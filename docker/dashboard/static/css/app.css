@@ -1,0 +1,14 @@
+body {
+    background-image: url('../images/hva-triangles.svg');
+    background-repeat: no-repeat;
+    background-size: auto 70%;
+    background-position: bottom 30px left;
+}
+
+h1#page-title {
+    font-size: 6vw;
+}
+
+h2#page-sub-title {
+    font-size: 3vw;
+}

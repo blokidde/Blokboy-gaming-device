@@ -1,0 +1,61 @@
+version: "3.7"
+services:
+  php:
+    build:
+      context: ./docker/images/php
+    container_name: iot-php
+    volumes:
+      - './web:/var/www/html'
+      - './docker/dashboard:/var/www/dashboard'
+    depends_on:
+      - mariadb
+  
+  nginx:
+    image: nginx:latest
+    container_name: iot-nginx
+    ports:
+      - "${WEBSERVER_PORT}:80"
+    links:
+      - 'php'
+    volumes:
+      - './web:/var/www/html'
+      - './docker/config/nginx:/etc/nginx/conf.d'
+      - './docker/dashboard:/var/www/dashboard'
+    external_links:
+      - mariadb:mariadb
+      - phpmyadmin:phpmyadmin
+      - tunnel:tunnel
+    depends_on:
+      - php
+  
+  mariadb:
+    image: mariadb:latest
+    container_name: iot-mariadb
+    ports:
+      - "${MYSQL_PORT}:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - './docker/config/mariadb:/var/lib/mysql'
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: iot-phpmyadmin
+    environment:
+      - "PMA_HOST=mariadb"
+      - "PMA_PORT=${MYSQL_PORT}"
+      - "PMA_ABSOLUTE_URI=http://localhost/phpmyadmin"
+    external_links:
+      - mariadb:mariadb
+    volumes:
+      - './docker/config/phpmyadmin/sessions:/sessions'
+
+  tunnel:
+    build:
+      context: ./docker/images/tunnel
+    container_name: iot-tunnel
+    environment:
+      - "WEBSERVER_PORT=${WEBSERVER_PORT}"
+      - "TUNNEL_SUBDOMAIN=${HVA_USERNAME}"
+    depends_on:
+      - nginx

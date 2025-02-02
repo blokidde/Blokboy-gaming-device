@@ -1,0 +1,17 @@
+nav:
+    - 🏚️ Home: index.md
+    - 📦 System Architecture: system_architecture
+    - ♟️ Learning journal: journal
+    - 🧰 Embedded:
+      - Requirements: embedded/requirements
+      - Technical documentation: embedded/technical_documentation
+      - Code: embedded/code
+    - 🌐 Web:
+      - Technical documentation: web/technical_documentation
+      - API reference: web/api_reference
+      - Code: web/code
+      - Database: web/database
+    - 👩‍🎨 User Experience Design:
+      - Concept & Design: uxd/concept_design
+      - Create & Test: uxd/create_test
+      - Conclude & Reflect: uxd/conclude_reflect
