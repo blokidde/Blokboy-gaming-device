@@ -59,3 +59,13 @@ The database is a MySQL database using MariaDB. You can connect to it using the 
 | Username | `root` |
 | Password | You can find this in your .env-file. |
 | Database | You need to create the database yourself. |
+
+## Blueprint
+im going to be using the handheld game device as my blueprint.
+my idea will look a little like a gameboy.
+
+## parts
+- microcontroller with wifi(raspberry pi, eps32, arduino)
+- buttons
+- joystick
+- lcd screen (140x164)
