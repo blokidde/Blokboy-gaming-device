@@ -28,6 +28,7 @@ my idea will look a little like a gameboy.
 - https://www.tinytronics.nl/nl/displays/tft/2.2-inch-tft-display-240*320-pixels-ili9341
 - https://www.tinytronics.nl/nl/displays/tft/3.5-inch-tft-display-320*480-pixels-mega-compatible-ili9486
 - https://wokwi.com/
+- https://www.instructables.com/C-Snake-Game-Simple/
 
 ## failures
 
