@@ -9,7 +9,7 @@ my idea will look a little like a gameboy.
 ## parts
 - microcontroller with wifi(raspberry pi, eps32, arduino)
 - buttons
-- joystick
+- joystick (5v, 2 potentiometers)
 - lcd screen (240x320/320x480)
 - speaker
 - battery pack (18650 Li-ion)
@@ -18,8 +18,6 @@ my idea will look a little like a gameboy.
 
 ## code necessities
 - lcd screen library (Adafruit_ILI9341.h)
-- joystick library
-- speaker library
 
 ## game used
 
@@ -31,7 +29,7 @@ my idea will look a little like a gameboy.
 - https://www.instructables.com/C-Snake-Game-Simple/
 
 ## failures
-
+- i used a joystick for my project. i connected this to the 5v, ground and 2 pins. however the joystick didnt work for quite a while, i tested and the values i got were very weird. after a bit of testing i tries connecting it to 3.3v instead of 5. this was a little against the instructions given on the internet and on the joystick itself, both said to use 5v. strangely enough the 3.3v worked and now the joystick works perfectly with values ranging from x 0-4095 and y 0-4095.
 ## research
 
 ## differences from the blueprint
