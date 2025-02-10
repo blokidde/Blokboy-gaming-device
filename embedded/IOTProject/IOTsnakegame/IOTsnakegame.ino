@@ -20,16 +20,16 @@
 
 #define BUZZER_PIN 1
 
-bool game_over;
-
-int score;
-
-struct snake {
-  int coordinates_x;
-  int coordinates_y;
+struct Snake {
+  SnakeSegment segments[100];
   int length;
   int direction_x;
   int direction_y;
+};
+
+struct SnakeSegment {
+  int x;
+  int y;
 };
 
 struct apple {
@@ -45,11 +45,16 @@ enum snakeDirection {
   DOWN
 };
 
-snake snake[MAX_LENGTH];
+Snake snake;
+Apple apple;
+
+bool game_over;
 
 int score = 0;
 
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
+
+void setupSnake();
 
 void setup() {
   Serial.begin(115200);
@@ -73,6 +78,19 @@ void setup() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
+}
+
+void setupSnake() {
+  game_over = false;
+  score = 0;
+
+  snake.length = 1;
+  snake.segments[0].x = GRID_COLS / 2;
+  snake.direction_x = 0;
+  snake.direction_y = 0;
+  
+  apple.x = random(0, GRID_COLS);
+  apple.y = random(0, GRID_ROWS);
 }
 
 void loop() {
