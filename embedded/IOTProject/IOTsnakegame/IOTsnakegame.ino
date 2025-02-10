@@ -18,6 +18,8 @@
 
 #define MAX_LENGTH 100
 
+#define BUZZER_PIN 1
+
 struct snake {
   int coordinates_x;
   int coordinates_y;
@@ -47,6 +49,8 @@ void setup() {
   pinMode(VERT_PIN, INPUT);
   pinMode(HORZ_PIN, INPUT);
   pinMode(SEL_PIN, INPUT_PULLUP);
+
+  pinMode(BUZZER_PIN, OUTPUT);
 
   if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println("OLED not found");
@@ -90,9 +94,12 @@ void loop() {
   if (button1){
     display.println("button 1 pressed");
     display.display();
+    tone(BUZZER_PIN, 500, 10);
   } else if (button2){
     display.println("button 2 pressed");
     display.display();
+  } else {
+    tone(BUZZER_PIN, 0, 0);
   }
 
   Serial.println(vert);
