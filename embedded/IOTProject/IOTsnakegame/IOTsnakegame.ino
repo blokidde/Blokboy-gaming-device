@@ -80,7 +80,7 @@ void setup() {
   display.setTextColor(SSD1306_WHITE);
 }
 
-void setupSnake() {
+void snakeInit() {
   game_over = false;
   score = 0;
 
@@ -88,22 +88,19 @@ void setupSnake() {
   snake.segments[0].x = GRID_COLS / 2;
   snake.direction_x = 0;
   snake.direction_y = 0;
-  
+
   apple.x = random(0, GRID_COLS);
   apple.y = random(0, GRID_ROWS);
 }
 
-void loop() {
+void readSensors(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
-  bool selPressed = digitalRead(SEL_PIN) == LOW;
+  // not used
+  //bool selPressed = digitalRead(SEL_PIN) == LOW;
 
   bool button1 = !digitalRead(BUTTON_1_PIN);
   bool button2 = !digitalRead(BUTTON_2_PIN);
-
-
-  display.clearDisplay();
-  display.setCursor(0, 0);
 
   if (vert < 1900){
     display.println("left");
@@ -131,7 +128,8 @@ void loop() {
   } else {
     tone(BUZZER_PIN, 0, 0);
   }
+}
 
-  Serial.println(vert);
-  Serial.println(horz);
+void loop() {
+  
 }
