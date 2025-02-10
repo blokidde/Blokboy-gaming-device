@@ -20,6 +20,10 @@
 
 #define BUZZER_PIN 1
 
+bool game_over;
+
+int score;
+
 struct snake {
   int coordinates_x;
   int coordinates_y;
@@ -31,6 +35,14 @@ struct snake {
 struct apple {
   int x;
   int y;
+};
+
+enum snakeDirection {
+  STOP = 0;
+  LEFT,
+  RIGHT,
+  UP,
+  DOWN
 };
 
 snake snake[MAX_LENGTH];
