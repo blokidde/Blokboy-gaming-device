@@ -20,6 +20,15 @@
 
 #define BUZZER_PIN 1
 
+#define ROWSX 32
+#define ROWSY 8
+#define BLOCKSIZE 4
+
+struct SnakeSegment {
+  int x;
+  int y;
+};
+
 struct Snake {
   SnakeSegment segments[100];
   int length;
@@ -27,18 +36,13 @@ struct Snake {
   int direction_y;
 };
 
-struct SnakeSegment {
-  int x;
-  int y;
-};
-
-struct apple {
+struct Apple {
   int x;
   int y;
 };
 
 enum snakeDirection {
-  STOP = 0;
+  STOP = 0,
   LEFT,
   RIGHT,
   UP,
@@ -55,6 +59,7 @@ int score = 0;
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
 void setupSnake();
+void readSensors();
 
 void setup() {
   Serial.begin(115200);
@@ -85,12 +90,20 @@ void snakeInit() {
   score = 0;
 
   snake.length = 1;
-  snake.segments[0].x = GRID_COLS / 2;
+  snake.segments[0].x = ROWSX / 2;
   snake.direction_x = 0;
   snake.direction_y = 0;
 
-  apple.x = random(0, GRID_COLS);
-  apple.y = random(0, GRID_ROWS);
+  apple.x = random(0, ROWSX);
+  apple.y = random(0, ROWSY);
+}
+
+void createGame(){
+  display.clearDisplay();
+  int applex = (apple.x * BLOCKSIZE);
+  int appley = (apple.y * BLOCKSIZE);
+  display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
+  display.display();
 }
 
 void readSensors(){
@@ -103,33 +116,21 @@ void readSensors(){
   bool button2 = !digitalRead(BUTTON_2_PIN);
 
   if (vert < 1900){
-    display.println("left");
-    display.display();
   } else if (vert > 2100){
-    display.println("right");
-    display.display();
   }
 
   if (horz < 1900){
-    display.println("down");
-    display.display();
   } else if (horz > 2100){
-    display.println("up");
-    display.display();
   }
 
   if (button1){
-    display.println("button 1 pressed");
-    display.display();
     tone(BUZZER_PIN, 500, 10);
   } else if (button2){
-    display.println("button 2 pressed");
-    display.display();
   } else {
     tone(BUZZER_PIN, 0, 0);
   }
 }
 
 void loop() {
-  
+  createGame();
 }
