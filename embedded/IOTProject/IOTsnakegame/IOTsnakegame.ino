@@ -96,6 +96,7 @@ void snakeInit() {
 
 void createGame(){
   display.clearDisplay();
+
   int applex = (apple.x * BLOCKSIZE);
   int appley = (apple.y * BLOCKSIZE);
   display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
@@ -122,16 +123,20 @@ void readSensors(){
   bool button1 = !digitalRead(BUTTON_1_PIN);
   bool button2 = !digitalRead(BUTTON_2_PIN);
 
-  if (vert < 1900){
-    Serial.println("down");
-  } else if (vert > 2100){
-    Serial.println("up");
+  if (vert < 1000 && snake.direction_x != 1){
+   snake.direction_x = 0;
+    snake.direction_y = 1;
+  } else if (vert > 2100 && snake.direction_x != -1){
+    snake.direction_x = 0;
+    snake.direction_y = -1;
   }
 
-  if (horz < 1900){
-    Serial.println("left");
-  } else if (horz > 2100){
-    Serial.println("right");
+  if (horz < 1000 && snake.direction_y != -1){
+    snake.direction_x = -1;
+    snake.direction_y = 0;
+  } else if (horz > 3000 && snake.direction_y != 1){
+    snake.direction_x = 1;
+    snake.direction_y = 0;
   }
 
   if (button1){
@@ -157,6 +162,11 @@ void gameOverScreen(){
 }
 
 void loop() {
-  readSensors();
-  createGame();
+  if (!game_over){
+    readSensors();
+    createGame();
+  } else {
+    gameOverScreen();
+    if 
+  }
 }
