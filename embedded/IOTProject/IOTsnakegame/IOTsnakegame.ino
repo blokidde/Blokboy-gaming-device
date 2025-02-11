@@ -99,6 +99,13 @@ void createGame(){
   int applex = (apple.x * BLOCKSIZE);
   int appley = (apple.y * BLOCKSIZE);
   display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
+
+  for (int i = 0; i < snake.length; i++) {
+    int x = snake.segments[i].x * BLOCKSIZE;
+    int y = snake.segments[i].y * BLOCKSIZE;
+    display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
+  }
+
   display.display();
 }
 
