@@ -41,14 +41,6 @@ struct Apple {
   int y;
 };
 
-enum snakeDirection {
-  STOP = 0,
-  LEFT,
-  RIGHT,
-  UP,
-  DOWN
-};
-
 Snake snake;
 Apple apple;
 
@@ -58,7 +50,9 @@ int score = 0;
 
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
-void setupSnake();
+void snakeInit();
+void createGame();
+void drawSnake();
 void readSensors();
 
 void setup() {
@@ -83,6 +77,8 @@ void setup() {
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
+
+  snakeInit();
 }
 
 void snakeInit() {
@@ -106,6 +102,10 @@ void createGame(){
   display.display();
 }
 
+void drawSnake(){
+
+}
+
 void readSensors(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
@@ -116,21 +116,40 @@ void readSensors(){
   bool button2 = !digitalRead(BUTTON_2_PIN);
 
   if (vert < 1900){
+    Serial.println("down");
   } else if (vert > 2100){
+    Serial.println("up");
   }
 
   if (horz < 1900){
+    Serial.println("left");
   } else if (horz > 2100){
+    Serial.println("right");
   }
 
   if (button1){
     tone(BUZZER_PIN, 500, 10);
+    Serial.println("buzzer");
   } else if (button2){
+    Serial.println("buttn2");
   } else {
     tone(BUZZER_PIN, 0, 0);
   }
 }
 
+void gameOverScreen(){
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setCursor(10, 10);
+  display.print("Game Over");
+  display.setTextSize(1);
+  display.setCursor(10, 30);
+  display.print("Score: ");
+  display.print(score);
+  display.display();
+}
+
 void loop() {
+  readSensors();
   createGame();
 }
