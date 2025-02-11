@@ -48,12 +48,17 @@ bool game_over;
 
 int score = 0;
 
+unsigned long moveTime = 0;
+const unsigned long moveSpeed = 200;
+
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
 void snakeInit();
 void createGame();
 void drawSnake();
 void readSensors();
+void gameOverScreen();
+void reset();
 
 void setup() {
   Serial.begin(115200);
@@ -111,22 +116,71 @@ void createGame(){
 }
 
 void drawSnake(){
-
+if (snake.direction_x == 0 && snake.direction_y == 0) {
+    return;
+  }
+  
+  int newHeadX = snake.segments[0].x + snake.direction_x;
+  int newHeadY = snake.segments[0].y + snake.direction_y;
+  
+  if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY) {
+    game_over = true;
+    return;
+  }
+  
+  for (int i = 0; i < snake.length; i++) {
+    if (snake.segments[i].x == newHeadX && snake.segments[i].y == newHeadY) {
+      game_over = true;
+      return;
+    }
+  }
+  
+  bool ateApple = (newHeadX == apple.x && newHeadY == apple.y);
+  
+  if (ateApple) {
+    for (int i = snake.length; i > 0; i--) {
+      snake.segments[i] = snake.segments[i - 1];
+    }
+    snake.segments[0].x = newHeadX;
+    snake.segments[0].y = newHeadY;
+    snake.length++;
+    score++;
+    
+    bool valid = false;
+    while (!valid) {
+      apple.x = random(0, ROWSX);
+      apple.y = random(0, ROWSY);
+      valid = true;
+      for (int i = 0; i < snake.length; i++) {
+        if (snake.segments[i].x == apple.x && snake.segments[i].y == apple.y) {
+          valid = false;
+          break;
+        }
+      }
+    }
+    tone(BUZZER_PIN, 1000, 100);
+  } else {
+    for (int i = snake.length - 1; i > 0; i--) {
+      snake.segments[i] = snake.segments[i - 1];
+    }
+    snake.segments[0].x = newHeadX;
+    snake.segments[0].y = newHeadY;
+  }
 }
 
 void readSensors(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
+
   // not used
   //bool selPressed = digitalRead(SEL_PIN) == LOW;
-
-  bool button1 = !digitalRead(BUTTON_1_PIN);
-  bool button2 = !digitalRead(BUTTON_2_PIN);
+  // bool button1 = !digitalRead(BUTTON_1_PIN);
+  // bool button2 = !digitalRead(BUTTON_2_PIN);
 
   if (vert < 1000 && snake.direction_x != 1){
    snake.direction_x = 0;
     snake.direction_y = 1;
-  } else if (vert > 2100 && snake.direction_x != -1){
+  } else if (vert > 3000 && snake.direction_x != -1){
     snake.direction_x = 0;
     snake.direction_y = -1;
   }
@@ -138,35 +192,41 @@ void readSensors(){
     snake.direction_x = 1;
     snake.direction_y = 0;
   }
-
-  if (button1){
-    tone(BUZZER_PIN, 500, 10);
-    Serial.println("buzzer");
-  } else if (button2){
-    Serial.println("buttn2");
-  } else {
-    tone(BUZZER_PIN, 0, 0);
-  }
 }
 
 void gameOverScreen(){
   display.clearDisplay();
   display.setTextSize(2);
-  display.setCursor(10, 10);
+  display.setCursor(10, 0);
   display.print("Game Over");
   display.setTextSize(1);
-  display.setCursor(10, 30);
+  display.setCursor(10, 20);
   display.print("Score: ");
   display.print(score);
   display.display();
 }
 
+void reset(){
+  snakeInit();
+  moveTime = millis();
+}
+
 void loop() {
-  if (!game_over){
+  if (!game_over) {
     readSensors();
+    
+    if (millis() - moveTime >= moveSpeed) {
+      drawSnake();
+      moveTime = millis();
+    }
+    
     createGame();
   } else {
     gameOverScreen();
-    if 
+    
+    if (!digitalRead(BUTTON_1_PIN)) {
+      reset();
+      delay(500);
+    }
   }
 }
