@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <WiFi.h>
 
 #define VERT_PIN 18
 #define HORZ_PIN 17
@@ -51,6 +52,9 @@ int score = 0;
 unsigned long moveTime = 0;
 const unsigned long moveSpeed = 200;
 
+const char* ssid = "iotroam";
+const char* password = "xYEa1WO94W";
+
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
 void snakeInit();
@@ -62,6 +66,7 @@ void reset();
 
 void setup() {
   Serial.begin(115200);
+  WiFi.begin(ssid, password);
   Wire.begin(SDA_PIN, SCL_PIN);
 
   pinMode(BUTTON_1_PIN, INPUT_PULLUP);
