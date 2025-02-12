@@ -177,18 +177,18 @@ void readSensors(){
   // bool button1 = !digitalRead(BUTTON_1_PIN);
   // bool button2 = !digitalRead(BUTTON_2_PIN);
 
-  if (vert < 1000 && snake.direction_x != 1){
+  if (vert < 1000 && snake.direction_y != -1){
    snake.direction_x = 0;
     snake.direction_y = 1;
-  } else if (vert > 3000 && snake.direction_x != -1){
+  } else if (vert > 3000 && snake.direction_y != 1){
     snake.direction_x = 0;
     snake.direction_y = -1;
   }
 
-  if (horz < 1000 && snake.direction_y != -1){
+  if (horz < 1000 && snake.direction_x != 1){
     snake.direction_x = -1;
     snake.direction_y = 0;
-  } else if (horz > 3000 && snake.direction_y != 1){
+  } else if (horz > 3000 && snake.direction_x != -1){
     snake.direction_x = 1;
     snake.direction_y = 0;
   }
