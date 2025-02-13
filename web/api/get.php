@@ -5,12 +5,12 @@ $json = file_get_contents("php://input");
 $data = json_decode($json, true);
 
 if($data){
-    $player_id = $data['player_id'];
-    $score = $data['score'];
-    $game_id = $data['game_id']; 
+    $player_id = $data['username'];
+    // $score = $data['score'];
+    // $game_id = $data['game_id']; 
 
-    $stmt = $conn->prepare("INSERT INTO Score (player_id, game_id, score_value) VALUES (?, ?, ?)");
-    $stmt->bind_param("iii", $player_id, $game_id, $score);
+    $stmt = $conn->prepare("INSERT INTO Player (username) VALUES (?)");
+    $stmt->bind_param("i", $username);
     $stmt->execute();
 
     $stmt->close();

@@ -1,41 +1,53 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
-#include <ArduinoJson.h>
 #include <WiFiClient.h>
+#include <ArduinoJson.h>
 
-const char* ssid = "iotroam";
-const char* password = "xYEa1WO94W";
+const char* ssid = "Lan solo";
+const char* password = "Zegikniet1";
 
 void setup() {
   Serial.begin(115200);
+  
+  // Verbinden met het WiFi-netwerk
   WiFi.begin(ssid, password);
-  
-  StaticJsonDocument<200> doc;
-  doc["player_id"] = 2;
-  doc["score"] = 50;
-  doc["game_id"] = 2;
-  String jsonString;
-  serializeJson(doc, jsonString);
-  Serial.print("Verzonden JSON: ");
-  Serial.println(jsonString);
-
-  WiFiClient client;
-
-  HTTPClient http;
-
-  http.begin(client, "http://145.3.253.18/api/get.php");
-  http.addHeader("Content-Type", "application/json");
-
-  int httpResponseCode = http.POST(jsonString);
-  
-  if(httpResponseCode > 0) {
-    Serial.print("HTTP Response Code: ");
-    Serial.println(httpResponseCode);
-  } else {
-    Serial.println(http.errorToString(httpResponseCode));
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.println("Not connected to WiFi...");
+    delay(1000);
   }
-  http.end();
+  Serial.println("Connected to WiFi");
 }
 
 void loop() {
+  WiFiClient client;
+  HTTPClient httpClient;
+  
+  httpClient.begin(client, "http://192.168.178.61/api/get.php");
+  
+  httpClient.addHeader("Content-Type", "application/json");
+
+  StaticJsonDocument<200> doc;
+  doc["username"] = "jurriaan4";
+  String jsonString;
+  serializeJson(doc, jsonString);
+  
+  Serial.print("Verstuurde JSON: ");
+  Serial.println(jsonString);
+  
+  int httpCode = httpClient.POST(jsonString);
+
+  if(httpCode > 0) {
+    Serial.print("HTTP Response Code: ");
+    Serial.println(httpCode);
+    String payload = httpClient.getString();
+    Serial.println("Server respons:");
+    Serial.println(payload);
+  } else {
+    Serial.print("Fout bij het versturen: ");
+    Serial.println(httpClient.errorToString(httpCode));
+  }
+  
+  httpClient.end();
+  
+  delay(5000);
 }

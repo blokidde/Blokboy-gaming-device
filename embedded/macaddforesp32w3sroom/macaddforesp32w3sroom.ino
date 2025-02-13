@@ -2,8 +2,8 @@
 #include <HTTPClient.h>
 #include <WiFiClient.h>
 
-const char* ssid = "iotroam";
-const char* password = "xYEa1WO94W";
+const char* ssid = "Lan solo";
+const char* password = "Zegikniet1";
 
 void setup() {
   // Initialize the Serial-connection on a speed of 115200 b/s
@@ -28,7 +28,7 @@ void loop() {
   HTTPClient httpClient;
 
   // Set the URL of where the call should be made to.
-  httpClient.begin(client, "http://145.3.253.18/api/get.php");
+  httpClient.begin(client, "http://192.168.178.61/api/get.php");
 
   // Make the GET-request, this returns the HTTP-code.
   int httpCode = httpClient.GET();
