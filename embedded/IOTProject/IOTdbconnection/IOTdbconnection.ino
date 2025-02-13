@@ -34,18 +34,20 @@ void loop() {
   Serial.print("Verstuurde JSON: ");
   Serial.println(jsonString);
   
-  int httpCode = httpClient.POST(jsonString);
+  httpClient.POST(jsonString);
 
-  if(httpCode > 0) {
-    Serial.print("HTTP Response Code: ");
-    Serial.println(httpCode);
-    String payload = httpClient.getString();
-    Serial.println("Server respons:");
-    Serial.println(payload);
-  } else {
-    Serial.print("Fout bij het versturen: ");
-    Serial.println(httpClient.errorToString(httpCode));
-  }
+  //not used
+  //int httpCode = httpClient.POST(jsonString);
+  // if(httpCode > 0) {
+  //   Serial.print("HTTP Response Code: ");
+  //   Serial.println(httpCode);
+  //   String payload = httpClient.getString();
+  //   Serial.println("Server respons:");
+  //   Serial.println(payload);
+  // } else {
+  //   Serial.print("Fout bij het versturen: ");
+  //   Serial.println(httpClient.errorToString(httpCode));
+  // }
   
   httpClient.end();
   

@@ -3,6 +3,8 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <WiFi.h>
+#include <HTTPClient.h>
+#include <WiFiClient.h>
 
 #define VERT_PIN 18
 #define HORZ_PIN 17
@@ -52,8 +54,14 @@ int score = 0;
 unsigned long moveTime = 0;
 const unsigned long moveSpeed = 200;
 
-const char* ssid = "iotroam";
-const char* password = "xYEa1WO94W";
+// const char* ssid = "iotroam";
+// const char* password = "xYEa1WO94W";
+// const char* url = "";
+
+const char* ssid = "Lan solo";
+const char* password = "Zegikniet1";
+const char* url = "http://192.168.178.61/api/post.php";
+
 
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
@@ -63,6 +71,7 @@ void drawSnake();
 void readSensors();
 void gameOverScreen();
 void reset();
+void httpreq();
 
 void setup() {
   Serial.begin(115200);
@@ -173,6 +182,10 @@ if (snake.direction_x == 0 && snake.direction_y == 0) {
   }
 }
 
+int totalXVal(){
+  
+}
+
 void readSensors(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
@@ -214,6 +227,25 @@ void gameOverScreen(){
 void reset(){
   snakeInit();
   moveTime = millis();
+}
+
+void httpreq(int horz, int vert){
+  WiFiClient client;
+  HTTPClient httpClient;
+
+  httpClient.begin(client, url);
+  httpClient.addHeader("Content-Type", "application/json");
+
+  StaticJsonDocument<200> doc;
+  doc["total_x_value"] = horz;
+  doc["total_y_value"] = vert;
+  String jsonString;
+  serializeJson(doc, jsonString);
+  
+  Serial.print("Verstuurde JSON: ");
+  Serial.println(jsonString);
+  
+  httpClient.POST(jsonString);
 }
 
 void loop() {
