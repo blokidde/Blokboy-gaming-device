@@ -5,10 +5,13 @@ $json = file_get_contents("php://input");
 $data = json_decode($json, true);
 
 if($data){
-    $username = $data[''];
+    $totalup = $data['totalup'];
+    $totaldown = $data['totaldown'];
+    $totalright = $data['totalright'];
+    $totalleft = $data['totalleft'];
 
-    $stmt = $conn->prepare("INSERT INTO Player (username) VALUES (?)");
-    $stmt->bind_param("s", $username);
+    $stmt = $conn->prepare("INSERT INTO JoystickInput (totalup, totaldown, totalright, totalleft) VALUES (????)");
+    $stmt->bind_param("iiii", $totalup, $totaldown, $totalleft, $totalleft);
     $stmt->execute();
     $stmt->close();
 } else {

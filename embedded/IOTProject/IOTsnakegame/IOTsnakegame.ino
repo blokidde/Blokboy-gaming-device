@@ -5,6 +5,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <WiFiClient.h>
+#include <ArduinoJson.h>
 
 #define VERT_PIN 18
 #define HORZ_PIN 17
@@ -51,6 +52,11 @@ bool game_over;
 
 int score = 0;
 
+int totalleft;
+int totalright;
+int totalup;
+int totaldown;
+
 unsigned long moveTime = 0;
 const unsigned long moveSpeed = 200;
 
@@ -68,10 +74,10 @@ Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 void snakeInit();
 void createGame();
 void drawSnake();
-void readSensors();
+int readSensors();
 void gameOverScreen();
 void reset();
-void httpreq();
+void httpreq(int horz, int vert);
 
 void setup() {
   Serial.begin(115200);
@@ -103,6 +109,8 @@ void setup() {
 void snakeInit() {
   game_over = false;
   score = 0;
+  totalhorz = 0;
+  totalvert = 0;
 
   snake.length = 1;
   snake.segments[0].x = ROWSX / 2;
@@ -182,10 +190,6 @@ if (snake.direction_x == 0 && snake.direction_y == 0) {
   }
 }
 
-int totalXVal(){
-  
-}
-
 void readSensors(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
@@ -196,20 +200,25 @@ void readSensors(){
   // bool button2 = !digitalRead(BUTTON_2_PIN);
 
   if (vert < 1000 && snake.direction_y != -1){
-   snake.direction_x = 0;
+    snake.direction_x = 0;
     snake.direction_y = 1;
+    totaldown++;
   } else if (vert > 3000 && snake.direction_y != 1){
     snake.direction_x = 0;
     snake.direction_y = -1;
+    totalup++;
   }
 
   if (horz < 1000 && snake.direction_x != 1){
     snake.direction_x = -1;
     snake.direction_y = 0;
+    totalleft++;
   } else if (horz > 3000 && snake.direction_x != -1){
     snake.direction_x = 1;
     snake.direction_y = 0;
+    totalright++;
   }
+
 }
 
 void gameOverScreen(){
@@ -229,7 +238,7 @@ void reset(){
   moveTime = millis();
 }
 
-void httpreq(int horz, int vert){
+void httpreq(int totalup, int totaldown, int totalleft, int totalright){
   WiFiClient client;
   HTTPClient httpClient;
 
@@ -237,15 +246,17 @@ void httpreq(int horz, int vert){
   httpClient.addHeader("Content-Type", "application/json");
 
   StaticJsonDocument<200> doc;
-  doc["total_x_value"] = horz;
-  doc["total_y_value"] = vert;
+  doc["totalup"] = totalup;
+  doc["totaldown"] = totaldown;
+  doc["totalleft"] = totalleft;
+  doc["totalright"] = totalright;
   String jsonString;
   serializeJson(doc, jsonString);
   
   Serial.print("Verstuurde JSON: ");
   Serial.println(jsonString);
   
-  httpClient.POST(jsonString);
+  httpcode = httpClient.POST(jsonString);
 }
 
 void loop() {
