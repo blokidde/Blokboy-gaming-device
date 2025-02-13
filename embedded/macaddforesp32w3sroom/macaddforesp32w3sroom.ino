@@ -28,7 +28,7 @@ void loop() {
   HTTPClient httpClient;
 
   // Set the URL of where the call should be made to.
-  httpClient.begin(client, "http://192.168.178.61/api/get.php");
+  httpClient.begin(client, "http://192.168.178.61/api/post.php");
 
   // Make the GET-request, this returns the HTTP-code.
   int httpCode = httpClient.GET();

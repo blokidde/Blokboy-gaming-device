@@ -5,11 +5,11 @@
 
 const char* ssid = "Lan solo";
 const char* password = "Zegikniet1";
+const char* url = "http://192.168.178.61/api/post.php";
 
 void setup() {
   Serial.begin(115200);
   
-  // Verbinden met het WiFi-netwerk
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     Serial.println("Not connected to WiFi...");
@@ -22,7 +22,7 @@ void loop() {
   WiFiClient client;
   HTTPClient httpClient;
   
-  httpClient.begin(client, "http://192.168.178.61/api/get.php");
+  httpClient.begin(client, url);
   
   httpClient.addHeader("Content-Type", "application/json");
 
