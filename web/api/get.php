@@ -11,6 +11,7 @@ if($data){
 
     $stmt = $conn->prepare("INSERT INTO Score (player_id, game_id, score_value) VALUES (?, ?, ?)");
     $stmt->bind_param("iii", $player_id, $game_id, $score);
+    $stmt->close();
 } else {
     echo json_encode(["status" => "error", "message" => "nothing recieved"]);
 }
