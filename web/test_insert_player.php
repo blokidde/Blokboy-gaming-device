@@ -1,8 +1,13 @@
 <?php
-require 'db_connect.php'; // Zorg ervoor dat dit je databaseverbinding bevat
+$servername = "iot-mariadb";
+$username = "root";
+$password = "7YKyE8R2AhKzswfN";
+$database = "mydb"; 
+
+$conn = new mysqli($servername, $username, $password, $database);
 
 // Hardcoded spelernaam
-$username = "JurriaanTest";
+$username = "JurriaanTest2";
 
 // Gebruik een prepared statement om SQL-injecties te voorkomen
 $stmt = $conn->prepare("INSERT INTO Player (username) VALUES (?)");

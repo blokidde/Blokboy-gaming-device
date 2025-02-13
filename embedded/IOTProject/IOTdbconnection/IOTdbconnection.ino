@@ -1,39 +1,39 @@
-#include <WiFiManager.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
+#include <WiFiClient.h>
 
-WiFiManager wm;
+const char* ssid = "iotroam";
+const char* password = "xYEa1WO94W";
 
 void setup() {
   Serial.begin(115200);
-  if (!wm.autoConnect("ESP32-Config")) {
-    Serial.println("no connection");
-    ESP.restart();
-  }
+  WiFi.begin(ssid, password);
+  
   StaticJsonDocument<200> doc;
-  doc["player_id"] = 1;
+  doc["player_id"] = 2;
   doc["score"] = 50;
   doc["game_id"] = 2;
-
   String jsonString;
   serializeJson(doc, jsonString);
-
+  Serial.print("Verzonden JSON: ");
   Serial.println(jsonString);
+
+  WiFiClient client;
 
   HTTPClient http;
 
-  http.begin("http://192.168.128.1/api/get.php");
+  http.begin(client, "http://145.3.253.18/api/get.php");
   http.addHeader("Content-Type", "application/json");
 
-  int httpresponse = http.POST(jsonString);
-  Serial.println("HTTP Response Code: ");
-  Serial.println(httpresponse);
-
-  String response = http.getString();
-  Serial.println("Server antwoord: ");
-  Serial.println(response);
-
+  int httpResponseCode = http.POST(jsonString);
+  
+  if(httpResponseCode > 0) {
+    Serial.print("HTTP Response Code: ");
+    Serial.println(httpResponseCode);
+  } else {
+    Serial.println(http.errorToString(httpResponseCode));
+  }
   http.end();
 }
 

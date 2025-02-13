@@ -1,28 +1,46 @@
 #include <WiFi.h>
-#include <esp_wifi.h>
+#include <HTTPClient.h>
+#include <WiFiClient.h>
 
-void readMacAddress(){
-  uint8_t baseMac[6];
-  esp_err_t ret = esp_wifi_get_mac(WIFI_IF_STA, baseMac);
-  if (ret == ESP_OK) {
-    Serial.printf("%02x:%02x:%02x:%02x:%02x:%02x\n",
-                  baseMac[0], baseMac[1], baseMac[2],
-                  baseMac[3], baseMac[4], baseMac[5]);
-  } else {
-    Serial.println("Failed to read MAC address");
-  }
-}
+const char* ssid = "iotroam";
+const char* password = "xYEa1WO94W";
 
-void setup(){
+void setup() {
+  // Initialize the Serial-connection on a speed of 115200 b/s
   Serial.begin(115200);
 
-  WiFi.mode(WIFI_STA);
-  WiFi.STA.begin();
+  // Your WeMos tries to connect to your Wi-fi network
+  WiFi.begin(ssid, password);
 
-  Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
-  readMacAddress();
+  // Keep the while-statement alive as long as we are NOT connected
+  // to the Wi-fi network.
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.println("not connected to wifi ");
+    delay(1000);
+  }
+
+  Serial.println("connected");
 }
- 
-void loop(){
 
+void loop() {
+  // Initialize a wi-fi client & http client
+  WiFiClient client;
+  HTTPClient httpClient;
+
+  // Set the URL of where the call should be made to.
+  httpClient.begin(client, "http://145.3.253.18/api/get.php");
+
+  // Make the GET-request, this returns the HTTP-code.
+  int httpCode = httpClient.GET();
+
+  // Check if the response is fine.
+  if(httpCode == HTTP_CODE_OK) { // HTTP_CODE_OK == 200
+    // Print the body of the GET-request response.
+    String payload = httpClient.getString();
+    Serial.println(payload);
+  } else {
+    Serial.println("Unable to connect :(");
+  }
+
+  delay(5000);
 }
