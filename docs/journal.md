@@ -1,5 +1,19 @@
 # Learning journal
 
-Your learning journal can be seen as a diary of your learning process. It is a place where you can reflect on your learning, and where you can keep track of your progress. It is also a place where you can keep track of your questions, and where you can write down your answers to those questions.
+## feedback per week
 
-So for example when you receive feedback on your project, you can write down the feedback and your reflection on it in your learning journal. You can also write down what you have learned from the feedback, and how you will apply it in your project.
+### week 1
+feedback from ian: 
+
+use more comments and a question about values's
+
+feedback from peter:
+
+code is good, nothing to say about code
+
+feedback from nino:
+
+code looks good, you could use more comments to make the code a bit easier to understand.
+
+### what to change to be better?
+i need to start using comments. at first i thought i would write the code first and add comments later but i noticed this makes it more difficult for myself and for readability for others. so in the class free week i will be adding comments to all my code and get everything updated for better readability.
