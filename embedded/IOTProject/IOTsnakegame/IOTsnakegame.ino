@@ -109,8 +109,10 @@ void setup() {
 void snakeInit() {
   game_over = false;
   score = 0;
-  totalhorz = 0;
-  totalvert = 0;
+  totalup = 0;
+  totaldown = 0;
+  totalleft = 0;
+  totalright = 0;
 
   snake.length = 1;
   snake.segments[0].x = ROWSX / 2;
