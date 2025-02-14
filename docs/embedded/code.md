@@ -20,10 +20,7 @@ these libraries are used for the http requests, the arduinojson lib is used to c
 ```
 this library is used for connecting wifi
 
-
-
-
-
 ## functions
 
-### 
+### `void setup()`
+in this function we set the outputs and inputs for the entire program like this `pinMode(VERT_PIN, INPUT);`, we also connect with necessary things like wifi using this `WiFi.begin(ssid, password);`, i2c bus and the oled screen `display.begin(SSD1306_SWITCHCAPVCC, 0x3C)`. 0x3 is the i2c address for the oled screen.
