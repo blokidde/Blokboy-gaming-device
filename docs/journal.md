@@ -5,8 +5,10 @@
 ## week 1
 
 ### things i learned this week
+this week i learned how to 3d design and make a print. i made my own design for my handheld gaming device and we had a class about 3d printing where we needed to design and print a dice. before we could print it we had to initialize the settings for the 3d printer. this was done with a paper sheet and the springs underneath the 3d printer.
+in my first try the dice was a succes, but there were some things i could inprove, like where i needed to put circles in combination with edges.
 
-### feedback
+# ## feedback
 feedback from ian: 
 
 use more comments and a question about values's
