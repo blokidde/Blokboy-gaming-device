@@ -9,7 +9,7 @@
 
 #define VERT_PIN 18
 #define HORZ_PIN 17
-#define SEL_PIN  10
+#define SEL_PIN 10
 
 #define SDA_PIN 15
 #define SCL_PIN 16
@@ -28,19 +28,22 @@
 #define ROWSY 8
 #define BLOCKSIZE 4
 
-struct SnakeSegment {
+struct SnakeSegment
+{
   int x;
   int y;
 };
 
-struct Snake {
+struct Snake
+{
   SnakeSegment segments[100];
   int length;
   int direction_x;
   int direction_y;
 };
 
-struct Apple {
+struct Apple
+{
   int x;
   int y;
 };
@@ -64,9 +67,9 @@ const unsigned long moveSpeed = 200;
 // const char* password = "xYEa1WO94W";
 // const char* url = "";
 
-const char* ssid = "Lan solo";
-const char* password = "Zegikniet1";
-const char* url = "http://192.168.178.61/api/post.php";
+const char *ssid = "Lan solo";
+const char *password = "Zegikniet1";
+const char *url = "http://192.168.178.61/api/post.php";
 
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
@@ -78,7 +81,8 @@ void gameOverScreen();
 void reset();
 void httpreq(int horz, int vert);
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   WiFi.begin(ssid, password);
   Wire.begin(SDA_PIN, SCL_PIN);
@@ -92,7 +96,8 @@ void setup() {
 
   pinMode(BUZZER_PIN, OUTPUT);
 
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
+  {
     Serial.println("OLED not found");
     while (true)
       ;
@@ -105,11 +110,10 @@ void setup() {
   snakeInit();
 }
 
-
-
 /// @brief Initializes the snake game by resetting game variables.
-// This function sets the initial values for the snake game
-void snakeInit() {
+/// This function sets the initial values for the snake game
+void snakeInit()
+{
   // set all the variables to 0 or false
   game_over = false;
   score = 0;
@@ -130,9 +134,10 @@ void snakeInit() {
 }
 
 /// @brief puts the elements needed for the game on the display.
-/// This function clears the screen and then draws the initial apple and the snake 
+/// This function clears the screen and then draws the initial apple and the snake
 /// on the display using their x and y positions.
-void createGame(){
+void createGame()
+{
   display.clearDisplay();
 
   // converts apple x and y position to usable positions for the display
@@ -143,7 +148,8 @@ void createGame(){
   display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
 
   // loop through the snake segments and convert and fill them the same way as the apple
-  for (int i = 0; i < snake.length; i++) {
+  for (int i = 0; i < snake.length; i++)
+  {
     int x = snake.segments[i].x * BLOCKSIZE;
     int y = snake.segments[i].y * BLOCKSIZE;
     display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
@@ -153,52 +159,85 @@ void createGame(){
   display.display();
 }
 
-void drawSnake(){
-if (snake.direction_x == 0 && snake.direction_y == 0) {
+/// @brief Moves the snake forward and checks for collisions.
+/// This function updates the snake's position, handles apple eating,
+/// and checks for collisions with the walls or the snake's own segments.
+void drawSnake()
+{
+  //if statement for when the snake isnt moving
+  if (snake.direction_x == 0 && snake.direction_y == 0)
+  {
     return;
   }
-  
+
+  // calculations for the new heads position
   int newHeadX = snake.segments[0].x + snake.direction_x;
   int newHeadY = snake.segments[0].y + snake.direction_y;
-  
-  if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY) {
+
+  // check if the head is outside the given game size
+  if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY)
+  {
     game_over = true;
     return;
   }
-  
-  for (int i = 0; i < snake.length; i++) {
-    if (snake.segments[i].x == newHeadX && snake.segments[i].y == newHeadY) {
+
+  // check if the snake hits its own segments
+  for (int i = 0; i < snake.length; i++)
+  {
+    if (snake.segments[i].x == newHeadX && snake.segments[i].y == newHeadY)
+    {
       game_over = true;
       return;
     }
   }
-  
+
+  // boolean for confirming if the snake eats an apple
   bool ateApple = (newHeadX == apple.x && newHeadY == apple.y);
-  
-  if (ateApple) {
-    for (int i = snake.length; i > 0; i--) {
+
+  // if statement for when the snake does eat the apple
+  if (ateApple)
+  { 
+    // loop to move segments forward after eating apple to make it longer
+    for (int i = snake.length; i > 0; i--)
+    {
       snake.segments[i] = snake.segments[i - 1];
     }
+
+    // set the position of the new head
     snake.segments[0].x = newHeadX;
     snake.segments[0].y = newHeadY;
+
+    // adds length to the snake and to the score
     snake.length++;
     score++;
-    
-    bool valid = false;
-    while (!valid) {
+
+    bool validPosition = false;
+
+    // loop to create new apple in random x and y position
+    while (!validPosition)
+    {
+      // new x and y for apple
       apple.x = random(0, ROWSX);
       apple.y = random(0, ROWSY);
-      valid = true;
-      for (int i = 0; i < snake.length; i++) {
-        if (snake.segments[i].x == apple.x && snake.segments[i].y == apple.y) {
-          valid = false;
+      validPosition = true;
+
+      // for loop to check if the apple is put in a valid position (not in the snake segments)
+      for (int i = 0; i < snake.length; i++)
+      {
+        if (snake.segments[i].x == apple.x && snake.segments[i].y == apple.y)
+        {
+          validPosition = false;
           break;
         }
       }
     }
-    tone(BUZZER_PIN, 1000, 100);
-  } else {
-    for (int i = snake.length - 1; i > 0; i--) {
+    // not used right now
+    // tone(BUZZER_PIN, 1000, 100);
+  }
+  else
+  {
+    for (int i = snake.length - 1; i > 0; i--)
+    {
       snake.segments[i] = snake.segments[i - 1];
     }
     snake.segments[0].x = newHeadX;
@@ -206,38 +245,45 @@ if (snake.direction_x == 0 && snake.direction_y == 0) {
   }
 }
 
-void readSensors(){
+void readSensors()
+{
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
 
   // not used
-  //bool selPressed = digitalRead(SEL_PIN) == LOW;
+  // bool selPressed = digitalRead(SEL_PIN) == LOW;
   // bool button1 = !digitalRead(BUTTON_1_PIN);
   // bool button2 = !digitalRead(BUTTON_2_PIN);
 
-  if (vert < 1000 && snake.direction_y != -1){
+  if (vert < 1000 && snake.direction_y != -1)
+  {
     snake.direction_x = 0;
     snake.direction_y = 1;
     totaldown++;
-  } else if (vert > 3000 && snake.direction_y != 1){
+  }
+  else if (vert > 3000 && snake.direction_y != 1)
+  {
     snake.direction_x = 0;
     snake.direction_y = -1;
     totalup++;
   }
 
-  if (horz < 1000 && snake.direction_x != 1){
+  if (horz < 1000 && snake.direction_x != 1)
+  {
     snake.direction_x = -1;
     snake.direction_y = 0;
     totalleft++;
-  } else if (horz > 3000 && snake.direction_x != -1){
+  }
+  else if (horz > 3000 && snake.direction_x != -1)
+  {
     snake.direction_x = 1;
     snake.direction_y = 0;
     totalright++;
   }
-
 }
 
-void gameOverScreen(){
+void gameOverScreen()
+{
   display.clearDisplay();
   display.setTextSize(2);
   display.setCursor(10, 0);
@@ -249,12 +295,14 @@ void gameOverScreen(){
   display.display();
 }
 
-void reset(){
+void reset()
+{
   snakeInit();
   moveTime = millis();
 }
 
-void httpreq(int totalup, int totaldown, int totalleft, int totalright){
+void httpreq(int totalup, int totaldown, int totalleft, int totalright)
+{
   WiFiClient client;
   HTTPClient httpClient;
 
@@ -268,27 +316,33 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright){
   doc["totalright"] = totalright;
   String jsonString;
   serializeJson(doc, jsonString);
-  
+
   Serial.print("Verstuurde JSON: ");
   Serial.println(jsonString);
-  
+
   httpcode = httpClient.POST(jsonString);
 }
 
-void loop() {
-  if (!game_over) {
+void loop()
+{
+  if (!game_over)
+  {
     readSensors();
-    
-    if (millis() - moveTime >= moveSpeed) {
+
+    if (millis() - moveTime >= moveSpeed)
+    {
       drawSnake();
       moveTime = millis();
     }
-    
+
     createGame();
-  } else {
+  }
+  else
+  {
     gameOverScreen();
-    
-    if (!digitalRead(BUTTON_1_PIN)) {
+
+    if (!digitalRead(BUTTON_1_PIN))
+    {
       reset();
       delay(500);
     }
