@@ -116,10 +116,17 @@ if (vert < 1000 && snake.direction_y != -1)
 ```
 in this code snippet you can see how the input from the joystick is handled. the smaller than 1000 is a countermeasure for stick drift. it ensures the snake doesnt move without being told to do so. it also counts the total times the function is called, this is used to display statistics at the end of the game
 
+### void gameOverScreen()
+this function is used to display a message when the game stops, it displays score and a big game over.
 
+### void reset()
 ```cpp
-copy example
+snakeInit();
+moveTime = millis();
 ```
+this function updates the moveTime to the current time with millis(). this is used so the game knows when it needs to move the snake.
+
+
 ```cpp
 copy example
 ```
