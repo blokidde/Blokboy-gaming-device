@@ -68,7 +68,6 @@ const char* ssid = "Lan solo";
 const char* password = "Zegikniet1";
 const char* url = "http://192.168.178.61/api/post.php";
 
-
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
 void snakeInit();
@@ -130,19 +129,27 @@ void snakeInit() {
   apple.y = random(0, ROWSY);
 }
 
+/// @brief puts the elements needed for the game on the display.
+/// This function clears the screen and then draws the initial apple and the snake 
+/// on the display using their x and y positions.
 void createGame(){
   display.clearDisplay();
 
+  // converts apple x and y position to usable positions for the display
   int applex = (apple.x * BLOCKSIZE);
   int appley = (apple.y * BLOCKSIZE);
+
+  // draws apples as a square on the display
   display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
 
+  // loop through the snake segments and convert and fill them the same way as the apple
   for (int i = 0; i < snake.length; i++) {
     int x = snake.segments[i].x * BLOCKSIZE;
     int y = snake.segments[i].y * BLOCKSIZE;
     display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
   }
 
+  // display everything on the screen
   display.display();
 }
 
