@@ -36,3 +36,26 @@ the snake init function is used to initialize everything needed for the snake an
   totalright = 0;
 ```
 after this the function starts by setting the values in the struct called snake. `snake.length = 1;`the length of the snake is set to 1. this is done for several different parts of the snake struct. values for the apple struct are also set using the same principle.
+
+### void creategame()
+the creategame function clears the screen, draws the apple at its position, draws each segment of the snake, and finally updates the display so you can see everything on the OLED screen. It uses a grid system, so it multiplies the apple’s and snake’s coordinates by the block size to place them at the right spots in pixels.
+
+```cpp
+display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
+```
+this code is used to create apples, in the code we use blocksize. the block size is the size of every object. this is done so that the snake and apple arent way too small. the block size is 4, the ssd1306 is 128 x 64. this means that the game is 32 by 16 blocks.
+
+```cpp
+for (int i = 0; i < snake.length; i++)
+  {
+    int x = snake.segments[i].x * BLOCKSIZE;
+    int y = snake.segments[i].y * BLOCKSIZE;
+    display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
+  }
+```
+this code uses the same principle to create the starting segments of the snake. they are also made from blocks that are 4x4 pixels.
+
+
+```cpp
+copy example
+```
