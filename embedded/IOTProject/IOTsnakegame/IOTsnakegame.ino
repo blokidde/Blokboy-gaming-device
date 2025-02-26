@@ -319,11 +319,13 @@ void readSensors()
   }
 }
 
-
+/// @brief puts a big game over on the display
 void gameOverScreen()
 {
   display.clearDisplay();
+  // size of the text
   display.setTextSize(2);
+  // startpoint for the text
   display.setCursor(10, 0);
   display.print("Game Over");
   display.setTextSize(1);
@@ -333,31 +335,51 @@ void gameOverScreen()
   display.display();
 }
 
+/// @brief this resets the game
 void reset()
 {
   snakeInit();
+  // sets start time for momvement time for the next game
   moveTime = millis();
 }
 
+
+/// @brief Sends a JSON HTTP request with movement statistics.
+/// This function sends a HTTP POST request containing the total movement
+/// stats of the snake during a game
+///
+/// @param totalup The number of times the snake moved up.
+/// @param totaldown The number of times the snake moved down.
+/// @param totalleft The number of times the snake moved left.
+/// @param totalright The number of times the snake moved right.
 void httpreq(int totalup, int totaldown, int totalleft, int totalright)
 {
+
+  // create clients for wifi and http
   WiFiClient client;
   HTTPClient httpClient;
 
+  // initialize http client with url
   httpClient.begin(client, url);
+
+  // set the content to send to json
   httpClient.addHeader("Content-Type", "application/json");
 
+  // create json document with necessary information
   StaticJsonDocument<200> doc;
   doc["totalup"] = totalup;
   doc["totaldown"] = totaldown;
   doc["totalleft"] = totalleft;
   doc["totalright"] = totalright;
+  // create string called jsonstring
   String jsonString;
+  // convert the json (doc) to a string (jsonstring)
   serializeJson(doc, jsonString);
 
   Serial.print("Verstuurde JSON: ");
   Serial.println(jsonString);
 
+  // send the json string
   httpcode = httpClient.POST(jsonString);
 }
 
