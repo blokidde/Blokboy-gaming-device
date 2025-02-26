@@ -91,18 +91,24 @@ void httpreq(int horz, int vert);
 void setup()
 {
   Serial.begin(115200);
+
+  // start wifi and i2c
   WiFi.begin(ssid, password);
   Wire.begin(SDA_PIN, SCL_PIN);
 
+  // set pins for buttons
   pinMode(BUTTON_1_PIN, INPUT_PULLUP);
   pinMode(BUTTON_2_PIN, INPUT_PULLUP);
 
+  // set pins for joystick
   pinMode(VERT_PIN, INPUT);
   pinMode(HORZ_PIN, INPUT);
   pinMode(SEL_PIN, INPUT_PULLUP);
 
+  // set pin for buzzer
   pinMode(BUZZER_PIN, OUTPUT);
 
+  // start connection with display and check if i2c connection works
   if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
   {
     Serial.println("OLED not found");
@@ -110,10 +116,12 @@ void setup()
       ;
   }
 
+  // initialize important things for display
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
 
+  //initialize snake
   snakeInit();
 }
 
