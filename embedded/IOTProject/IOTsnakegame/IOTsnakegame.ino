@@ -106,7 +106,12 @@ void setup() {
   snakeInit();
 }
 
+
+
+/// @brief Initializes the snake game by resetting game variables.
+// This function sets the initial values for the snake game
 void snakeInit() {
+  // set all the variables to 0 or false
   game_over = false;
   score = 0;
   totalup = 0;
@@ -114,11 +119,13 @@ void snakeInit() {
   totalleft = 0;
   totalright = 0;
 
+  // set all elements of the snake to its startign position
   snake.length = 1;
   snake.segments[0].x = ROWSX / 2;
   snake.direction_x = 0;
   snake.direction_y = 0;
 
+  // set the first apple on a random x and y
   apple.x = random(0, ROWSX);
   apple.y = random(0, ROWSY);
 }
