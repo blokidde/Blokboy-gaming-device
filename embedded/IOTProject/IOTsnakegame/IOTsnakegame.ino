@@ -235,11 +235,15 @@ void drawSnake()
     // tone(BUZZER_PIN, 1000, 100);
   }
   else
+  // if the snake doesnt eat an apple, move it forward
   {
     for (int i = snake.length - 1; i > 0; i--)
     {
+      // update the segment to the segments infront of it
       snake.segments[i] = snake.segments[i - 1];
     }
+
+    // set new head x and y
     snake.segments[0].x = newHeadX;
     snake.segments[0].y = newHeadY;
   }
