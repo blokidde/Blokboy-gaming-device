@@ -196,7 +196,7 @@ void drawSnake()
   int newHeadX = snake.segments[0].x + snake.direction_x;
   int newHeadY = snake.segments[0].y + snake.direction_y;
 
-  // check if the head is outside the given game size
+  // check if the head is outside the given game border
   if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY)
   {
     game_over = true;

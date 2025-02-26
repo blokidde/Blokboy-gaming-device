@@ -47,15 +47,70 @@ this code is used to create apples, in the code we use blocksize. the block size
 
 ```cpp
 for (int i = 0; i < snake.length; i++)
-  {
-    int x = snake.segments[i].x * BLOCKSIZE;
-    int y = snake.segments[i].y * BLOCKSIZE;
-    display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
-  }
+{
+  int x = snake.segments[i].x * BLOCKSIZE;
+  int y = snake.segments[i].y * BLOCKSIZE;
+  display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
+}
 ```
 this code uses the same principle to create the starting segments of the snake. they are also made from blocks that are 4x4 pixels.
 
+### void drawSnake()
+The drawSnake function moves the snake’s head in its current direction and checks if it hits a wall or its own segments. If it eats an apple, the snake grows longer and the apple is moved to a new random location. Otherwise, it just moves forward. If the snake collides with anything, the game ends.
 
+```cpp
+int newHeadX = snake.segments[0].x + snake.direction_x;
+int newHeadY = snake.segments[0].y + snake.direction_y;
+```
+in this code snippet you can see how the new head of the x and y are calculated. first you take the first point of the segments array. this is the old head position. after this you add the direction, this direction comes from the joystick input. 
+
+
+```cpp
+if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY)
+{
+  game_over = true;
+  return;
+}
+
+for (int i = 0; i < snake.length; i++)
+{
+  if (snake.segments[i].x == newHeadX && snake.segments[i].y == newHeadY)
+  {
+    game_over = true;
+    return;
+  }
+}
+```
+these if statements are used to check for collisions with the game border and the segments of the snake itself
+
+after this the code starts a big if statement for when an apple is eaten. in this if statement we have several important parts
+```cpp
+for (int i = snake.length; i > 0; i--)
+  {
+    snake.segments[i] = snake.segments[i - 1];
+  }
+```
+this loop is used to set every segment to the segment in front of it when the snake gets an apple
+
+```cpp
+for (int i = 0; i < snake.length; i++)
+      {
+        if (snake.segments[i].x == apple.x && snake.segments[i].y == apple.y)
+        {
+          validPosition = false;
+          break;
+        }
+      }
+```
+this loop checks the x and y positions of a newly generated apple with all segments of the snake, when the apple get created on a spot thats already in use, the boolean validPosition gets set to false and the proces of creating a new apple restarts.
+
+###
+```cpp
+copy example
+```
+```cpp
+copy example
+```
 ```cpp
 copy example
 ```
