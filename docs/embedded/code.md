@@ -126,7 +126,32 @@ moveTime = millis();
 ```
 this function updates the moveTime to the current time with millis(). this is used so the game knows when it needs to move the snake.
 
+### void httpreq()
+The httpreq function sends the snake’s movement statistics to a server using an HTTP POST request. It first creates WiFi and HTTP clients, then prepares a JSON object containing the number of times the snake moved up, down, left, and right. This JSON is converted into a string and sent to the server. The function also prints the JSON to the serial monitor for debugging.
 
 ```cpp
-copy example
+HTTPClient httpClient;
+httpClient.begin(client, url);
 ```
+this bit of code is used to create a httpclient. this is then used to link a url to send the httprequest to.
+
+```cpp
+StaticJsonDocument<200> doc;
+doc["totalup"] = totalup;
+doc["totaldown"] = totaldown;
+doc["totalleft"] = totalleft;
+doc["totalright"] = totalright;
+```
+this bit of code creates a json document called doc. then it adds the totals to the json file.
+
+```cpp
+String jsonString;
+serializeJson(doc, jsonString);
+```
+a string is created called jsonString. ater this the serialize Json puts the information from the doc into this string.
+by doing this it makes it easier for the API to read.
+
+```cpp
+httpcode = httpClient.POST(jsonString);
+```
+this last bit of code sends the jsonString to the webpage(url).
