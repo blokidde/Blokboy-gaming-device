@@ -249,8 +249,13 @@ void drawSnake()
   }
 }
 
+/// @brief reads the sensors and updates the direction of the snake 
+/// this function converts the analog inputs from the sensors to usable
+/// data the game can use to go towards any direction
 void readSensors()
 {
+
+  // variables for the reading of the joystick
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
 
@@ -259,29 +264,42 @@ void readSensors()
   // bool button1 = !digitalRead(BUTTON_1_PIN);
   // bool button2 = !digitalRead(BUTTON_2_PIN);
 
+
+  // if statement to check if the joystick is going down
   if (vert < 1000 && snake.direction_y != -1)
   {
+    // updates direction
     snake.direction_x = 0;
     snake.direction_y = 1;
+    // updates the total amount of times in the game the player has gone down
     totaldown++;
   }
+  // if statement to check if the joystick is going up
   else if (vert > 3000 && snake.direction_y != 1)
   {
+    // updates direction
     snake.direction_x = 0;
     snake.direction_y = -1;
+    // updates the total amount of times in the game the player has gone up
     totalup++;
   }
 
+  // if statement to check if the joystick is going left
   if (horz < 1000 && snake.direction_x != 1)
   {
+    // updates direction
     snake.direction_x = -1;
     snake.direction_y = 0;
+    // updates the total amount of times in the game the player has gone left
     totalleft++;
   }
+  // if statement to check if the joystick is going right
   else if (horz > 3000 && snake.direction_x != -1)
   {
+    // updates direction
     snake.direction_x = 1;
     snake.direction_y = 0;
+    // updates the total amount of times in the game the player has gone right
     totalright++;
   }
 }
