@@ -28,12 +28,14 @@
 #define ROWSY 8
 #define BLOCKSIZE 4
 
+// struct for creating snakesegments in another struct
 struct SnakeSegment
 {
   int x;
   int y;
 };
 
+// struct for keeping information on the snake
 struct Snake
 {
   SnakeSegment segments[100];
@@ -42,6 +44,7 @@ struct Snake
   int direction_y;
 };
 
+// struct for keeping information about the apple
 struct Apple
 {
   int x;
@@ -53,24 +56,28 @@ Apple apple;
 
 bool game_over;
 
+// variables for the game
 int score = 0;
-
 int totalleft;
 int totalright;
 int totalup;
 int totaldown;
 
+// variables needed for the game
 unsigned long moveTime = 0;
 const unsigned long moveSpeed = 200;
 
+// wifi credentials
 // const char* ssid = "iotroam";
 // const char* password = "xYEa1WO94W";
 // const char* url = "";
 
+// wifi credentials
 const char *ssid = "Lan solo";
 const char *password = "Zegikniet1";
 const char *url = "http://192.168.178.61/api/post.php";
 
+// initialization of the display
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 
 void snakeInit();
@@ -303,6 +310,7 @@ void readSensors()
     totalright++;
   }
 }
+
 
 void gameOverScreen()
 {
