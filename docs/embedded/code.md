@@ -104,10 +104,19 @@ for (int i = 0; i < snake.length; i++)
 ```
 this loop checks the x and y positions of a newly generated apple with all segments of the snake, when the apple get created on a spot thats already in use, the boolean validPosition gets set to false and the proces of creating a new apple restarts.
 
-###
+### void readSensors()
+this function is used to get sensor data from the joystick to give directions to the snake.
 ```cpp
-copy example
+if (vert < 1000 && snake.direction_y != -1)
+  {
+    snake.direction_x = 0;
+    snake.direction_y = 1;
+    totaldown++;
+  }
 ```
+in this code snippet you can see how the input from the joystick is handled. the smaller than 1000 is a countermeasure for stick drift. it ensures the snake doesnt move without being told to do so. it also counts the total times the function is called, this is used to display statistics at the end of the game
+
+
 ```cpp
 copy example
 ```
