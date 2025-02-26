@@ -7,23 +7,30 @@
 #include <WiFiClient.h>
 #include <ArduinoJson.h>
 
+// joystick pins
 #define VERT_PIN 18
 #define HORZ_PIN 17
 #define SEL_PIN 10
 
+// oled display pins
 #define SDA_PIN 15
 #define SCL_PIN 16
 #define OLED_RESET -1
 #define DISPLAY_WIDTH 128
 #define DISPLAY_HEIGHT 32
 
+// button pins
 #define BUTTON_1_PIN 4
 #define BUTTON_2_PIN 5
 
+// max lenght of the snake
 #define MAX_LENGTH 100
 
+// buzzer pin
 #define BUZZER_PIN 1
 
+// size of the game, display is 128 by 64, game has blocks size of 4
+// so 128 and 64 divided by 4
 #define ROWSX 32
 #define ROWSY 8
 #define BLOCKSIZE 4
