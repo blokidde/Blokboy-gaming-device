@@ -71,6 +71,9 @@ int totaldown;
 unsigned long moveTime = 0;
 const unsigned long moveSpeed = 200;
 
+// variable for http request
+int httpCode;
+
 // wifi credentials
 // const char* ssid = "iotroam";
 // const char* password = "xYEa1WO94W";
@@ -79,7 +82,7 @@ const unsigned long moveSpeed = 200;
 // wifi credentials
 const char *ssid = "Lan solo";
 const char *password = "Zegikniet1";
-const char *url = "http://192.168.178.61/api/post.php";
+const char *url = "http://192.168.178.61/api/insert.php";
 
 // initialization of the display
 Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
@@ -372,7 +375,7 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright) {
   Serial.println(jsonString);
 
   // send the json string
-  int httpCode = httpClient.POST(jsonString);
+  httpCode = httpClient.POST(jsonString);
 
   if (httpCode > 0) {
     // print response code from http POST
@@ -386,7 +389,7 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright) {
 void loop() {
   if (!game_over) {
     readSensors();
-
+    httpCode = 0;
     if (millis() - moveTime >= moveSpeed) {
       drawSnake();
       moveTime = millis();
@@ -396,7 +399,9 @@ void loop() {
   } else {
     gameOverScreen();
     Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
-    httpreq(totalup, totaldown, totalleft, totalright);
+    if(httpCode != 200){
+      httpreq(totalup, totaldown, totalleft, totalright);
+    }
     if (!digitalRead(BUTTON_1_PIN)) {
       reset();
       delay(500);
