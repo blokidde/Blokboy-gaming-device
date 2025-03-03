@@ -99,6 +99,8 @@ void setup()
 {
   Serial.begin(115200);
 
+  //seeding the random generator with the time
+  randomSeed(micros());
   // start wifi and i2c
   WiFi.begin(ssid, password);
   Wire.begin(SDA_PIN, SCL_PIN);
@@ -144,9 +146,14 @@ void snakeInit()
   totalleft = 0;
   totalright = 0;
 
-  // set all elements of the snake to its startign position
+  // set length of initial snake
   snake.length = 1;
-  snake.segments[0].x = ROWSX / 2;
+
+  // set first snake segments on random place
+  snake.segments[0].x = random(0, ROWSX);
+  snake.segments[0].y = random(0, ROWSY);
+
+  // no movement when starting
   snake.direction_x = 0;
   snake.direction_y = 0;
 
