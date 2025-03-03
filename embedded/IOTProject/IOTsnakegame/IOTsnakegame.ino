@@ -90,7 +90,7 @@ Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
 void snakeInit();
 void createGame();
 void drawSnake();
-int readSensors();
+void readSensors();
 void gameOverScreen();
 void reset();
 void httpreq(int horz, int vert);
@@ -161,6 +161,9 @@ void snakeInit()
 void createGame()
 {
   display.clearDisplay();
+
+  // draw the border for the game
+  display.drawRect(0, 0, 128, 32, SSD1306_WHITE);
 
   // converts apple x and y position to usable positions for the display
   int applex = (apple.x * BLOCKSIZE);
@@ -387,7 +390,15 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright)
   Serial.println(jsonString);
 
   // send the json string
-  httpcode = httpClient.POST(jsonString);
+  int httpCode = httpClient.POST(jsonString);
+
+  if (httpCode > 0) {
+    // print response code from http POST
+    Serial.println(httpCode);
+} else {
+    Serial.print("POST failed: ");
+    Serial.println(httpCode);
+}
 }
 
 void loop()
