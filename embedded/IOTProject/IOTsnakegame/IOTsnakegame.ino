@@ -348,7 +348,7 @@ void reset() {
 /// @param totaldown The number of times the snake moved down.
 /// @param totalleft The number of times the snake moved left.
 /// @param totalright The number of times the snake moved right.
-void httpreq(int totalup, int totaldown, int totalleft, int totalright) {
+void httpreq(int totalup, int totaldown, int totalleft, int totalright, int score) {
 
   // create clients for wifi and http
   WiFiClient client;
@@ -366,6 +366,7 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright) {
   doc["totaldown"] = totaldown;
   doc["totalleft"] = totalleft;
   doc["totalright"] = totalright;
+  doc["score_value"] = score;
   // create string called jsonstring
   String jsonString;
   // convert the json (doc) to a string (jsonstring)
@@ -400,7 +401,7 @@ void loop() {
     gameOverScreen();
     Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
     if(httpCode != 200){
-      httpreq(totalup, totaldown, totalleft, totalright);
+      httpreq(totalup, totaldown, totalleft, totalright, score);
     }
     if (!digitalRead(BUTTON_1_PIN)) {
       reset();
