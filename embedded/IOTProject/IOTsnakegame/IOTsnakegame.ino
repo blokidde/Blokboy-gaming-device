@@ -399,7 +399,8 @@ void loop() {
     createGame();
   } else {
     gameOverScreen();
-    Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
+    // used for debugging
+    //Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
     if(httpCode != 200){
       httpreq(totalup, totaldown, totalleft, totalright, score);
     }

@@ -1,44 +1,49 @@
 <?php
-// Include the file that creates the $conn database connection
+// Include the file that connects to the database
 require "db_connect.php";
 
-// Read raw JSON from the request body
+// Read raw JSON from the request
 $json = file_get_contents("php://input");
-// Decode the JSON into a PHP array/object
 $data = json_decode($json, true);
 
 if ($data) {
-    // Extract the fields from the decoded JSON, met fallback naar 0 als een waarde ontbreekt
-    $totalup = $data['totalup'] ?? 0;
-    $totaldown = $data['totaldown'] ?? 0;
-    $totalright = $data['totalright'] ?? 0;
-    $totalleft = $data['totalleft'] ?? 0;
-    $score_value = $data['score_value'] ?? 0;
-
-    // Start a database transaction for rollbacks if something goes wrong
-    $conn->begin_transaction();
+    // Extract data from JSON
+    $game_id = $data['game_id']; // Now we expect game_id from the request
+    $totalup = $data['totalup'];
+    $totaldown = $data['totaldown'];
+    $totalright = $data['totalright'];
+    $totalleft = $data['totalleft'];
+    $score_value = $data['score_value'];
 
     try {
-        // Prepare and execute first INSERT for JoystickInput
-        $stmt1 = $conn->prepare("INSERT INTO JoystickInput (totalup, totaldown, totalright, totalleft) VALUES (?, ?, ?, ?)");
-        $stmt1->bind_param("iiii", $totalup, $totaldown, $totalright, $totalleft);
+        // Check if game_id exists before inserting data
+        $checkGame = $conn->prepare("SELECT game_id FROM CurrentGame WHERE game_id = ?");
+        $checkGame->bind_param("i", $game_id);
+        $checkGame->execute();
+        $checkGame->store_result();
+        if ($checkGame->num_rows == 0) {
+            echo json_encode(["status" => "error", "message" => "Game ID does not exist"]);
+            exit();
+        }
+        $checkGame->close();
+
+        // Insert Joystick Input linked to game_id
+        $stmt1 = $conn->prepare("INSERT INTO JoystickInput (game_id, totalup, totaldown, totalright, totalleft) VALUES (?, ?, ?, ?, ?)");
+        $stmt1->bind_param("iiiii", $game_id, $totalup, $totaldown, $totalright, $totalleft);
         $stmt1->execute();
         $stmt1->close();
 
-        // Prepare en execute the second INSERT for Score
-        $stmt2 = $conn->prepare("INSERT INTO Score (score_value) VALUES (?)");
-        $stmt2->bind_param("i", $score_value);
+        // Insert Score linked to game_id
+        $stmt2 = $conn->prepare("INSERT INTO Score (game_id, score_value) VALUES (?, ?)");
+        $stmt2->bind_param("ii", $game_id, $score_value);
         $stmt2->execute();
         $stmt2->close();
 
-        // commit whe both statements succeed
-        $conn->commit();
-
-        // send succesful JSON-response back
         echo json_encode([
             "status" => "success",
-            "message" => "Data inserted",
+            "message" => "Data inserted successfully",
             "inserted_data" => [
+                "game_id" => $game_id,
                 "totalup" => $totalup,
                 "totaldown" => $totaldown,
                 "totalright" => $totalright,
@@ -47,21 +52,12 @@ if ($data) {
             ]
         ]);
     } catch (Exception $e) {
-        // rollback transaction if error occurs
-        $conn->rollback();
-        echo json_encode([
-            "status" => "error",
-            "message" => "Execute failed: " . $e->getMessage()
-        ]);
+        echo json_encode(["status" => "error", "message" => "Execute failed: " . $e->getMessage()]);
     }
 } else {
-    // no correct json error handler
-    echo json_encode([
-        "status" => "error",
-        "message" => "No valid JSON received"
-    ]);
+    echo json_encode(["status" => "error", "message" => "No valid JSON received"]);
 }
 
-// close database connection
+// Close database connection
 $conn->close();
 ?>
