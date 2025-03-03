@@ -36,15 +36,13 @@
 #define BLOCKSIZE 4
 
 // struct for creating snakesegments in another struct
-struct SnakeSegment
-{
+struct SnakeSegment {
   int x;
   int y;
 };
 
 // struct for keeping information on the snake
-struct Snake
-{
+struct Snake {
   SnakeSegment segments[100];
   int length;
   int direction_x;
@@ -52,8 +50,7 @@ struct Snake
 };
 
 // struct for keeping information about the apple
-struct Apple
-{
+struct Apple {
   int x;
   int y;
 };
@@ -95,8 +92,7 @@ void gameOverScreen();
 void reset();
 void httpreq(int horz, int vert);
 
-void setup()
-{
+void setup() {
   Serial.begin(115200);
 
   //seeding the random generator with the time
@@ -118,8 +114,7 @@ void setup()
   pinMode(BUZZER_PIN, OUTPUT);
 
   // start connection with display and check if i2c connection works
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
-  {
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println("OLED not found");
     while (true)
       ;
@@ -136,8 +131,7 @@ void setup()
 
 /// @brief Initializes the snake game by resetting game variables.
 /// This function sets the initial values for the snake game
-void snakeInit()
-{
+void snakeInit() {
   // set all the variables to 0 or false
   game_over = false;
   score = 0;
@@ -165,8 +159,7 @@ void snakeInit()
 /// @brief puts the elements needed for the game on the display.
 /// This function clears the screen and then draws the initial apple and the snake
 /// on the display using their x and y positions.
-void createGame()
-{
+void createGame() {
   display.clearDisplay();
 
   // draw the border for the game
@@ -180,8 +173,7 @@ void createGame()
   display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
 
   // loop through the snake segments and convert and fill them the same way as the apple
-  for (int i = 0; i < snake.length; i++)
-  {
+  for (int i = 0; i < snake.length; i++) {
     int x = snake.segments[i].x * BLOCKSIZE;
     int y = snake.segments[i].y * BLOCKSIZE;
     display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
@@ -194,12 +186,21 @@ void createGame()
 /// @brief Moves the snake forward and checks for collisions.
 /// This function updates the snake's position, handles apple eating,
 /// and checks for collisions with the walls or the snake's own segments.
-void drawSnake()
-{
+void drawSnake() {
   //if statement for when the snake isnt moving
-  if (snake.direction_x == 0 && snake.direction_y == 0)
-  {
+  if (snake.direction_x == 0 && snake.direction_y == 0) {
     return;
+  }
+
+  // count total amount the snake moves and which directions
+  if (snake.direction_x == 1) {
+    totalright++;
+  } else if (snake.direction_x == -1) {
+    totalleft++;
+  } else if (snake.direction_y == 1) {
+    totaldown++;
+  } else if (snake.direction_y == -1) {
+    totalup++;
   }
 
   // calculations for the new heads position
@@ -207,17 +208,14 @@ void drawSnake()
   int newHeadY = snake.segments[0].y + snake.direction_y;
 
   // check if the head is outside the given game border
-  if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY)
-  {
+  if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY) {
     game_over = true;
     return;
   }
 
   // check if the snake hits its own segments
-  for (int i = 0; i < snake.length; i++)
-  {
-    if (snake.segments[i].x == newHeadX && snake.segments[i].y == newHeadY)
-    {
+  for (int i = 0; i < snake.length; i++) {
+    if (snake.segments[i].x == newHeadX && snake.segments[i].y == newHeadY) {
       game_over = true;
       return;
     }
@@ -227,11 +225,9 @@ void drawSnake()
   bool ateApple = (newHeadX == apple.x && newHeadY == apple.y);
 
   // if statement for when the snake does eat the apple
-  if (ateApple)
-  { 
+  if (ateApple) {
     // loop to move segments forward after eating apple to make it longer
-    for (int i = snake.length; i > 0; i--)
-    {
+    for (int i = snake.length; i > 0; i--) {
       snake.segments[i] = snake.segments[i - 1];
     }
 
@@ -246,18 +242,15 @@ void drawSnake()
     bool validPosition = false;
 
     // loop to create new apple in random x and y position
-    while (!validPosition)
-    {
+    while (!validPosition) {
       // new x and y for apple
       apple.x = random(0, ROWSX);
       apple.y = random(0, ROWSY);
       validPosition = true;
 
       // for loop to check if the apple is put in a valid position (not in the snake segments)
-      for (int i = 0; i < snake.length; i++)
-      {
-        if (snake.segments[i].x == apple.x && snake.segments[i].y == apple.y)
-        {
+      for (int i = 0; i < snake.length; i++) {
+        if (snake.segments[i].x == apple.x && snake.segments[i].y == apple.y) {
           validPosition = false;
           break;
         }
@@ -265,12 +258,10 @@ void drawSnake()
     }
     // not used right now
     // tone(BUZZER_PIN, 1000, 100);
-  }
-  else
+  } else
   // if the snake doesnt eat an apple, move it forward
   {
-    for (int i = snake.length - 1; i > 0; i--)
-    {
+    for (int i = snake.length - 1; i > 0; i--) {
       // update the segment to the segments infront of it
       snake.segments[i] = snake.segments[i - 1];
     }
@@ -281,11 +272,10 @@ void drawSnake()
   }
 }
 
-/// @brief reads the sensors and updates the direction of the snake 
+/// @brief reads the sensors and updates the direction of the snake
 /// this function converts the analog inputs from the sensors to usable
 /// data the game can use to go towards any direction
-void readSensors()
-{
+void readSensors() {
 
   // variables for the reading of the joystick
   int vert = analogRead(VERT_PIN);
@@ -298,47 +288,34 @@ void readSensors()
 
 
   // if statement to check if the joystick is going down
-  if (vert < 1000 && snake.direction_y != -1)
-  {
+  if (vert < 1000 && snake.direction_y != -1) {
     // updates direction
     snake.direction_x = 0;
     snake.direction_y = 1;
-    // updates the total amount of times in the game the player has gone down
-    totaldown++;
   }
   // if statement to check if the joystick is going up
-  else if (vert > 3000 && snake.direction_y != 1)
-  {
+  else if (vert > 3000 && snake.direction_y != 1) {
     // updates direction
     snake.direction_x = 0;
     snake.direction_y = -1;
-    // updates the total amount of times in the game the player has gone up
-    totalup++;
   }
 
   // if statement to check if the joystick is going left
-  if (horz < 1000 && snake.direction_x != 1)
-  {
+  if (horz < 1000 && snake.direction_x != 1) {
     // updates direction
     snake.direction_x = -1;
     snake.direction_y = 0;
-    // updates the total amount of times in the game the player has gone left
-    totalleft++;
   }
   // if statement to check if the joystick is going right
-  else if (horz > 3000 && snake.direction_x != -1)
-  {
+  else if (horz > 3000 && snake.direction_x != -1) {
     // updates direction
     snake.direction_x = 1;
     snake.direction_y = 0;
-    // updates the total amount of times in the game the player has gone right
-    totalright++;
   }
 }
 
 /// @brief puts a big game over on the display
-void gameOverScreen()
-{
+void gameOverScreen() {
   display.clearDisplay();
   // size of the text
   display.setTextSize(2);
@@ -353,8 +330,7 @@ void gameOverScreen()
 }
 
 /// @brief this resets the game
-void reset()
-{
+void reset() {
   snakeInit();
   // sets start time for momvement time for the next game
   moveTime = millis();
@@ -369,8 +345,7 @@ void reset()
 /// @param totaldown The number of times the snake moved down.
 /// @param totalleft The number of times the snake moved left.
 /// @param totalright The number of times the snake moved right.
-void httpreq(int totalup, int totaldown, int totalleft, int totalright)
-{
+void httpreq(int totalup, int totaldown, int totalleft, int totalright) {
 
   // create clients for wifi and http
   WiFiClient client;
@@ -402,32 +377,27 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright)
   if (httpCode > 0) {
     // print response code from http POST
     Serial.println(httpCode);
-} else {
+  } else {
     Serial.print("POST failed: ");
     Serial.println(httpCode);
-}
+  }
 }
 
-void loop()
-{
-  if (!game_over)
-  {
+void loop() {
+  if (!game_over) {
     readSensors();
 
-    if (millis() - moveTime >= moveSpeed)
-    {
+    if (millis() - moveTime >= moveSpeed) {
       drawSnake();
       moveTime = millis();
     }
 
     createGame();
-  }
-  else
-  {
+  } else {
     gameOverScreen();
-
-    if (!digitalRead(BUTTON_1_PIN))
-    {
+    Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
+    httpreq(totalup, totaldown, totalleft, totalright);
+    if (!digitalRead(BUTTON_1_PIN)) {
       reset();
       delay(500);
     }
