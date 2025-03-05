@@ -79,6 +79,8 @@ int httpCode;
 // const char* password = "xYEa1WO94W";
 // const char* url = "";
 
+const char starturl = "";
+
 // wifi credentials
 const char *ssid = "Lan solo";
 const char *password = "Zegikniet1";
@@ -93,7 +95,8 @@ void drawSnake();
 void readSensors();
 void gameOverScreen();
 void reset();
-void httpreq(int horz, int vert);
+void httpreq(int totalup, int totaldown, int totalleft, int totalright, int score);
+void startGame();
 
 void setup() {
   Serial.begin(115200);
@@ -335,6 +338,7 @@ void gameOverScreen() {
 /// @brief this resets the game
 void reset() {
   snakeInit();
+  startGame();
   // sets start time for momvement time for the next game
   moveTime = millis();
 }
@@ -385,6 +389,36 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright, int scor
     Serial.print("POST failed: ");
     Serial.println(httpCode);
   }
+}
+
+void startGame() {
+  WiFiClient client;
+  HTTPClient http;
+
+  http.begin(client, starturl);
+  http.addHeader("Content-Type", "application/json");
+
+  // Create JSON file
+  StaticJsonDocument<200> doc;
+
+  // Send "1" to start a new "game"
+  doc["start"] = 1;
+  String jsonString;
+  serializeJson(doc, jsonString);
+
+  // Send HTTP POST request
+  int httpResponseCode = http.POST(jsonString);
+
+  if (httpResponseCode > 0) {
+    String response = http.getString();
+    Serial.print("Response from startGame: ");
+    Serial.println(response);
+  } else {
+    Serial.print("POST request failed, error: ");
+    Serial.println(httpResponseCode);
+  }
+
+  http.end();
 }
 
 void loop() {
