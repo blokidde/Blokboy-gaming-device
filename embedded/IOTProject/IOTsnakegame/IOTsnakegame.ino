@@ -74,12 +74,16 @@ const unsigned long moveSpeed = 200;
 // variable for http request
 int httpCode;
 
+// variables for information about the game
+int player_id = 0;
+int game_id = 0;
+
 // wifi credentials school
 const char* ssid = "iotroam";
 const char* password = "xYEa1WO94W";
 const char* url = "http://145.92.189.65/api/insert.php";
 
-const char* starturl = "http://192.168.178.61/api/start_game.php";
+const char* starturl = "http://145.92.189.65/api/start_game.php";
 
 // wifi credentials home
 // const char *ssid = "Lan solo";
@@ -353,7 +357,7 @@ void reset() {
 /// @param totaldown The number of times the snake moved down.
 /// @param totalleft The number of times the snake moved left.
 /// @param totalright The number of times the snake moved right.
-void httpreq(int totalup, int totaldown, int totalleft, int totalright, int score) {
+void httpreq(int, game_id, int totalup, int totaldown, int totalleft, int totalright, int score) {
 
   // create clients for wifi and http
   WiFiClient client;
@@ -367,6 +371,7 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright, int scor
 
   // create json document with necessary information
   StaticJsonDocument<200> doc;
+  doc["game_id"] = game_id;
   doc["totalup"] = totalup;
   doc["totaldown"] = totaldown;
   doc["totalleft"] = totalleft;
@@ -393,32 +398,48 @@ void httpreq(int totalup, int totaldown, int totalleft, int totalright, int scor
 }
 
 void startGame() {
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("WiFi not connected!");
+    return;
+  }
+
   WiFiClient client;
   HTTPClient http;
-
   http.begin(client, starturl);
   http.addHeader("Content-Type", "application/json");
 
-  // Create JSON file
+  // Creëer JSON payload
   StaticJsonDocument<200> doc;
-
-  // Send "1" to start a new "game"
-  doc["start"] = 1;
+  doc["generate"] = 1;  // Gaat naar PHP
   String jsonString;
   serializeJson(doc, jsonString);
 
-  // Send HTTP POST request
+  // Verstuur HTTP POST
   int httpResponseCode = http.POST(jsonString);
-
   if (httpResponseCode > 0) {
     String response = http.getString();
     Serial.print("Response from startGame: ");
     Serial.println(response);
+
+    // JSON-resultaat parsen
+    StaticJsonDocument<200> responseDoc;
+    DeserializationError error = deserializeJson(responseDoc, response);
+    if (!error && responseDoc["status"] == "success") {
+      // player_id en game_id uitlezen
+      player_id = responseDoc["player_id"] | 0;
+      game_id = responseDoc["game_id"] | 0;
+
+      Serial.print("New player_id: ");
+      Serial.println(player_id);
+      Serial.print("New game_id: ");
+      Serial.println(game_id);
+    } else {
+      Serial.println("Failed to parse JSON or status != success.");
+    }
   } else {
-    Serial.print("POST request failed, error: ");
+    Serial.print("POST failed, error code: ");
     Serial.println(httpResponseCode);
   }
-
   http.end();
 }
 
