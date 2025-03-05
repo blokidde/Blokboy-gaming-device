@@ -304,26 +304,26 @@ void readSensors() {
 
 
   // if statement to check if the joystick is going down
-  if (vert < 1000 && snake.direction_y != -1) {
+  if (vert < 500 && snake.direction_y != -1) {
     // updates direction
     snake.direction_x = 0;
     snake.direction_y = 1;
   }
   // if statement to check if the joystick is going up
-  else if (vert > 3000 && snake.direction_y != 1) {
+  else if (vert > 3500 && snake.direction_y != 1) {
     // updates direction
     snake.direction_x = 0;
     snake.direction_y = -1;
   }
 
   // if statement to check if the joystick is going left
-  if (horz < 1000 && snake.direction_x != 1) {
+  if (horz < 500 && snake.direction_x != 1) {
     // updates direction
     snake.direction_x = -1;
     snake.direction_y = 0;
   }
   // if statement to check if the joystick is going right
-  else if (horz > 3000 && snake.direction_x != -1) {
+  else if (horz > 3500 && snake.direction_x != -1) {
     // updates direction
     snake.direction_x = 1;
     snake.direction_y = 0;
