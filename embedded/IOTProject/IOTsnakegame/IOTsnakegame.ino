@@ -99,7 +99,7 @@ void drawSnake();
 void readSensors();
 void gameOverScreen();
 void reset();
-void httpreq(int totalup, int totaldown, int totalleft, int totalright, int score);
+void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalright, int score);
 void startGame();
 
 void setup() {
@@ -109,6 +109,10 @@ void setup() {
   randomSeed(micros());
   // start wifi and i2c
   WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(250);
+    Serial.print(".");
+  }
   Wire.begin(SDA_PIN, SCL_PIN);
 
   // set pins for buttons
@@ -352,12 +356,12 @@ void reset() {
 /// @brief Sends a JSON HTTP request with movement statistics.
 /// This function sends a HTTP POST request containing the total movement
 /// stats of the snake during a game
-///
+/// @param game_id ID created by database, used as foreign keys for 
 /// @param totalup The number of times the snake moved up.
 /// @param totaldown The number of times the snake moved down.
 /// @param totalleft The number of times the snake moved left.
 /// @param totalright The number of times the snake moved right.
-void httpreq(int, game_id, int totalup, int totaldown, int totalleft, int totalright, int score) {
+void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalright, int score) {
 
   // create clients for wifi and http
   WiFiClient client;
@@ -428,11 +432,6 @@ void startGame() {
       // player_id en game_id uitlezen
       player_id = responseDoc["player_id"] | 0;
       game_id = responseDoc["game_id"] | 0;
-
-      Serial.print("New player_id: ");
-      Serial.println(player_id);
-      Serial.print("New game_id: ");
-      Serial.println(game_id);
     } else {
       Serial.println("Failed to parse JSON or status != success.");
     }
@@ -458,7 +457,7 @@ void loop() {
     // used for debugging
     //Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
     if(httpCode != 200){
-      httpreq(totalup, totaldown, totalleft, totalright, score);
+      httpreq(game_id, totalup, totaldown, totalleft, totalright, score);
     }
     if (!digitalRead(BUTTON_1_PIN)) {
       reset();
