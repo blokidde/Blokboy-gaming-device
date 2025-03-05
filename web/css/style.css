@@ -1,8 +1,24 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
-h1 {
-    color: #007bff;
-}
+  body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+  }
+
+  h1 {
+      color: #FF0000;
+      text-align: center;
+      margin-top: 20px;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  table {
+      text-align: center;
+      border: 1px;
+      margin: 20px auto;
+      border-collapse: collapse;
+  }

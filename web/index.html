@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Minimal Scoreboard</title>
+  <title>Home</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <h1>Scores</h1>
-  <table id="scoreTable" border="1">
-    <thead>
-      <tr>
-        <th>Player ID</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
 
+<body>
+  <div class="container">
+    <h1>Scores</h1>
+    <table id="scoreTable">
+      <thead>
+        <tr>
+          <th>Player ID</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
   <script>
     // Deze functie haalt de scores op van scoreboard.php en vult de tabel
     function fetchScores() {
@@ -52,4 +56,5 @@
     document.addEventListener('DOMContentLoaded', fetchScores);
   </script>
 </body>
+
 </html>
