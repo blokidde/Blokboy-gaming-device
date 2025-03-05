@@ -1,43 +1,28 @@
 <?php
-// Include the file that creates the $conn database connection
-require "db_connect.php";
+// scoreboard.php
+require "db_connect.php"; // bevat de code voor db-connectie
 
-// Prepare a SELECT query for the table JoystickInput
-$sql = "SELECT totalup, totaldown, totalright, totalleft FROM JoystickInput";
+// Query: haal scores op én koppel ze aan player_id uit Player
+$query = "
+    SELECT s.score_value, p.player_id
+    FROM Score s
+    JOIN CurrentGame c ON s.game_id = c.game_id
+    JOIN Player p ON c.player_id = p.player_id
+    ORDER BY s.score_value DESC
+";
 
-// Execute the query
-$result = $conn->query($sql);
+$result = $conn->query($query);
+$scores = [];
 
-if (!$result) {
-    // If the query fails, give an error
-    echo json_encode([
-        "status" => "error",
-        "message" => "Query failed: " . $conn->error
-    ]);
-    $conn->close();
-    exit;
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // $row bevat ['score_value' => 123, 'player_id' => 5] enz.
+        $scores[] = $row;
+    }
 }
 
-// Fetch all rows into array
-$data = [];
-while ($row = $result->fetch_assoc()) {
-    $data[] = $row;
-}
+// Stuur de data terug als JSON
+echo json_encode($scores);
 
-// Check if any rows get back
-if (count($data) === 0) {
-    echo json_encode([
-        "status" => "success",
-        "data" => [],
-        "message" => "No rows found"
-    ]);
-} else {
-    echo json_encode([
-        "status" => "success",
-        "data" => $data
-    ]);
-}
-
-// Close the database connection
 $conn->close();
 ?>
