@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Home</title>
   <link rel="stylesheet" href="css/style.css?v=1.0">
+  <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -20,41 +21,6 @@
       <tbody></tbody>
     </table>
   </div>
-  <script>
-    // Deze functie haalt de scores op van scoreboard.php en vult de tabel
-    function fetchScores() {
-      fetch('api/get.php')
-        .then(response => response.json())
-        .then(data => {
-          // 'data' is nu een array met objecten { score_value, player_id }
-          const tbody = document.querySelector('#scoreTable tbody');
-          // maak de tabel leeg, voor het geval je opnieuw laadt
-          tbody.innerHTML = '';
-
-          data.forEach(item => {
-            const tr = document.createElement('tr');
-
-            // Player ID
-            const tdPlayer = document.createElement('td');
-            tdPlayer.textContent = item.player_id;
-            tr.appendChild(tdPlayer);
-
-            // Score
-            const tdScore = document.createElement('td');
-            tdScore.textContent = item.score_value;
-            tr.appendChild(tdScore);
-
-            tbody.appendChild(tr);
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching scores:', error);
-        });
-    }
-
-    // Zodra de pagina is geladen, roep fetchScores() aan
-    document.addEventListener('DOMContentLoaded', fetchScores);
-  </script>
 </body>
 
 </html>

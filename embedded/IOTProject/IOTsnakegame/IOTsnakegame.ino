@@ -84,11 +84,11 @@ const char* password = "xYEa1WO94W";
 const char* url = "http://145.92.189.65/api/insert.php";
 const char* starturl = "http://145.92.189.65/api/start_game.php";
 
-// wifi credentials home
+// // // wifi credentials home
 // const char *ssid = "Lan solo";
 // const char *password = "Zegikniet1";
 // const char *url = "http://192.168.178.61/api/insert.php";
-//const char* starturl = "http://192.168.178.61/api/start_game.php";
+// const char* starturl = "http://192.168.178.61/api/start_game.php";
 
 
 // initialization of the display
@@ -357,11 +357,12 @@ void reset() {
 /// @brief Sends a JSON HTTP request with movement statistics.
 /// This function sends a HTTP POST request containing the total movement
 /// stats of the snake during a game
-/// @param game_id ID created by database, used as foreign keys for 
+/// @param game_id ID created by database, used as foreign keys for. 
 /// @param totalup The number of times the snake moved up.
 /// @param totaldown The number of times the snake moved down.
 /// @param totalleft The number of times the snake moved left.
 /// @param totalright The number of times the snake moved right.
+/// @param score The amount of points gotten in a game.
 void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalright, int score) {
 
   // create clients for wifi and http
