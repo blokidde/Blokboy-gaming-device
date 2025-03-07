@@ -35,4 +35,7 @@ function sendRequestToESP32() {
 }
 
 // when page is loaded, call the function
-document.addEventListener('DOMContentLoaded', fetchScores);
+document.addEventListener('DOMContentLoaded', () => {
+  fetchScores();
+  document.getElementById('sendRequestBtn').addEventListener('click', sendRequestToESP32);
+});
