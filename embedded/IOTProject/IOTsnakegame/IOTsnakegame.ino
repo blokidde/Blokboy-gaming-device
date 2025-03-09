@@ -79,9 +79,11 @@ int httpCode;
 int player_id = 0;
 int game_id = 0;
 
+WiFiServer server(80);
+
 // wifi credentials school
-const char* ssid = "iotroam";
-const char* password = "xYEa1WO94W";
+// const char* ssid = "iotroam";
+// const char* password = "xYEa1WO94W";
 const char* url = "http://145.92.189.65/api/insert.php";
 const char* starturl = "http://145.92.189.65/api/start_game.php";
 
@@ -501,6 +503,7 @@ void loop() {
     if (httpCode != 200) {
       httpreq(game_id, totalup, totaldown, totalleft, totalright, score);
     }
+    webserver();
     if (!digitalRead(BUTTON_1_PIN)) {
       reset();
       delay(500);
