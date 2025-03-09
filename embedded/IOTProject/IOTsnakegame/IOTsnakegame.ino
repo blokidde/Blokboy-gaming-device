@@ -6,6 +6,7 @@
 #include <HTTPClient.h>
 #include <WiFiClient.h>
 #include <ArduinoJson.h>
+#include <WiFiManager.h>
 
 // joystick pins
 #define VERT_PIN 18
@@ -102,18 +103,35 @@ void gameOverScreen();
 void reset();
 void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalright, int score);
 void startGame();
+void webserver();
 
 void setup() {
   Serial.begin(115200);
 
   //seeding the random generator with the time
   randomSeed(micros());
+
+  // not used
+  // WiFi.begin(ssid, password);
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   delay(250);
+  //   Serial.print(".");
+  // }
+
+  WiFiManager wifiManager;
   // start wifi and i2c
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(250);
-    Serial.print(".");
+  if (!wifiManager.autoConnect("ESP32-Setup")) {
+    Serial.println("Failed to connect, restarting...");
+    delay(3000);
+    ESP.restart();
   }
+
+  Serial.println("Connected to WiFi!");
+  Serial.print("ESP32 IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  server.begin();
+  Serial.println("Webserver started");
   Wire.begin(SDA_PIN, SCL_PIN);
 
   // set pins for buttons
@@ -147,7 +165,7 @@ void setup() {
 /// @brief Initializes the snake game by resetting game variables.
 /// This function sets the initial values for the snake game
 void snakeInit() {
-  
+
   startGame();
   // set all the variables to 0 or false
   game_over = false;
@@ -357,7 +375,7 @@ void reset() {
 /// @brief Sends a JSON HTTP request with movement statistics.
 /// This function sends a HTTP POST request containing the total movement
 /// stats of the snake during a game
-/// @param game_id ID created by database, used as foreign keys for. 
+/// @param game_id ID created by database, used as foreign keys for.
 /// @param totalup The number of times the snake moved up.
 /// @param totaldown The number of times the snake moved down.
 /// @param totalleft The number of times the snake moved left.
@@ -444,6 +462,28 @@ void startGame() {
   http.end();
 }
 
+void webserver() {
+  WiFiClient client = server.available();
+
+  if (client) {
+    Serial.println("New Client connected!");
+    String request = "";
+
+    while (client.connected()) {
+      if (client.available()) {
+        char c = client.read();
+        request += c;
+        if (c == '\n') break;
+      }
+    }
+
+    Serial.println("Client Request: ");
+    Serial.println(request);
+    client.stop();
+    Serial.println("Client disconnected.");
+  }
+}
+
 void loop() {
   if (!game_over) {
     readSensors();
@@ -458,7 +498,7 @@ void loop() {
     gameOverScreen();
     // used for debugging
     //Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
-    if(httpCode != 200){
+    if (httpCode != 200) {
       httpreq(game_id, totalup, totaldown, totalleft, totalright, score);
     }
     if (!digitalRead(BUTTON_1_PIN)) {

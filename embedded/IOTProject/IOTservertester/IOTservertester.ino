@@ -39,17 +39,6 @@ void loop() {
 
         Serial.println("Client Request: ");
         Serial.println(request);
-
-        client.println("HTTP/1.1 200 OK");
-        client.println("Content-type:text/html");
-        client.println("Connection: close");
-        client.println();
-        client.println("<!DOCTYPE html><html><body>");
-        client.println("<h1>ESP32 Webserver met WiFiManager</h1>");
-        client.println("<p>ESP32 is verbonden met WiFi!</p>");
-        client.println("</body></html>");
-        client.println();
-
         client.stop();
         Serial.println("Client disconnected.");
     }
