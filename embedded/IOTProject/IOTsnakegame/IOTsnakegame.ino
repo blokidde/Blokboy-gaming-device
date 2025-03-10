@@ -480,6 +480,9 @@ void webserver() {
       }
     }
 
+    if (request.indexOf("GET /debug") >= 0) {
+      debug();
+    }
     Serial.println("Client Request: ");
     Serial.println(request);
     client.stop();
@@ -492,8 +495,8 @@ void debug(){
   display.println("starting debug");
   display.println("press button to continue");
   display.display();
-  delay(200);
-  while(digitalRead(BUTTON_1_PIN)){
+  delay(2000);
+  while(!digitalRead(BUTTON_1_PIN)){
     display.fillRect(0, 0, display.width(), display.height(), SSD1306_WHITE);
     display.display();
     delay(20);
