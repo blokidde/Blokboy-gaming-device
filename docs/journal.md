@@ -32,9 +32,18 @@ this week i did a workshop about lasercutting, i learned what to do with several
 in week 2 i started with the backend of my website, i created a GET.php file to get information from the database. i also created an INSERT. this is used to put stuff into the database. creating this was rather difficult because i had never really worked with php and SQL before. this meant i had to start from scratch. luckily the internet is a big help with this.
 
 ## week 4
+
+### HTML
 this week i learned more about web development. HTML helped me build the basic structure of the page. I used different tags to organize my content and added important elements like a button and a table that shows the scores that are fethced from my database scores. I also learned how to connect an external JavaScript file and a CSS file in the head section. 
 
+### CSS
 with CSS i can control how the page looks. I set up fonts, changed background colors, and made sure that different parts of the page have the right spacing. I also tried to make sure the page is responsive, so it looks good on both big screens and small screens.
+
+### JavaScript
+JavaScript made the page interactive. For example, I used the fetch function to get data from my database, then created table rows and columns to display data. I also added an event listener to the button, so that when you click it, it sends a request to the ESP32 for debugging.
+
+### Problems
+while working on web development i ran into a problem i had some difficulties solving. the css wasnt loading on the page. i needed to clear my cache everytime i wanted to check the css. by doing a little research i found out i could use something called a cache buster. after adding this 
 
 ## week 5
 
