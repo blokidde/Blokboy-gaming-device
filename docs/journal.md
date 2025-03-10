@@ -46,6 +46,10 @@ JavaScript made the page interactive. For example, I used the fetch function to 
 while working on web development i ran into a problem i had some difficulties solving. the css wasnt loading on the page. i needed to clear my cache everytime i wanted to check the css. by doing a little research i found out i could use something called a cache buster. after adding this 
 
 ## week 5
+### JavaScript
+i used JavaScript to make it possible for the website to communicate with the ESP32. I used the fetch function to send a request to the ESP32's local IP address. This request asks the ESP32 to execute a command, and I logged the response in the console to check if it was working. I also learned how to handle errors if the ESP32 was not responding.
+
+### ESP32
 
 ## week 6
 ### 10/3/25
