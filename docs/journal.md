@@ -32,7 +32,9 @@ this week i did a workshop about lasercutting, i learned what to do with several
 in week 2 i started with the backend of my website, i created a GET.php file to get information from the database. i also created an INSERT. this is used to put stuff into the database. creating this was rather difficult because i had never really worked with php and SQL before. this meant i had to start from scratch. luckily the internet is a big help with this.
 
 ## week 4
-this week i learned more about 
+this week i learned more about web development. HTML helped me build the basic structure of the page. I used different tags to organize my content and added important elements like a button and a table that shows the scores that are fethced from my database scores. I also learned how to connect an external JavaScript file and a CSS file in the head section. 
+
+
 
 ## week 5
 
