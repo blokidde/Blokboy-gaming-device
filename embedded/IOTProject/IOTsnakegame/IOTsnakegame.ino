@@ -84,14 +84,14 @@ WiFiServer server(80);
 // wifi credentials school
 // const char* ssid = "iotroam";
 // const char* password = "xYEa1WO94W";
-const char* url = "http://145.92.189.65/api/insert.php";
-const char* starturl = "http://145.92.189.65/api/start_game.php";
+// const char* url = "http://145.92.189.65/api/insert.php";
+// const char* starturl = "http://145.92.189.65/api/start_game.php";
 
 // // // wifi credentials home
 // const char *ssid = "Lan solo";
 // const char *password = "Zegikniet1";
-// const char *url = "http://192.168.178.61/api/insert.php";
-// const char* starturl = "http://192.168.178.61/api/start_game.php";
+const char *url = "http://192.168.178.61/api/insert.php";
+const char* starturl = "http://192.168.178.61/api/start_game.php";
 
 
 // initialization of the display
