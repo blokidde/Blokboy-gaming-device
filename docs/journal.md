@@ -32,11 +32,13 @@ this week i did a workshop about lasercutting, i learned what to do with several
 in week 2 i started with the backend of my website, i created a GET.php file to get information from the database. i also created an INSERT. this is used to put stuff into the database. creating this was rather difficult because i had never really worked with php and SQL before. this meant i had to start from scratch. luckily the internet is a big help with this.
 
 ## week 4
+this week i learned more about 
 
 ## week 5
 
 ## week 6
-
+### 10/3/25
+my goal for today is to write more in my learning journal, i also want to create a debugging function for the ESP32, so i can be able to test the sensors for my project if necessary.
 ## week 7
 
 ## week 8
