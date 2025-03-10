@@ -50,6 +50,7 @@ while working on web development i ran into a problem i had some difficulties so
 i used JavaScript to make it possible for the website to communicate with the ESP32. I used the fetch function to send a request to the ESP32's local IP address. This request asks the ESP32 to execute a command, and I logged the response in the console to check if it was working. I also learned how to handle errors if the ESP32 was not responding.
 
 ### ESP32
+ESP32 as a webserver. The ESP32 runs a small server that listens for requests from my website. When the site sends a request to /command, the ESP32 processes it and sends back a response.
 
 ## week 6
 ### 10/3/25
