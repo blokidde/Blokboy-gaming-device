@@ -34,7 +34,7 @@ in week 2 i started with the backend of my website, i created a GET.php file to 
 ## week 4
 this week i learned more about web development. HTML helped me build the basic structure of the page. I used different tags to organize my content and added important elements like a button and a table that shows the scores that are fethced from my database scores. I also learned how to connect an external JavaScript file and a CSS file in the head section. 
 
-
+with CSS i can control how the page looks. I set up fonts, changed background colors, and made sure that different parts of the page have the right spacing. I also tried to make sure the page is responsive, so it looks good on both big screens and small screens.
 
 ## week 5
 
