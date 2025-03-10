@@ -106,6 +106,7 @@ void reset();
 void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalright, int score);
 void startGame();
 void webserver();
+void debug();
 
 void setup() {
   Serial.begin(115200);
@@ -484,6 +485,20 @@ void webserver() {
     client.stop();
     Serial.println("Client disconnected.");
   }
+}
+
+void debug(){
+  display.clearDisplay();
+  display.println("starting debug");
+  display.println("press button to continue");
+  display.display();
+  delay(200);
+  while(digitalRead(BUTTON_1_PIN)){
+    display.fillRect(0, 0, display.width(), display.height(), SSD1306_WHITE);
+    display.display();
+    delay(20);
+  }
+
 }
 
 void loop() {
