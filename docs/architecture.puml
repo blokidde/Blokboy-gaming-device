@@ -1,13 +1,42 @@
 @startuml
-title Test Diagram
+title architecture diagram
 
-actor User
-participant "Web App" as WA
-database "DB"
+skinparam linetype ortho
+rectangle "User" as User
 
-User -> WA: Request
-WA -> DB: Query
-DB --> WA: Result
-WA --> User: Response
+rectangle "frontend" as Browser {
+  component "index.html" as index
+  component "script.js" as script
+  component "style.css" as style
+}
+
+rectangle "backend" as Server {
+  component "insert.php" as insert
+  component "start_game.php" as start
+  component "get.php" as get
+  component "delete.php" as delete
+  component "db_connect.php" as dbconn
+  database "MySQL Database" as DB
+}
+
+rectangle "embedded" as embedded{
+    component "ssd1306" as oled 
+    component "joystick" as joystick
+    component "button" as bttn 
+    component "buzzer" as bzzr
+    component "ESP32" as ESP32
+}
+
+User --> Browser :
+Browser --> Server : API
+dbconn --> DB : db_connect.php
+ESP32 --> Server : API
+Browser --> ESP32 : GET /debug
+delete --> dbconn
+get --> dbconn
+insert --> dbconn
+start --> dbconn
+ESP32 --> oled
 
 @enduml
+
