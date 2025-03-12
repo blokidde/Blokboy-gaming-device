@@ -63,6 +63,9 @@ ESP32 as a webserver. The ESP32 runs a small server that listens for requests fr
 my goal for today is to write more in my learning journal, i also want to create a debugging function for the ESP32, so i can be able to test the sensors for my project if necessary.
 
 done: i have written the most important things ive learned in the last few weeks for my learning journal. 
+
+### 12/3/25
+my goal for today is to get to know more about architecture diagrams, how to create them and why you use them.
 ## week 7
 
 ## week 8

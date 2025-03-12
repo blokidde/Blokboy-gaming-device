@@ -11,7 +11,7 @@ rectangle "frontend" as Browser {
   component "style.css" as style
 }
 
-rectangle "backend" as Server {
+rectangle "backend" as backend {
   component "insert.php" as insert
   component "start_game.php" as start
   component "get.php" as get
@@ -31,7 +31,7 @@ rectangle "embedded" as embedded{
 User --> embedded
 User --> index
 dbconn --> DB : db_connect.php
-ESP32 --> Server : API
+ESP32 --> backend : API
 script --> ESP32 : debug
 delete --> dbconn
 get --> dbconn
@@ -43,6 +43,7 @@ ESP32 --> bzzr
 bttn --> ESP32
 style --> index
 script --> index
+script --> backend
 
 
 @enduml
