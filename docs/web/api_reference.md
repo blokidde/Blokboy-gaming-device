@@ -30,8 +30,8 @@ The API receives joystick input from the ESP32 and stores it in a database.
 }
 ```
 
-#### response
-if correctly sent, code: 200.
+#### response codes
+if correctly sent, code: 200
 
 if not sent correctly code of: -1
 

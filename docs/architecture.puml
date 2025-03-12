@@ -1,0 +1,13 @@
+@startuml
+title Test Diagram
+
+actor User
+participant "Web App" as WA
+database "DB"
+
+User -> WA: Request
+WA -> DB: Query
+DB --> WA: Result
+WA --> User: Response
+
+@enduml
