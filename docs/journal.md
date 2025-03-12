@@ -66,6 +66,8 @@ done: i have written the most important things ive learned in the last few weeks
 
 ### 12/3/25
 my goal for today is to get to know more about architecture diagrams, how to create them and why you use them.
+
+i learned how to use plantuml for automatic generation of architecture diagrams, i added all components for the esp32, i added the API files used for fetching data and the files used in the frontend. 
 ## week 7
 
 ## week 8
