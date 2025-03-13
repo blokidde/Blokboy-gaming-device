@@ -160,3 +160,28 @@ this last bit of code sends the jsonString to the webpage(url).
 The startGame() function initializes a new game by sending an HTTP POST request to a server which in turn gets a game ID from a database. It also retrieves the server's response. These values are stored in player_id and game_id for use in the game. for more information on the code, see above(httpreq)
 
 ### void webserver()
+The webserver() function listens for incoming connections on port 80. When a client connects, it reads the request and checks if the client has requested a specific endpoint (like "GET /debug"). Based on the request, the server either handles the request or responds with the corresponding information.
+
+```cpp
+WiFiClient client = server.available();
+```
+this code snippet checks if the server has a connection
+
+```cpp
+  if (client.available()) {
+    char c = client.read();
+    request += c;
+    if (c == '\n') break;
+  }
+```
+this part of the code puts the http request into a string named request.
+
+```cpp
+if (request.indexOf("GET /debug") >= 0) {
+  debug();
+}
+```
+the if statement checks if the request string contains a certain word or command and if it does it starts the debug
+function
+
+### void debug
