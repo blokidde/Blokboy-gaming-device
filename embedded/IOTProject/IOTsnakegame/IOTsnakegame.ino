@@ -13,6 +13,12 @@
 #define HORZ_PIN 17
 #define SEL_PIN 10
 
+// joystick constants
+#define UPTHRES 3500
+#define DOWNTHRES 500
+#define LEFTTHRES 500
+#define RIGHTTHRES 3500
+
 // oled display pins
 #define SDA_PIN 15
 #define SCL_PIN 16
@@ -326,26 +332,26 @@ void readSensors() {
 
 
   // if statement to check if the joystick is going down
-  if (vert < 500 && snake.direction_y != -1) {
+  if (vert < DOWNTHRES && snake.direction_y != -1) {
     // updates direction
     snake.direction_x = 0;
     snake.direction_y = 1;
   }
   // if statement to check if the joystick is going up
-  else if (vert > 3500 && snake.direction_y != 1) {
+  else if (vert > UPTHRES && snake.direction_y != 1) {
     // updates direction
     snake.direction_x = 0;
     snake.direction_y = -1;
   }
 
   // if statement to check if the joystick is going left
-  if (horz < 500 && snake.direction_x != 1) {
+  if (horz < LEFTTHRES && snake.direction_x != 1) {
     // updates direction
     snake.direction_x = -1;
     snake.direction_y = 0;
   }
   // if statement to check if the joystick is going right
-  else if (horz > 3500 && snake.direction_x != -1) {
+  else if (horz > RIGHTTHRES && snake.direction_x != -1) {
     // updates direction
     snake.direction_x = 1;
     snake.direction_y = 0;
@@ -491,11 +497,15 @@ void webserver() {
 }
 
 void debug(){
+  int vert = analogRead(VERT_PIN);
+  int horz = analogRead(HORZ_PIN);
   display.clearDisplay();
   display.setCursor(0, 0);
   display.println("starting debug");
+  display.display();
   delay(5000);
   display.clearDisplay();
+  display.setCursor(0, 0);
   display.println("press button to continue");
   display.display();
   delay(5000);
@@ -504,7 +514,42 @@ void debug(){
     display.display();
     delay(20);
   }
-
+  display.clearDisplay();
+  while (vert < UPTHRES){
+    vert = analogRead(VERT_PIN);
+    display.setCursor(0, 0);
+    display.println("joystick omhoog");
+    display.display();
+  }
+  display.clearDisplay();
+  while (vert > DOWNTHRES){
+    vert = analogRead(VERT_PIN);
+    display.setCursor(0, 0);
+    display.println("joystick omlaag");
+    display.display();
+  }
+  display.clearDisplay();
+  while (horz > LEFTTHRES){
+    horz = analogRead(HORZ_PIN);
+    display.setCursor(0, 0);
+    display.println("joystick links");
+    display.display();
+  }
+  display.clearDisplay();
+  while (horz < RIGHTTHRES){
+    horz = analogRead(HORZ_PIN);
+    display.setCursor(0, 0);
+    display.println("joystick rechts");
+    display.display();
+  }
+  display.clearDisplay();
+  while(digitalRead(BUTTON_1_PIN)){
+    display.setCursor(0, 0);
+    display.println("press button when");
+    display.println("buzzer sounds");
+    display.display();
+    tone(BUZZER_PIN, 1000, 100);
+  }
 }
 
 void loop() {
