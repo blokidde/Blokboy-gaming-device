@@ -155,3 +155,8 @@ by doing this it makes it easier for the API to read.
 httpcode = httpClient.POST(jsonString);
 ```
 this last bit of code sends the jsonString to the webpage(url).
+
+### void startGame()
+The startGame() function initializes a new game by sending an HTTP POST request to a server which in turn gets a game ID from a database. It also retrieves the server's response. These values are stored in player_id and game_id for use in the game. for more information on the code, see above(httpreq)
+
+### void webserver()
