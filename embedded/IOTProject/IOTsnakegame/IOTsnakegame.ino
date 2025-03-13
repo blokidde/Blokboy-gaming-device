@@ -492,11 +492,14 @@ void webserver() {
 
 void debug(){
   display.clearDisplay();
+  display.setCursor(0, 0);
   display.println("starting debug");
+  delay(5000);
+  display.clearDisplay();
   display.println("press button to continue");
   display.display();
-  delay(2000);
-  while(!digitalRead(BUTTON_1_PIN)){
+  delay(5000);
+  while(digitalRead(BUTTON_1_PIN)){
     display.fillRect(0, 0, display.width(), display.height(), SSD1306_WHITE);
     display.display();
     delay(20);
