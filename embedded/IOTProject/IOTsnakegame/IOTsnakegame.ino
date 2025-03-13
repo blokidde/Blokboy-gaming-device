@@ -550,6 +550,7 @@ void debug(){
     display.display();
     tone(BUZZER_PIN, 1000, 100);
   }
+  delay(1000);
 }
 
 void loop() {
