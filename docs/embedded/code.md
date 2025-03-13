@@ -157,10 +157,10 @@ httpcode = httpClient.POST(jsonString);
 this last bit of code sends the jsonString to the webpage(url).
 
 ### void startGame()
-The startGame() function initializes a new game by sending an HTTP POST request to a server which in turn gets a game ID from a database. It also retrieves the server's response. These values are stored in player_id and game_id for use in the game. for more information on the code, see above(httpreq)
+The startGame function initializes a new game by sending an HTTP POST request to a server which in turn gets a game ID from a database. It also retrieves the server's response. These values are stored in player_id and game_id for use in the game. for more information on the code, see above(httpreq)
 
 ### void webserver()
-The webserver() function listens for incoming connections on port 80. When a client connects, it reads the request and checks if the client has requested a specific endpoint (like "GET /debug"). Based on the request, the server either handles the request or responds with the corresponding information.
+The webserver function listens for incoming connections on port 80. When a client connects, it reads the request and checks if the client has requested a specific endpoint (like "GET /debug"). Based on the request, the server either handles the request or responds with the corresponding information.
 
 ```cpp
 WiFiClient client = server.available();
@@ -185,3 +185,34 @@ the if statement checks if the request string contains a certain word or command
 function
 
 ### void debug
+The debug function is used for debugging purposes. It displays information on the OLED screen about the joystick's movements and button presses. It also provides visual feedback, guiding the user through various steps (e.g., pressing buttons, moving the joystick in different directions). After every action, it waits for user input before proceeding to the next step.
+
+```cpp
+while(digitalRead(BUTTON_1_PIN)){
+  display.fillRect(0, 0, display.width(), display.height(), SSD1306_WHITE);
+  display.display();
+  delay(20);
+}
+```
+this fills the entire display, this way you can see if a pixel is broken
+
+```cpp
+while (vert < UPTHRES){
+  vert = analogRead(VERT_PIN);
+  display.setCursor(0, 0);
+  display.println("joystick omhoog");
+  display.display();
+}
+```
+this checks if the joystick can move upwards. this loop is copied for all directions
+
+```cpp
+while(digitalRead(BUTTON_1_PIN)){
+  display.setCursor(0, 0);
+  display.println("press button when");
+  display.println("buzzer sounds");
+  display.display();
+  tone(BUZZER_PIN, 1000, 100);
+}
+```
+this loop plays a sound on the buzzer, after this the user needs to press the button to continue.
