@@ -72,6 +72,8 @@ i learned how to use plantuml for automatic generation of architecture diagrams,
 ### 13/3/25
 my goal for today is to create a working debug function which you can activate through the website.
 
+today i fixed my debug function, it didnt work because of a few small bugs i hadnt thought about. like the fact that i needed to use display.display() and 
+display.cleardisplay() after everytime i wanted to do something. i also ran into the problem that when you clicked the button for the last time in the debug, it automatically started a new game, it did this because it registered several clicks. to fix this i added a delay.
 ## week 7
 
 ## week 8
