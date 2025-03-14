@@ -11,6 +11,14 @@ rectangle "frontend" as Browser {
   component "style.css" as style
 }
 
+rectangle "docker" as docker {
+  component "tunnel" as tunnel
+  component "nginx" as nginx
+  component "php" as php
+  component "mariadb" as mdb 
+  component "phpMyAdmin" as myad
+}
+
 rectangle "backend" as backend {
   component "insert.php" as insert
   component "start_game.php" as start
@@ -44,6 +52,7 @@ bttn --> ESP32
 style --> index
 script --> index
 script --> backend
+DB --> mdb
 
 
 @enduml
