@@ -1,9 +1,3 @@
-/*
- * Description: IOTProject based on the handheld gamedevice blueprint.
- * Author:  Jurriaan Egmond
- * Date:    03/02/2025
- */
-
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_GFX.h>
@@ -17,7 +11,7 @@
 #define TFT_MISO  13
 #define TFT_LED   14
 
-Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
 void setup() {
   Serial.begin(115200);
@@ -25,15 +19,13 @@ void setup() {
 
   pinMode(TFT_LED, OUTPUT);
   digitalWrite(TFT_LED, HIGH);
-
   SPI.begin(TFT_SCK, TFT_MISO, TFT_MOSI, TFT_CS);
-
-  tft.begin();
+  display.begin();
 }
 
 void loop() {
-  tft.setCursor(0, 0);
-  tft.setTextColor(ILI9341_WHITE);  
-  tft.setTextSize(2);
-  tft.println("hello world");
+  display.setCursor(0, 0);
+  display.setTextColor(ILI9341_WHITE);
+  display.setTextSize(2);
+  display.println("hello world");
 }
