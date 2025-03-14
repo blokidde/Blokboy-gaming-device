@@ -74,6 +74,11 @@ my goal for today is to create a working debug function which you can activate t
 
 today i fixed my debug function, it didnt work because of a few small bugs i hadnt thought about. like the fact that i needed to use display.display() and 
 display.cleardisplay() after everytime i wanted to do something. i also ran into the problem that when you clicked the button for the last time in the debug, it automatically started a new game, it did this because it registered several clicks. to fix this i added a delay.
+
+### 14/3/25
+my goal for today is to write code for the ili9341, a bigger screen that will be an upgrade to the ssd1306
+
+today i tested code fo the ili9341 in wokwi, the code worked, now i need to wait for the actual display to arrive so i can test it. i also updated the 3d design to fit the actual screen and not the entire pcb. 
 ## week 7
 
 ## week 8
