@@ -83,6 +83,8 @@ today i tested code fo the ili9341 in wokwi, the code worked, now i need to wait
 ### 17/3/25
 my goal for today is to start printing my 3d print in the makerslab. this will be my first time printing something i designed myself so there will probably be some problems. when i start my 3d print i will work on documentation.
 
+today i started printing my first real 3d print with the help of a teacher in the makerslab. the first few layers looked very good and tomorrow i will see how it turned out. i also started working on my research question. this took a very long time because i didnt know what i wanted to do. at last i came up with the question: how do i make my entire system safer. i want to make every part of the system safer for now but first i will need to check with a teacher to ask if this is correct question or if it might be too big
+
 ## week 8
 
 ## week 9
