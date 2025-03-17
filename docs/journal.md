@@ -80,6 +80,8 @@ my goal for today is to write code for the ili9341, a bigger screen that will be
 
 today i tested code fo the ili9341 in wokwi, the code worked, now i need to wait for the actual display to arrive so i can test it. i also updated the 3d design to fit the actual screen and not the entire pcb. 
 ## week 7
+### 17/3/25
+my goal for today is to start printing my 3d print in the makerslab. this will be my first time printing something i designed myself so there will probably be some problems. when i start my 3d print i will work on documentation.
 
 ## week 8
 
