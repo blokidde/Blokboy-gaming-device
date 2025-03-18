@@ -85,6 +85,17 @@ my goal for today is to start printing my 3d print in the makerslab. this will b
 
 today i started printing my first real 3d print with the help of a teacher in the makerslab. the first few layers looked very good and tomorrow i will see how it turned out. i also started working on my research question. this took a very long time because i didnt know what i wanted to do. at last i came up with the question: how do i make my entire system safer. i want to make every part of the system safer for now but first i will need to check with a teacher to ask if this is correct question or if it might be too big
 
+### 18/3/25
+my goal for today is to get my 3d print and test if the components i already have fit, and if not(probably), what i need to change in my next iteration to make it fit.
+
+necessary changes to 3d design:
+- bigger hole for piezo buzzer
+- better buttons and bigger holes for buttons
+- smaller hole for joystick
+- some way to hold joystick in place
+- some way to hold display in place
+
+today i have learned a lot about 3d design and the things you dont think about before deisgning someting. my design was good but most of my meausurements were not acurate enough. because of this most parts dont fit or dont have a way to stay in place. for testing purposes i carved out a little plc to try and get the piezo buzzer to fit. this is however too much work and isnt smart to do for every part. that is why i will need to work on a better design and start a second iteration of the front of my design 
 ## week 8
 
 ## week 9
