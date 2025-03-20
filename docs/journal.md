@@ -95,12 +95,14 @@ necessary changes to 3d design:
 - some way to hold joystick in place
 - some way to hold display in place
 
-today i have learned a lot about 3d design and the things you dont think about before deisgning someting. my design was good but most of my meausurements were not acurate enough. because of this most parts dont fit or dont have a way to stay in place. for testing purposes i carved out a little plc to try and get the piezo buzzer to fit. this is however too much work and isnt smart to do for every part. that is why i will need to work on a better design and start a second iteration of the front of my design 
+today i have learned a lot about 3d design and the things you dont think about before deisgning someting. my design was good but most of my meausurements were not acurate enough. because of this most parts dont fit or dont have a way to stay in place. for testing purposes i carved out a little plc to try and get the piezo buzzer to fit. this is however too much work and isnt smart to do for every part. that is why i will need to work on a better design and start a second iteration of the front of my design
+
+### 19/03/25
 
 ### 20/3/25
 my goal for today is to learn how to use the bambu printers in the makerslab, the difference between the ultimakers and the bambu's is that they are quicker. this means i can 3d print faster. 
 
-
+unfortunately the bambu printers were taken, and i wont be able to use and learn about them today. however im very confident that this will not be my last iteration of 3d printing. i will be using the ultimaker 2+ for today and check on the progress tomorrow.
 ## week 8
 
 ## week 9
