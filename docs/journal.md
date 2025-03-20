@@ -96,6 +96,11 @@ necessary changes to 3d design:
 - some way to hold display in place
 
 today i have learned a lot about 3d design and the things you dont think about before deisgning someting. my design was good but most of my meausurements were not acurate enough. because of this most parts dont fit or dont have a way to stay in place. for testing purposes i carved out a little plc to try and get the piezo buzzer to fit. this is however too much work and isnt smart to do for every part. that is why i will need to work on a better design and start a second iteration of the front of my design 
+
+### 20/3/25
+my goal for today is to learn how to use the bambu printers in the makerslab, the difference between the ultimakers and the bambu's is that they are quicker. this means i can 3d print faster. 
+
+
 ## week 8
 
 ## week 9
