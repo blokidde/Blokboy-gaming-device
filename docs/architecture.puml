@@ -37,10 +37,12 @@ rectangle "embedded" as embedded{
 }
 
 
-User --> index
+User --> index : internet
 dbconn --> DB : db_connect.php
-ESP32 --> backend : http
+ESP32 --> start : http
+ESP32 --> get : http
 script --> ESP32 : http
+ESP32 --> insert : http
 delete --> dbconn 
 get --> dbconn
 insert --> dbconn
@@ -51,7 +53,7 @@ ESP32 --> bzzr : pwm
 bttn --> ESP32 : analog
 style --> index
 script --> index
-script --> backend
+backend --> script : http
 DB --> mdb
 
 
