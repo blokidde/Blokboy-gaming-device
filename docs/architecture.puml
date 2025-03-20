@@ -3,7 +3,7 @@ title architecture diagram
 
 skinparam linetype ortho
 
-rectangle "User" as User
+rectangle "User device" as User
 
 rectangle "frontend" as Browser {
   component "index.html" as index
@@ -36,19 +36,19 @@ rectangle "embedded" as embedded{
     component "ESP32" as ESP32
 }
 
-User --> embedded
+
 User --> index
 dbconn --> DB : db_connect.php
-ESP32 --> backend : API
-script --> ESP32 : debug
-delete --> dbconn
+ESP32 --> backend : http
+script --> ESP32 : http
+delete --> dbconn 
 get --> dbconn
 insert --> dbconn
 start --> dbconn
 ESP32 --> oled : I2C
-joystick --> ESP32
-ESP32 --> bzzr
-bttn --> ESP32
+joystick --> ESP32 : analog
+ESP32 --> bzzr : pwm
+bttn --> ESP32 : analog
 style --> index
 script --> index
 script --> backend
