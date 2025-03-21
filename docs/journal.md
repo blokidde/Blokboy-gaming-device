@@ -101,6 +101,8 @@ today i have learned a lot about 3d design and the things you dont think about b
 my goal for today is to learn how to use the bambu printers in the makerslab, the difference between the ultimakers and the bambu's is that they are quicker. this means i can 3d print faster. 
 
 unfortunately the bambu printers were taken, and i wont be able to use and learn about them today. however im very confident that this will not be my last iteration of 3d printing. i will be using the ultimaker 2+ for today and check on the progress tomorrow.
+
+
 ## week 8
 
 ## week 9
