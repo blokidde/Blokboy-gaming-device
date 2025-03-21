@@ -21,6 +21,7 @@ void setup() {
   digitalWrite(TFT_LED, HIGH);
   SPI.begin(TFT_SCK, TFT_MISO, TFT_MOSI, TFT_CS);
   display.begin();
+  display.fillScreen(ILI9341_BLACK);
 }
 
 void loop() {
