@@ -3,7 +3,9 @@ title architecture diagram
 
 skinparam linetype ortho
 
-rectangle "User device" as User
+rectangle "User device" as Userdev
+
+rectangle "User" as User
 
 rectangle "frontend" as Browser {
   component "index.html" as index
@@ -37,7 +39,8 @@ rectangle "embedded" as embedded{
 }
 
 
-User --> index : internet
+Userdev --> index : internet
+User --> embedded
 dbconn --> DB : db_connect.php
 ESP32 --> start : http
 ESP32 --> get : http
