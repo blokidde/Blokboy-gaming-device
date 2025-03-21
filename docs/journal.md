@@ -102,7 +102,8 @@ my goal for today is to learn how to use the bambu printers in the makerslab, th
 
 unfortunately the bambu printers were taken, and i wont be able to use and learn about them today. however im very confident that this will not be my last iteration of 3d printing. i will be using the ultimaker 2+ for today and check on the progress tomorrow.
 
-
+### 21/3/25
+my goal for today is to use the bambu 3d printer. i have had an explanation on how everything works so i think i can start it all by myselft for now. the ili9341 also arrived(broken screen unfortunately), and i would really like to integrate the display into my prototype.
 ## week 8
 
 ## week 9
