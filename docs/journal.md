@@ -104,6 +104,8 @@ unfortunately the bambu printers were taken, and i wont be able to use and learn
 
 ### 21/3/25
 my goal for today is to use the bambu 3d printer. i have had an explanation on how everything works so i think i can start it all by myselft for now. the ili9341 also arrived(broken screen unfortunately), and i would really like to integrate the display into my prototype.
+
+my print looks very good, unfortunately the screen doesnt fit well enough and the joystick screw pillars arent palced correctly. also the on off switch hole is too small i have now changed these things and will start with my next iteration.
 ## week 8
 
 ## week 9
