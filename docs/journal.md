@@ -106,6 +106,8 @@ unfortunately the bambu printers were taken, and i wont be able to use and learn
 my goal for today is to use the bambu 3d printer. i have had an explanation on how everything works so i think i can start it all by myselft for now. the ili9341 also arrived(broken screen unfortunately), and i would really like to integrate the display into my prototype.
 
 my print looks very good, unfortunately the screen doesnt fit well enough and the joystick screw pillars arent palced correctly. also the on off switch hole is too small i have now changed these things and will start with my next iteration.
+
+today i learned a lot about 3d printing, my print went wrong twice because one of the printers wasnt leveled correctly. luckily i followed the advice of the teachers at the makers lab to make sure to stay with the print for at least the first layer. because of this i made sure that i started a new print within 15 minutes. i also started with the bigger ili9341 display. i tested code that i made within a simulator and this worked. it did have some problems with the backlight, this was white which made the display flicker. after turning it off the "hello world" worked perfectly. now i only need to integrate it into my project. i have planned to do this this weekend or maybe the monday after this weekend.
 ## week 8
 
 ## week 9
