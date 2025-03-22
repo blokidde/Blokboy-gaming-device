@@ -41,8 +41,8 @@
 // size of the game, display is 320 by 240, game has blocks size of 4
 // so 240 and 320 divided by 4
 #define BLOCKSIZE 4
-#define ROWSX (DISLPAY_WIDTH/BLOCKSIZE)
-#define ROWSY (DISLPAY_HEIGHT/BLOCKSIZE)
+#define ROWSX 60
+#define ROWSY 80
 
 // struct for creating snakesegments in another struct
 struct SnakeSegment {
@@ -167,7 +167,7 @@ void setup() {
   // }
 
   // initialize important things for display
-  display.clearDisplay();
+  //display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(ILI9341_WHITE);
   display.fillScreen(ILI9341_BLACK);
@@ -209,7 +209,7 @@ void snakeInit() {
 /// This function clears the screen and then draws the initial apple and the snake
 /// on the display using their x and y positions.
 void createGame() {
-  display.clearDisplay();
+  //display.clearDisplay();
 
   // draw the border for the game
   display.drawRect(0, 0, 128, 32, ILI9341_WHITE);
@@ -229,7 +229,7 @@ void createGame() {
   }
 
   // display everything on the screen
-  display.display();
+  //display.display();
 }
 
 /// @brief Moves the snake forward and checks for collisions.
@@ -365,7 +365,7 @@ void readSensors() {
 
 /// @brief puts a big game over on the display
 void gameOverScreen() {
-  display.clearDisplay();
+  //display.clearDisplay();
   // size of the text
   display.setTextSize(2);
   // startpoint for the text
@@ -375,7 +375,7 @@ void gameOverScreen() {
   display.setCursor(10, 20);
   display.print("Score: ");
   display.print(score);
-  display.display();
+  //display.display();
 }
 
 /// @brief this resets the game
@@ -504,55 +504,55 @@ void webserver() {
 void debug(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
-  display.clearDisplay();
+  //display.clearDisplay();
   display.setCursor(0, 0);
   display.println("starting debug");
-  display.display();
+  //display.display();
   delay(5000);
-  display.clearDisplay();
+  //display.clearDisplay();
   display.setCursor(0, 0);
   display.println("press button to continue");
-  display.display();
+  //display.display();
   delay(5000);
   while(digitalRead(BUTTON_1_PIN)){
     display.fillRect(0, 0, display.width(), display.height(), ILI9341_WHITE);
-    display.display();
+    //display.display();
     delay(20);
   }
-  display.clearDisplay();
+  //display.clearDisplay();
   while (vert < UPTHRES){
     vert = analogRead(VERT_PIN);
     display.setCursor(0, 0);
     display.println("joystick omhoog");
-    display.display();
+    //display.display();
   }
-  display.clearDisplay();
+  //display.clearDisplay();
   while (vert > DOWNTHRES){
     vert = analogRead(VERT_PIN);
     display.setCursor(0, 0);
     display.println("joystick omlaag");
-    display.display();
+    //display.display();
   }
-  display.clearDisplay();
+  //display.clearDisplay();
   while (horz > LEFTTHRES){
     horz = analogRead(HORZ_PIN);
     display.setCursor(0, 0);
     display.println("joystick links");
-    display.display();
+    //display.display();
   }
-  display.clearDisplay();
+  //display.clearDisplay();
   while (horz < RIGHTTHRES){
     horz = analogRead(HORZ_PIN);
     display.setCursor(0, 0);
     display.println("joystick rechts");
-    display.display();
+    //display.display();
   }
-  display.clearDisplay();
+  //display.clearDisplay();
   while(digitalRead(BUTTON_1_PIN)){
     display.setCursor(0, 0);
     display.println("press button when");
     display.println("buzzer sounds");
-    display.display();
+    //display.display();
     tone(BUZZER_PIN, 1000, 100);
   }
   delay(1000);
