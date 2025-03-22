@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include <Arduino.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <Adafruit_ILI9341.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <WiFiClient.h>
@@ -19,12 +19,14 @@
 #define LEFTTHRES 500
 #define RIGHTTHRES 3500
 
-// oled display pins
-#define SDA_PIN 15
-#define SCL_PIN 16
-#define OLED_RESET -1
-#define DISPLAY_WIDTH 128
-#define DISPLAY_HEIGHT 32
+// ili9341 pins and defines
+#define TFT_CS   10
+#define TFT_DC   9
+#define TFT_RST  3
+#define TFT_CLK  4
+#define TFT_MOSI 5
+#define DISPLAY_WIDTH 240
+#define DISPLAY_HEIGHT 320
 
 // button pins
 #define BUTTON_1_PIN 4
@@ -36,11 +38,11 @@
 // buzzer pin
 #define BUZZER_PIN 1
 
-// size of the game, display is 128 by 64, game has blocks size of 4
-// so 128 and 64 divided by 4
-#define ROWSX 32
-#define ROWSY 8
+// size of the game, display is 320 by 240, game has blocks size of 4
+// so 240 and 320 divided by 4
 #define BLOCKSIZE 4
+#define ROWSX (DISLPAY_WIDTH/BLOCKSIZE)
+#define ROWSY (DISLPAY_HEIGHT/BLOCKSIZE)
 
 // struct for creating snakesegments in another struct
 struct SnakeSegment {
@@ -101,7 +103,7 @@ const char* starturl = "http://192.168.178.61/api/start_game.php";
 
 
 // initialization of the display
-Adafruit_SSD1306 display(DISPLAY_WIDTH, DISPLAY_HEIGHT, &Wire, OLED_RESET);
+Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
 void snakeInit();
 void createGame();
@@ -141,7 +143,8 @@ void setup() {
 
   server.begin();
   Serial.println("Webserver started");
-  Wire.begin(SDA_PIN, SCL_PIN);
+  SPI.begin(TFT_CLK, -1, TFT_MOSI);
+  display.begin();
 
   // set pins for buttons
   pinMode(BUTTON_1_PIN, INPUT_PULLUP);
@@ -155,17 +158,19 @@ void setup() {
   // set pin for buzzer
   pinMode(BUZZER_PIN, OUTPUT);
 
+  // not used
   // start connection with display and check if i2c connection works
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    Serial.println("OLED not found");
-    while (true)
-      ;
-  }
+  // if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+  //   Serial.println("OLED not found");
+  //   while (true)
+  //     ;
+  // }
 
   // initialize important things for display
   display.clearDisplay();
   display.setTextSize(1);
-  display.setTextColor(SSD1306_WHITE);
+  display.setTextColor(ILI9341_WHITE);
+  display.fillScreen(ILI9341_BLACK);
 
   //initialize snake
   snakeInit();
@@ -207,7 +212,7 @@ void createGame() {
   display.clearDisplay();
 
   // draw the border for the game
-  display.drawRect(0, 0, 128, 32, SSD1306_WHITE);
+  display.drawRect(0, 0, 128, 32, ILI9341_WHITE);
 
   // converts apple x and y position to usable positions for the display
   int applex = (apple.x * BLOCKSIZE);
@@ -220,7 +225,7 @@ void createGame() {
   for (int i = 0; i < snake.length; i++) {
     int x = snake.segments[i].x * BLOCKSIZE;
     int y = snake.segments[i].y * BLOCKSIZE;
-    display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
+    display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
   }
 
   // display everything on the screen
@@ -510,7 +515,7 @@ void debug(){
   display.display();
   delay(5000);
   while(digitalRead(BUTTON_1_PIN)){
-    display.fillRect(0, 0, display.width(), display.height(), SSD1306_WHITE);
+    display.fillRect(0, 0, display.width(), display.height(), ILI9341_WHITE);
     display.display();
     delay(20);
   }
