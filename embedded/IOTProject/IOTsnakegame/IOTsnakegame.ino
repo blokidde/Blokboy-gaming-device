@@ -11,7 +11,7 @@
 // joystick pins
 #define VERT_PIN 18
 #define HORZ_PIN 17
-#define SEL_PIN 10
+#define SEL_PIN 11
 
 // joystick constants
 #define UPTHRES 3500
@@ -20,6 +20,7 @@
 #define RIGHTTHRES 3500
 
 // ili9341 pins and defines
+#define TFT_SPI_FREQUENCY 40000000
 #define TFT_CS   10
 #define TFT_DC   9
 #define TFT_RST  3
@@ -30,7 +31,7 @@
 
 // button pins
 #define BUTTON_1_PIN 6
-#define BUTTON_2_PIN 7
+//#define BUTTON_2_PIN 7
 
 // max lenght of the snake
 #define MAX_LENGTH 100
@@ -210,7 +211,7 @@ void snakeInit() {
 /// on the display using their x and y positions.
 void createGame() {
   //display.clearDisplay();
-
+  display.startWrite();
   // draw the border for the game
   display.drawRect(0, 0, 128, 32, ILI9341_WHITE);
 
@@ -227,6 +228,7 @@ void createGame() {
     int y = snake.segments[i].y * BLOCKSIZE;
     display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
   }
+  display.endWrite();
 
   // display everything on the screen
   //display.display();
@@ -365,6 +367,7 @@ void readSensors() {
 
 /// @brief puts a big game over on the display
 void gameOverScreen() {
+  display.beginWrite();
   //display.clearDisplay();
   // size of the text
   display.setTextSize(2);
@@ -375,6 +378,7 @@ void gameOverScreen() {
   display.setCursor(10, 20);
   display.print("Score: ");
   display.print(score);
+  display.endWrite();
   //display.display();
 }
 
@@ -502,6 +506,7 @@ void webserver() {
 }
 
 void debug(){
+  display.beginWrite();
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
   //display.clearDisplay();
@@ -555,6 +560,7 @@ void debug(){
     //display.display();
     tone(BUZZER_PIN, 1000, 100);
   }
+  display.endWrite();
   delay(1000);
 }
 
