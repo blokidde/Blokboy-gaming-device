@@ -29,8 +29,8 @@
 #define DISPLAY_HEIGHT 320
 
 // button pins
-#define BUTTON_1_PIN 4
-#define BUTTON_2_PIN 5
+#define BUTTON_1_PIN 6
+#define BUTTON_2_PIN 7
 
 // max lenght of the snake
 #define MAX_LENGTH 100
@@ -219,7 +219,7 @@ void createGame() {
   int appley = (apple.y * BLOCKSIZE);
 
   // draws apples as a square on the display
-  display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
+  display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
 
   // loop through the snake segments and convert and fill them the same way as the apple
   for (int i = 0; i < snake.length; i++) {
