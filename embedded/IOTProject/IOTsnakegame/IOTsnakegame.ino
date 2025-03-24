@@ -31,7 +31,7 @@
 
 // button pins
 #define BUTTON_1_PIN 6
-//#define BUTTON_2_PIN 7
+#define BUTTON_2_PIN 7
 
 // max lenght of the snake
 #define MAX_LENGTH 100
@@ -99,9 +99,8 @@ WiFiServer server(80);
 // // // wifi credentials home
 // const char *ssid = "Lan solo";
 // const char *password = "Zegikniet1";
-const char *url = "http://192.168.178.61/api/insert.php";
-const char* starturl = "http://192.168.178.61/api/start_game.php";
-
+// const char *url = "http://192.168.178.61/api/insert.php";
+// const char* starturl = "http://192.168.178.61/api/start_game.php";
 
 // initialization of the display
 Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
@@ -367,7 +366,7 @@ void readSensors() {
 
 /// @brief puts a big game over on the display
 void gameOverScreen() {
-  display.beginWrite();
+  display.startWrite();
   //display.clearDisplay();
   // size of the text
   display.setTextSize(2);
@@ -452,7 +451,7 @@ void startGame() {
 
   // Creëer JSON payload
   StaticJsonDocument<200> doc;
-  doc["generate"] = 1;  // Gaat naar PHP
+  doc["generate"] = 1;
   String jsonString;
   serializeJson(doc, jsonString);
 
@@ -506,7 +505,7 @@ void webserver() {
 }
 
 void debug(){
-  display.beginWrite();
+  display.startWrite();
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
   //display.clearDisplay();
@@ -519,11 +518,12 @@ void debug(){
   display.println("press button to continue");
   //display.display();
   delay(5000);
+  display.fillRect(0, 0, display.width(), display.height(), ILI9341_WHITE);
   while(digitalRead(BUTTON_1_PIN)){
-    display.fillRect(0, 0, display.width(), display.height(), ILI9341_WHITE);
     //display.display();
     delay(20);
   }
+  display.fillRect(0, 0, display.width(), display.height(), ILI9341_BLACK);
   //display.clearDisplay();
   while (vert < UPTHRES){
     vert = analogRead(VERT_PIN);
