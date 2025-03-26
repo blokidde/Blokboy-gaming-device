@@ -20,7 +20,7 @@
 #define RIGHTTHRES 3500
 
 // ili9341 pins and defines
-#define TFT_SPI_FREQUENCY 10000000
+//#define TFT_SPI_FREQUENCY 40000000
 #define TFT_CS   10
 #define TFT_DC   9
 #define TFT_RST  3
@@ -99,8 +99,8 @@ WiFiServer server(80);
 // // // wifi credentials home
 // const char *ssid = "Lan solo";
 // const char *password = "Zegikniet1";
-const char *url = "http://192.168.178.61/api/insert.php";
-const char* starturl = "http://192.168.178.61/api/start_game.php";
+const char *url = "http://192.168.178.56/api/insert.php";
+const char* starturl = "http://192.168.178.56/api/start_game.php";
 
 // initialization of the display
 Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
@@ -210,9 +210,8 @@ void snakeInit() {
 /// on the display using their x and y positions.
 void createGame() {
   //display.clearDisplay();
-  display.startWrite();
   // draw the border for the game
-  display.drawRect(0, 0, 128, 32, ILI9341_WHITE);
+  display.drawRect(0, 0, 240, 320, ILI9341_WHITE);
 
   // converts apple x and y position to usable positions for the display
   int applex = (apple.x * BLOCKSIZE);
@@ -227,7 +226,6 @@ void createGame() {
     int y = snake.segments[i].y * BLOCKSIZE;
     display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
   }
-  display.endWrite();
 
   // display everything on the screen
   //display.display();
@@ -366,7 +364,6 @@ void readSensors() {
 
 /// @brief puts a big game over on the display
 void gameOverScreen() {
-  display.startWrite();
   //display.clearDisplay();
   // size of the text
   display.setTextSize(2);
@@ -377,7 +374,6 @@ void gameOverScreen() {
   display.setCursor(10, 20);
   display.print("Score: ");
   display.print(score);
-  display.endWrite();
   //display.display();
 }
 
@@ -505,7 +501,6 @@ void webserver() {
 }
 
 void debug(){
-  display.startWrite();
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
   //display.clearDisplay();
@@ -560,7 +555,6 @@ void debug(){
     //display.display();
     tone(BUZZER_PIN, 1000, 100);
   }
-  display.endWrite();
   delay(1000);
 }
 
