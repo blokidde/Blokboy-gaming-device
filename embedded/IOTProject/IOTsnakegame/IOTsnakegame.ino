@@ -512,6 +512,8 @@ void webserver() {
   }
 }
 
+/// @brief Runs a full hardware debug function for the joystick, button, display, and buzzer.
+/// Guides the user through debug to verify each component works correctly.
 void debug(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
@@ -521,17 +523,23 @@ void debug(){
   //display.display();
   delay(5000);
   //display.clearDisplay();
+
+  // Show initial debug message
   display.setCursor(0, 0);
   display.println("press button to continue");
   //display.display();
   delay(5000);
-  display.fillRect(0, 0, display.width(), display.height(), ILI9341_WHITE);
+  // Fill the screen white to check for broken pixels
+  display.fillScreen(ILI9341_BLACK);
   while(digitalRead(BUTTON_1_PIN)){
     //display.display();
     delay(20);
   }
-  display.fillRect(0, 0, display.width(), display.height(), ILI9341_BLACK);
+  // clear the screen
+  display.fillScreen(ILI9341_BLACK);
   //display.clearDisplay();
+
+  // check for joystick movement
   while (vert < UPTHRES){
     vert = analogRead(VERT_PIN);
     display.setCursor(0, 0);
@@ -560,6 +568,7 @@ void debug(){
     //display.display();
   }
   //display.clearDisplay();
+  // check for buzzer sounds
   while(digitalRead(BUTTON_1_PIN)){
     display.setCursor(0, 0);
     display.println("press button when");
