@@ -20,7 +20,7 @@
 #define RIGHTTHRES 3500
 
 // ili9341 pins and defines
-#define TFT_SPI_FREQUENCY 40000000
+#define TFT_SPI_FREQUENCY 10000000
 #define TFT_CS   10
 #define TFT_DC   9
 #define TFT_RST  3
@@ -99,8 +99,8 @@ WiFiServer server(80);
 // // // wifi credentials home
 // const char *ssid = "Lan solo";
 // const char *password = "Zegikniet1";
-// const char *url = "http://192.168.178.61/api/insert.php";
-// const char* starturl = "http://192.168.178.61/api/start_game.php";
+const char *url = "http://192.168.178.61/api/insert.php";
+const char* starturl = "http://192.168.178.61/api/start_game.php";
 
 // initialization of the display
 Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);

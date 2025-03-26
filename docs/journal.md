@@ -109,7 +109,8 @@ my print looks very good, unfortunately the screen doesnt fit well enough and th
 
 today i learned a lot about 3d printing, my print went wrong twice because one of the printers wasnt leveled correctly. luckily i followed the advice of the teachers at the makers lab to make sure to stay with the print for at least the first layer. because of this i made sure that i started a new print within 15 minutes. i also started with the bigger ili9341 display. i tested code that i made within a simulator and this worked. it did have some problems with the backlight, this was white which made the display flicker. after turning it off the "hello world" worked perfectly. now i only need to integrate it into my project. i have planned to do this this weekend or maybe the monday after this weekend.
 ## week 8
-
+### 26/3/25
+my goal for today is to get my SPI display to work, right now it works but the framerate is bad which makes it look glitchy.
 ## week 9
 
 ## week 10
