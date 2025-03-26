@@ -437,6 +437,9 @@ void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalri
   }
 }
 
+/// @brief sends an http request to get necessary values to start a game
+/// This function sends a HTTP request to a webpage. this webpage then interacts with the API 
+/// the API then creates a new database addition and sends the ID's back
 void startGame() {
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println("WiFi not connected!");
@@ -448,20 +451,20 @@ void startGame() {
   http.begin(client, starturl);
   http.addHeader("Content-Type", "application/json");
 
-  // Creëer JSON payload
+  //create json payload
   StaticJsonDocument<200> doc;
   doc["generate"] = 1;
   String jsonString;
   serializeJson(doc, jsonString);
 
-  // Verstuur HTTP POST
+  // send http post
   int httpResponseCode = http.POST(jsonString);
   if (httpResponseCode > 0) {
     String response = http.getString();
     Serial.print("Response from startGame: ");
     Serial.println(response);
 
-    // JSON-resultaat parsen
+    // parse json
     StaticJsonDocument<200> responseDoc;
     DeserializationError error = deserializeJson(responseDoc, response);
     if (!error && responseDoc["status"] == "success") {
