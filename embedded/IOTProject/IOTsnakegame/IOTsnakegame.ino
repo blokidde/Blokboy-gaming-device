@@ -575,13 +575,12 @@ void loop() {
     gameOverScreen();
     // used for debugging
     //Serial.printf("\n%d %d %d %d \n", totalup, totaldown, totalleft, totalright);
-    if (httpCode != 200) {
-      httpreq(game_id, totalup, totaldown, totalleft, totalright, score);
-    }
-    webserver();
-    if (!digitalRead(BUTTON_1_PIN)) {
-      reset();
-      delay(500);
-    }
+    while(digitalRead(BUTTON_1_PIN)){
+      if (httpCode != 200) {
+        httpreq(game_id, totalup, totaldown, totalleft, totalright, score);
+      }
+      webserver();
+    }  
+    reset();
   }
 }
