@@ -481,21 +481,27 @@ void startGame() {
   http.end();
 }
 
+/// @brief Starts a web server that listens for incoming connections.
+///  If a client sends a request containing "GET /debug", the debug() function is triggered.
 void webserver() {
+  // check for connections to server
   WiFiClient client = server.available();
 
   if (client) {
     Serial.println("New Client connected!");
     String request = "";
 
+    // if the client is connected stay in the loop
     while (client.connected()) {
       if (client.available()) {
+        // read one character and add it to the request string
         char c = client.read();
         request += c;
         if (c == '\n') break;
       }
     }
 
+    //check if the request string contains the command necessary to start debug function
     if (request.indexOf("GET /debug") >= 0) {
       debug();
     }
