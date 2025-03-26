@@ -368,12 +368,12 @@ void gameOverScreen() {
   display.fillScreen(ILI9341_BLACK);
   //display.clearDisplay();
   // size of the text
-  display.setTextSize(2);
+  display.setTextSize(3);
   // startpoint for the text
-  display.setCursor(10, 0);
+  display.setCursor(40, 160);
   display.print("Game Over");
-  display.setTextSize(1);
-  display.setCursor(10, 20);
+  display.setTextSize(2);
+  display.setCursor(60, 200);
   display.print("Score: ");
   display.print(score);
   //display.display();
