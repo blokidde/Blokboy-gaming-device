@@ -88,6 +88,10 @@ int httpCode;
 int player_id = 0;
 int game_id = 0;
 
+// variables for tail
+int oldTailX = -1;
+int oldTailY = -1;
+
 WiFiServer server(80);
 
 // wifi credentials school
@@ -361,6 +365,7 @@ void readSensors() {
 
 /// @brief puts a big game over on the display
 void gameOverScreen() {
+  display.fillScreen(ILI9341_BLACK);
   //display.clearDisplay();
   // size of the text
   display.setTextSize(2);
@@ -376,6 +381,7 @@ void gameOverScreen() {
 
 /// @brief this resets the game
 void reset() {
+  display.fillScreen(ILI9341_BLACK);
   snakeInit();
   // sets start time for momvement time for the next game
   moveTime = millis();
