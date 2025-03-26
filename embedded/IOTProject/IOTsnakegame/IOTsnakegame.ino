@@ -99,8 +99,8 @@ WiFiServer server(80);
 // // // wifi credentials home
 // const char *ssid = "Lan solo";
 // const char *password = "Zegikniet1";
-const char *url = "http://192.168.178.56/api/insert.php";
-const char* starturl = "http://192.168.178.56/api/start_game.php";
+const char *url = "http://192.168.178.61/api/insert.php";
+const char* starturl = "http://192.168.178.61/api/start_game.php";
 
 // initialization of the display
 Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
@@ -235,33 +235,30 @@ void createGame() {
 /// This function updates the snake's position, handles apple eating,
 /// and checks for collisions with the walls or the snake's own segments.
 void drawSnake() {
-  //if statement for when the snake isnt moving
   if (snake.direction_x == 0 && snake.direction_y == 0) {
     return;
   }
 
-  // count total amount the snake moves and which directions
-  if (snake.direction_x == 1) {
-    totalright++;
-  } else if (snake.direction_x == -1) {
-    totalleft++;
-  } else if (snake.direction_y == 1) {
-    totaldown++;
-  } else if (snake.direction_y == -1) {
-    totalup++;
-  }
+  if (snake.direction_x == 1) totalright++;
+  else if (snake.direction_x == -1) totalleft++;
+  else if (snake.direction_y == 1) totaldown++;
+  else if (snake.direction_y == -1) totalup++;
 
-  // calculations for the new heads position
+  // remember old tail x and y
+  oldTailX = snake.segments[snake.length - 1].x;
+  oldTailY = snake.segments[snake.length - 1].y;
+  
+  // calculate new snake head
   int newHeadX = snake.segments[0].x + snake.direction_x;
   int newHeadY = snake.segments[0].y + snake.direction_y;
 
-  // check if the head is outside the given game border
+  // check for boundaries 
   if (newHeadX < 0 || newHeadX >= ROWSX || newHeadY < 0 || newHeadY >= ROWSY) {
     game_over = true;
     return;
   }
 
-  // check if the snake hits its own segments
+  // check for other collision
   for (int i = 0; i < snake.length; i++) {
     if (snake.segments[i].x == newHeadX && snake.segments[i].y == newHeadY) {
       game_over = true;
@@ -269,34 +266,27 @@ void drawSnake() {
     }
   }
 
-  // boolean for confirming if the snake eats an apple
+  // check if the snake eats an apple
   bool ateApple = (newHeadX == apple.x && newHeadY == apple.y);
 
-  // if statement for when the snake does eat the apple
   if (ateApple) {
-    // loop to move segments forward after eating apple to make it longer
+    // all segments of the snake go forward
     for (int i = snake.length; i > 0; i--) {
       snake.segments[i] = snake.segments[i - 1];
     }
-
-    // set the position of the new head
+    // new snakehead position, length and score
     snake.segments[0].x = newHeadX;
     snake.segments[0].y = newHeadY;
-
-    // adds length to the snake and to the score
     snake.length++;
     score++;
 
+    // create new apple
     bool validPosition = false;
-
-    // loop to create new apple in random x and y position
     while (!validPosition) {
-      // new x and y for apple
       apple.x = random(0, ROWSX);
       apple.y = random(0, ROWSY);
       validPosition = true;
-
-      // for loop to check if the apple is put in a valid position (not in the snake segments)
+      // check if the apple is in a correct place
       for (int i = 0; i < snake.length; i++) {
         if (snake.segments[i].x == apple.x && snake.segments[i].y == apple.y) {
           validPosition = false;
@@ -304,19 +294,26 @@ void drawSnake() {
         }
       }
     }
-    // not used right now
-    // tone(BUZZER_PIN, 1000, 100);
-  } else
-  // if the snake doesnt eat an apple, move it forward
-  {
+  } else {
+    // if no apple is eaten palce all segments of the snake forward
     for (int i = snake.length - 1; i > 0; i--) {
-      // update the segment to the segments infront of it
       snake.segments[i] = snake.segments[i - 1];
     }
-
-    // set new head x and y
     snake.segments[0].x = newHeadX;
     snake.segments[0].y = newHeadY;
+  }
+
+  // remove old tail
+  if (!ateApple) {
+    display.fillRect(oldTailX * BLOCKSIZE, oldTailY * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE, ILI9341_BLACK);
+  }
+
+  // draw new head
+  display.fillRect(snake.segments[0].x * BLOCKSIZE, snake.segments[0].y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
+
+  // draw new apple
+  if (ateApple) {
+    display.fillRect(apple.x * BLOCKSIZE, apple.y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
   }
 }
 
