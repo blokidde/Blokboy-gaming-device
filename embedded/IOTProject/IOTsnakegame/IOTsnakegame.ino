@@ -41,9 +41,9 @@
 
 // size of the game, display is 320 by 240, game has blocks size of 4
 // so 240 and 320 divided by 4
-#define BLOCKSIZE 4
-#define ROWSX 60
-#define ROWSY 80
+#define BLOCKSIZE 8
+#define ROWSX 30
+#define ROWSY 40
 
 // struct for creating snakesegments in another struct
 struct SnakeSegment {
@@ -222,7 +222,7 @@ void createGame() {
   int appley = (apple.y * BLOCKSIZE);
 
   // draws apples as a square on the display
-  display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
+  display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, ILI9341_RED);
 
   // loop through the snake segments and convert and fill them the same way as the apple
   for (int i = 0; i < snake.length; i++) {
@@ -317,7 +317,7 @@ void drawSnake() {
 
   // draw new apple
   if (ateApple) {
-    display.fillRect(apple.x * BLOCKSIZE, apple.y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
+    display.fillRect(apple.x * BLOCKSIZE, apple.y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE, ILI9341_RED);
   }
 }
 
