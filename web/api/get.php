@@ -9,6 +9,7 @@ $query = "
     JOIN CurrentGame c ON s.game_id = c.game_id
     JOIN Player p ON c.player_id = p.player_id
     ORDER BY s.score_value DESC
+    LIMIT 15
 ";
 
 $result = $conn->query($query);
@@ -21,7 +22,7 @@ if ($result && $result->num_rows > 0) {
     }
 }
 
-// Stuur de data terug als JSON
+// send data back as json
 echo json_encode($scores);
 
 $conn->close();

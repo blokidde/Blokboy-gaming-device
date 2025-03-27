@@ -508,6 +508,7 @@ void webserver() {
     Serial.println(request);
     client.stop();
     Serial.println("Client disconnected.");
+    gameOverScreen();
   }
 }
 
@@ -531,7 +532,6 @@ void debug(){
   //display.display();
   delay(5000);
   // Fill the screen white to check for broken pixels
-  display.fillScreen(ILI9341_BLACK);
   while(digitalRead(BUTTON_2_PIN)){
     //display.display();
     delay(20);
