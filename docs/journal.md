@@ -113,6 +113,9 @@ today i learned a lot about 3d printing, my print went wrong twice because one o
 my goal for today is to get my SPI display to work, right now it works but the framerate is bad which makes it look glitchy.
 
 yesterday i fixed my SPI display, this took a very long time because my entire code needed upgrades and changes and i didnt know which changes i needed. after a long while i finally found what i had to change, instead of clearing the entire screen everytime i wanted to update something i need to only clear the pixels that werent necessary anymore. when i cleared the entire screen the display started flickering, this was because the SPI is slower than the I2C i used before this. now i have updated the code to make it work the way i said before.
+
+### 27/3/25
+today i want to learn how to use a multimeter, i also want to write 
 ## week 9
 
 ## week 10
