@@ -28,7 +28,7 @@ int httpcode = httpClient.POST(jsonString);
 The embedded device also acts as a server and receives status messages from the application backend over http or https.
 
 ## EMBRQ#02
-The ESP32 also works as a server. It waits for HTTP requests from the backend. When the backend sends a request to the /debug endpoint, the ESP32 sees this and runs the debug() function. This way, it can receive status messages or commands from the backend over HTTP.
+The ESP32 works as a server. It waits for HTTP requests from the backend. When the backend sends a request to the /debug endpoint, the ESP32 sees this and runs the debug() function. This way, it can receive status messages or commands from the backend over HTTP.
 
 ### code
 ```cpp
@@ -48,11 +48,31 @@ if (client) {
 }
 ```
 
-EMBRQ#03
-[Insert text explaining how you fulfilled the requirement here]
+# requirements EMBRQ#03
+The embedded device contains at least two types of input sensors (e.g. LDR, buttons, joystick, capacitive touch, etc.).
 
-Code:
-[Insert code snippet(s) proving the requirement is fulfilled here]
+## EMBRQ#03
+The ESP32 uses two types of input sensors:
+- A joystick to control the snake's movement (up, down, left, right).
+- Buttons to interact with the game, like starting or restarting.
+
+The joystick is read using analog input pins, and the buttons are read using digital input pins.
+
+### code
+example of joystick code:
+```cpp
+if (vert < DOWNTHRES && snake.direction_y != -1) {
+    snake.direction_x = 0;
+    snake.direction_y = 1;
+}
+```
+
+example of button code:
+```cpp
+while(digitalRead(BUTTON_2_PIN)){
+    delay(20);
+}
+```
 
 EMBRQ#04
 [Insert text explaining how you fulfilled the requirement here]
