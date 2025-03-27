@@ -20,7 +20,6 @@
 #define RIGHTTHRES 3500
 
 // ili9341 pins and defines
-//#define TFT_SPI_FREQUENCY 40000000
 #define TFT_CS   10
 #define TFT_DC   9
 #define TFT_RST  3
@@ -39,8 +38,8 @@
 // buzzer pin
 #define BUZZER_PIN 1
 
-// size of the game, display is 320 by 240, game has blocks size of 4
-// so 240 and 320 divided by 4
+// size of the game, display is 320 by 240, game has blocks size of 8
+// so 240 and 320 divided by 8
 #define BLOCKSIZE 8
 #define ROWSX 30
 #define ROWSY 40
@@ -228,7 +227,7 @@ void createGame() {
   for (int i = 0; i < snake.length; i++) {
     int x = snake.segments[i].x * BLOCKSIZE;
     int y = snake.segments[i].y * BLOCKSIZE;
-    display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
+    display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, ILI9341_GREEN);
   }
 
   // display everything on the screen
@@ -313,7 +312,7 @@ void drawSnake() {
   }
 
   // draw new head
-  display.fillRect(snake.segments[0].x * BLOCKSIZE, snake.segments[0].y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE, ILI9341_WHITE);
+  display.fillRect(snake.segments[0].x * BLOCKSIZE, snake.segments[0].y * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE, ILI9341_GREEN);
 
   // draw new apple
   if (ateApple) {
