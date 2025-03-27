@@ -26,6 +26,7 @@ the changes that were made are:
 - direction of screen has changed
 - size of screen has changed
 - bigger buzzer hole
+- bigger battery placement hole
 
 this is the frontpanel:
 ![frontpanel design](designfrontpicture.png)
