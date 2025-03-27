@@ -32,4 +32,4 @@ this is the frontpanel:
 ![frontpanel design](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/frontpanel_v5.png)
 
 this is the backpanel: 
-![frontpanel design](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/backpanelv2.png)
+![frontpanel design](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/backpanel_v2.png)
