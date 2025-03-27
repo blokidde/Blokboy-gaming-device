@@ -74,12 +74,28 @@ while(digitalRead(BUTTON_2_PIN)){
 }
 ```
 
-EMBRQ#04
-[Insert text explaining how you fulfilled the requirement here]
+# requirements EMBRQ#04
+The embedded device contains at least two types of visual and/or sensory outputs (e.g. LED, LED Matrix, 7-segment display, motor, servo, actuator, LCD-screen, buzzer, etc.).
 
-Code:
-[Insert code snippet proving the requirement is fulfilled here]
+## EMBRQ#04
+The ESP32 has two types of outputs:
 
+- An lcd display (ILI9341) that displays the snake game
+- A piezo buzzer that makes sound during the debug test and during the game
+
+### code
+example for display:
+```cpp
+Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+
+display.setTextSize(1);
+display.setTextColor(ILI9341_WHITE);
+display.fillScreen(ILI9341_BLACK);
+```
+example for buzzer:
+```cpp
+tone(BUZZER_PIN, 1000, 100);
+```
 EMBRQ#05
 [Insert text explaining how you fulfilled the requirement here]
 
