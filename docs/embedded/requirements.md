@@ -24,11 +24,29 @@ serializeJson(doc, jsonString);
 int httpcode = httpClient.POST(jsonString);
 ```
 
-EMBRQ#02
-[Insert text explaining how you fulfilled the requirement here]
+# requirements EMBRQ#02
+The embedded device also acts as a server and receives status messages from the application backend over http or https.
 
-Code:
-[Insert code snippet(s) proving the requirement is fulfilled here]
+## EMBRQ#02
+The ESP32 also works as a server. It waits for HTTP requests from the backend. When the backend sends a request to the /debug endpoint, the ESP32 sees this and runs the debug() function. This way, it can receive status messages or commands from the backend over HTTP.
+
+### code
+```cpp
+WiFiClient client = server.available();
+
+if (client) {
+  String request = "";
+  while (client.available()) {
+    char c = client.read();
+    request += c;
+    if (c == '\n') break;
+  }
+
+  if (request.indexOf("GET /debug") >= 0) {
+    debug();
+  }
+}
+```
 
 EMBRQ#03
 [Insert text explaining how you fulfilled the requirement here]
