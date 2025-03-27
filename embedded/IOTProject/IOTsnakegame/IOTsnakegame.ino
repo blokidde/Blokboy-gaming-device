@@ -517,11 +517,13 @@ void debug(){
   int vert = analogRead(VERT_PIN);
   int horz = analogRead(HORZ_PIN);
   //display.clearDisplay();
+  display.fillScreen(ILI9341_BLACK);
   display.setCursor(0, 0);
   display.println("starting debug");
   //display.display();
   delay(5000);
   //display.clearDisplay();
+  display.fillScreen(ILI9341_BLACK);
 
   // Show initial debug message
   display.setCursor(0, 0);
@@ -530,7 +532,7 @@ void debug(){
   delay(5000);
   // Fill the screen white to check for broken pixels
   display.fillScreen(ILI9341_BLACK);
-  while(digitalRead(BUTTON_1_PIN)){
+  while(digitalRead(BUTTON_2_PIN)){
     //display.display();
     delay(20);
   }
@@ -545,6 +547,7 @@ void debug(){
     display.println("joystick omhoog");
     //display.display();
   }
+  display.fillScreen(ILI9341_BLACK);
   //display.clearDisplay();
   while (vert > DOWNTHRES){
     vert = analogRead(VERT_PIN);
@@ -552,6 +555,7 @@ void debug(){
     display.println("joystick omlaag");
     //display.display();
   }
+  display.fillScreen(ILI9341_BLACK);
   //display.clearDisplay();
   while (horz > LEFTTHRES){
     horz = analogRead(HORZ_PIN);
@@ -559,6 +563,7 @@ void debug(){
     display.println("joystick links");
     //display.display();
   }
+  display.fillScreen(ILI9341_BLACK);
   //display.clearDisplay();
   while (horz < RIGHTTHRES){
     horz = analogRead(HORZ_PIN);
@@ -566,15 +571,17 @@ void debug(){
     display.println("joystick rechts");
     //display.display();
   }
+  display.fillScreen(ILI9341_BLACK);
   //display.clearDisplay();
   // check for buzzer sounds
-  while(digitalRead(BUTTON_1_PIN)){
+  while(digitalRead(BUTTON_2_PIN)){
     display.setCursor(0, 0);
     display.println("press button when");
     display.println("buzzer sounds");
     //display.display();
     tone(BUZZER_PIN, 1000, 100);
   }
+  display.fillScreen(ILI9341_BLACK);
   delay(1000);
 }
 
