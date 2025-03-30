@@ -8,8 +8,13 @@ HTTP stands for hypertext transfer protocol. it is used to send information over
 
 HTTPS stands for hypertext transfer protocol secure. it is the upgraded version of HTTP, it uses something called TLS, which stands for transport layer security. this is an encryption program, it encrypts the message sent between client and server. 
 
+by upgrading HTTP to HTTPS, a layer of security is added. when someone tries to look at the message sent from client to server through a program like wireshark they can see the entire HTTP message plain as day. with HTTPS you could only see a 
+
 # upgrading HTTP to HTTPS
-by upgrading HTTP to HTTPS, a layer of security is added. when someone tries to look at the message sent from client to server through a program like wireshark they can see the entire HTTP message plain as day. when HTTPS
+what do you need to upgrade HTTP to HTTPS?
+- ssl/tls certificate
+- https capable server
+- updated URL's
 
 ### sources
 https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
