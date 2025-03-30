@@ -1,6 +1,5 @@
 # Requirements
 
-
 # requirements EMBRQ#01
 The embedded device acts as a client and sends measured sensor data to the application backend over http or https.
 

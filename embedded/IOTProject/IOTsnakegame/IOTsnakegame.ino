@@ -273,6 +273,7 @@ void drawSnake() {
   bool ateApple = (newHeadX == apple.x && newHeadY == apple.y);
 
   if (ateApple) {
+    tone(BUZZER_PIN, 1000, 30);
     // all segments of the snake go forward
     for (int i = snake.length; i > 0; i--) {
       snake.segments[i] = snake.segments[i - 1];
