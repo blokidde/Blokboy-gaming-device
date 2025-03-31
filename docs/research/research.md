@@ -43,6 +43,7 @@ to upgrade you need at least these things:
 - updated URL's
 ## how do i test the upgraded safety?
 ![frontpanel design](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/http_wireshark.png)
+here we see a wireshark screenshot with a few important parts. this is a http message that was sent from the ESP32(server) to the API. on the right bottom side we see the exact json message that was sent through http, on the left bottom side are a few pieces of information about the message like the length, amount of bytes and bits and the protocols used. on the top you can see several different http messages, all of these were sent between server and client and the content can be easily read.
 ## why is security important?
 ## are there issues that arise from switching to https?
 
