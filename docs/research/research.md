@@ -42,6 +42,7 @@ to upgrade you need at least these things:
 - https capable server
 - updated URL's
 ## how do i test the upgraded safety?
+![frontpanel design](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/http_wireshark.png)
 ## why is security important?
 ## are there issues that arise from switching to https?
 
