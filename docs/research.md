@@ -49,7 +49,7 @@ ensures that the data sent from the client to the server is scrambled into unrea
 
 ## What do i need to upgrade http to https?
 to upgrade you need at least these things:
-- ssl/tls certificate
+- tls(ssl) certificate
 - https capable server
 - updated URL's
 
