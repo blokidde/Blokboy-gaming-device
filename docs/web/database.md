@@ -49,3 +49,26 @@
 - No redundant data across tables.
 - All non-key attributes depend on the full primary key.
 - Relationships are clean and maintainable.
+
+## Sensor Data Flexibility
+
+The current system gets four directional inputs from a joystick:
+- up
+- down
+- left
+- right
+
+however it is fairly easy to add more sensor data to this table without modifying the schema.
+
+### SQL implementations
+
+```sql
+INSERT INTO players (player_id, created_at) VALUES (1, NOW());
+INSERT INTO games (game_id, player_id, start_time) VALUES (1, 1, NOW());
+INSERT INTO scores (score_id, game_id, score_value) VALUES (1, 1, 45);
+INSERT INTO sensor_data (sensor_id, game_id, direction, total_moves, timestamp) VALUES
+(1, 1, 'up', 15, NOW()),
+(2, 1, 'down', 10, NOW()),
+(3, 1, 'left', 5, NOW()),
+(4, 1, 'right', 20, NOW());
+```
