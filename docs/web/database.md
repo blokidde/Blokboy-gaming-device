@@ -36,3 +36,9 @@
 | direction     | VARCHAR(10)  | 'up', 'down', 'left', or 'right'        |
 | total_moves   | INT          | Number of directional movements         |
 | timestamp     | TIMESTAMP    | When this sensor data was recorded      |
+
+## Relationships
+
+- One `player` can have many `games`
+- Each `game` has one `score`
+- Each `game` can have many `sensor_data` entries
