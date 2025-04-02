@@ -42,3 +42,10 @@
 - One `player` can have many `games`
 - Each `game` has one `score`
 - Each `game` can have many `sensor_data` entries
+
+## Normalization
+
+- The database is normalized to 3rd Normal Form (3NF).
+- No redundant data across tables.
+- All non-key attributes depend on the full primary key.
+- Relationships are clean and maintainable.
