@@ -74,3 +74,9 @@ for the design part of the project, the following tools and settings were used:
 - layer height: 0.2 mm
 - infill: 20%
 - supports: only for frontpanel, using the tree support style
+
+## recreatability
+the device is designed to be fully recreatable:
+- freecad files include all versions
+- printed with standard PLA and normal 3d printer
+- component placement is visible in the 3d model
