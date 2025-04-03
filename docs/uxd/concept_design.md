@@ -19,6 +19,14 @@ the user is someone who wants to play a classic snake game on a physical, handhe
 - the device must be easy to assemble without tools or glue
 - a battery must fit inside so it's fully portable
 
+## product requirements
+- the joystick must fit perfectly in the joystickhole
+- the screen must be fully visible and centered
+- two breadboards with ESP32 and battery must fit inside the case
+- the buzzer must fit perfectly in the buzzer hole
+- the power button must be accessible from the outside
+- all components must be powered by a single li-ion 18650 battery
+
 ## first design
 
 frontpanel design:
