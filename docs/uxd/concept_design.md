@@ -1,5 +1,9 @@
 # Concept & Design prototype
 
+## Main goal
+the main goal of this project is:  
+create a handheld gaming device for playing snake with physical inputs and automatic data tracking, that is fully 3d-printable and works wirelessly. 
+
 ## concept
 im going to try to make the design look a little like an old gameboy. for designing i used the tool Freecad.
 
