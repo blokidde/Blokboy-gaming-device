@@ -22,6 +22,7 @@ the user is someone who wants to play a classic snake game on a physical, handhe
 ## product requirements
 - the joystick must fit perfectly in the joystickhole
 - the screen must be fully visible and centered
+- the screen must fit well into the hole, wihtout falling out
 - two breadboards with ESP32 and battery must fit inside the case
 - the buzzer must fit perfectly in the buzzer hole
 - the power button must be accessible from the outside
@@ -62,3 +63,14 @@ this is the frontpanel:
 this is the backpanel:
 
 ![frontpanel design](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/backpanel_v2.png)
+
+## tools used
+for the design part of the project, the following tools and settings were used:
+
+- Freecad for 3d modeling
+- exported as STL for slicing
+- printed using an Ultimaker 2+  (standard settings)
+- filament used: PLA
+- layer height: 0.2 mm
+- infill: 20%
+- supports: only for frontpanel, using the tree support style
