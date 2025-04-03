@@ -69,11 +69,13 @@ for the design part of the project, the following tools and settings were used:
 
 - Freecad for 3d modeling
 - exported as STL for slicing
-- printed using an Ultimaker 2+  (standard settings)
+- printed using an Ultimaker 2+ and bambu lab carbon x1 (standard settings)
 - filament used: PLA
 - layer height: 0.2 mm
 - infill: 20%
 - supports: only for frontpanel, using the tree support style
+
+i used Freecad because it is open-source and allows full control over design with a nice GUI. this made it easy to quickly change measurements like hole sizes and panel thicknesses during each design.
 
 ## recreatability
 the device is designed to be fully recreatable:
