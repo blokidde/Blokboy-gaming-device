@@ -80,3 +80,15 @@ the device is designed to be fully recreatable:
 - freecad files include all versions
 - printed with standard PLA and normal 3d printer
 - component placement is visible in the 3d model
+
+## versions
+### frontpanel
+- v1 
+- v2 changed sizes for components
+- v3 changed small things for component sizes
+- v4 rotated display hole, lowered the button holes
+- v5 bigger hole for joystick and display, added thicker screw holes
+
+### backpanel
+- v1
+- v2 more centered and bigger battery hole
