@@ -1,7 +1,19 @@
 # Concept & Design prototype
 
 ## concept
-im going to try to make the design look a little like an old gameboy. for designing i used the tool Freecad. 
+im going to try to make the design look a little like an old gameboy. for designing i used the tool Freecad.
+
+## user description
+the user is someone who wants to play a classic snake game on a physical, handheld gaming devie. the user wants to get instant feedback from joystick and button inputs and view scores after a game. the device needs to be small, portable, and easy to charge.
+
+## user needs
+- the device must be compact and handheld
+- it must feel like an oldschool gameboy
+- it must be possible to track gameplay stats
+- scores must be sent to a database
+- the data should be viewable in a simple online dashboard
+- the device must be easy to assemble without tools or glue
+- a battery must fit inside so it's fully portable
 
 ## first design
 
