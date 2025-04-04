@@ -55,7 +55,6 @@ the changes that were made are:
 - bigger buzzer hole
 - bigger battery placement hole
 
-
 this is the frontpanel:
 
 ![frontpanel design](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/frontpanel_v5.png)

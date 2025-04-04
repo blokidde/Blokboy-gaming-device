@@ -71,7 +71,6 @@ on the top you can see several different http messages, all of these were sent b
 
 ## Are there issues that arise from switching to https?
 
-
 ### Sources
 https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
 https://www.ssl.com/faqs/what-is-https/
