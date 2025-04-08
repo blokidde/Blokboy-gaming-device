@@ -1,8 +1,6 @@
 <?php
-// scoreboard.php
-require "db_connect.php"; // bevat de code voor db-connectie
+require "db_connect.php";
 
-// Query: haal scores op én koppel ze aan player_id uit Player
 $query = "
     SELECT s.score_value, p.player_id
     FROM Score s
@@ -17,12 +15,10 @@ $scores = [];
 
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // $row bevat ['score_value' => 123, 'player_id' => 5] enz.
         $scores[] = $row;
     }
 }
 
-// send data back as json
 echo json_encode($scores);
 
 $conn->close();

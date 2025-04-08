@@ -4,7 +4,7 @@
 #include <Adafruit_ILI9341.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
-#include <WiFiClient.h>
+#include <WiFiClientSecure.h>
 #include <ArduinoJson.h>
 #include <WiFiManager.h>
 
@@ -96,14 +96,14 @@ WiFiServer server(80);
 // wifi credentials school
 // const char* ssid = "iotroam";
 // const char* password = "xYEa1WO94W";
-const char* url = "http://145.92.189.65/api/insert.php";
-const char* starturl = "http://145.92.189.65/api/start_game.php";
+// const char* url = "https://145.92.189.65/api/insert.php";
+// const char* starturl = "https://145.92.189.65/api/start_game.php";
 
 // // // wifi credentials home
 // const char *ssid = "Lan solo";
 // const char *password = "Zegikniet1";
-// const char *url = "http://192.168.178.61/api/insert.php";
-// const char* starturl = "http://192.168.178.61/api/start_game.php";
+const char *url = "https://192.168.178.61/api/insert.php";
+const char* starturl = "https://192.168.178.61/api/start_game.php";
 
 // initialization of the display
 Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
@@ -400,8 +400,11 @@ void reset() {
 void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalright, int score) {
 
   // create clients for wifi and http
-  WiFiClient client;
+  WiFiClientSecure client;
   HTTPClient httpClient;
+
+  // ignores unsafe(self generated) ssl certificates and allows them in
+  client.setInsecure();
 
   // initialize http client with url
   httpClient.begin(client, url);
@@ -446,8 +449,9 @@ void startGame() {
     return;
   }
 
-  WiFiClient client;
+  WiFiClientSecure client;
   HTTPClient http;
+  client.setInsecure();
   http.begin(client, starturl);
   http.addHeader("Content-Type", "application/json");
 

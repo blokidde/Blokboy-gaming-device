@@ -54,6 +54,7 @@ to upgrade you need at least these things:
 - updated URL's
 
 ## How do i test the upgraded safety?
+### HTTP
 ![http_wireshark](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/http_wireshark.png)
 here we see a wireshark screenshot with a few important parts. this is a http message that was sent from the ESP32(server) to the API. on the right bottom side we see the exact json message that was sent through http:
 
