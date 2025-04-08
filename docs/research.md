@@ -44,14 +44,17 @@ HTTPS improves the safety of communication between a client and a server in thre
 ensures that the data sent from the client to the server is scrambled into unreadable characters. When using HTTP, this data is sent as plain text, meaning anyone on the same network — for example, using a program like Wireshark — can easily read it. This is dangerous when sending sensitive information like usernames, scores, or commands to a device. With HTTPS, the data is encrypted, so even if someone intercepts it, they will only see unreadable characters. This keeps the content of the communication private and secure.
 
 ### Authentication
+Authentication ensures that the client communicates with the intended server, preventing attacks such as man-in-the-middle attack. HTTPS uses SSL/TLS certificates issued by trusted third-party authorities to verify the identity of servers. When connecting, the server presents its certificate, allowing the client to verify that the server is authentic and trusted.
 
 ### Data integrity
 
-## What do i need to upgrade http to https?
+## What do i need to upgrade HTTP to HTTPS?
 to upgrade you need at least these things:
 - tls(ssl) certificate
 - https capable server
 - updated URL's
+
+## step by step upgrade to HTTPS
 
 ## How do i test the upgraded safety?
 ### HTTP
@@ -85,3 +88,4 @@ on the top you can see several different http messages, all of these were sent b
 ### Sources
 https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
 https://www.ssl.com/faqs/what-is-https/
+chatgpt

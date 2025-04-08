@@ -1,1 +1,2 @@
 docker/config/mariadb/
+docker/config/nginx/ssl/localhost.key
