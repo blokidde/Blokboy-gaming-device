@@ -47,6 +47,7 @@ ensures that the data sent from the client to the server is scrambled into unrea
 Authentication ensures that the client communicates with the intended server, preventing attacks such as man-in-the-middle attack. HTTPS uses SSL/TLS certificates issued by trusted third-party authorities to verify the identity of servers. When connecting, the server presents its certificate, allowing the client to verify that the server is authentic and trusted.
 
 ### Data integrity
+Data integrity ensures that messages exchanged between client and server cannot be altered during transmission. HTTPS, via TLS, includes integrity checks that detect any attempts to modify data packets while being sent. If data manipulation is detected, the connection is terminated, protecting the transmitted information from being changed by unauthorized people.
 
 ## What do i need to upgrade HTTP to HTTPS?
 to upgrade you need at least these things:
@@ -73,13 +74,15 @@ on the top you can see several different http messages, all of these were sent b
 
 ### HTTPS
 
-
+This is a Wireshark capture using HTTPS. The content is encrypted, showing only "Encrypted Application Data":
 
 ![https_top](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/top_HTTPS.png)
 
-1
+Encrypted HTTPS message, showing no readable info:
 
 ![https_message_encoded](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/message_HTTPS.png)
+
+This shows the extra safety with HTTPS.
 
 ## Why is security important?
 
