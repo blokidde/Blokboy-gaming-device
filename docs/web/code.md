@@ -17,3 +17,10 @@ fetch('api/get.php')
 this function first makes a GET request to the get.php endpoint. afther this is parses the json and updates the table with the data.
 
 ### sendrequesttoesp32()
+This function sends a debug request to the ESP32 device.
+
+```JS
+fetch('https://145.109.225.167/debug', { method: 'GET' })
+```
+
+makes a GET request to the esp32's ip address webserver
