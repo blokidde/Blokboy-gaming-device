@@ -4,13 +4,13 @@
 
 ```cpp
 #include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <Adafruit_ILI9341.h>
 ```
 
 these libraries are used for the 128x64 oled screen
 ```cpp
 #include <HTTPClient.h>
-#include <WiFiClient.h>
+#include <WiFiClientSecure.h>
 #include <ArduinoJson.h>
 ```
 these libraries are used for the http requests, the arduinojson lib is used to create 
@@ -23,7 +23,20 @@ this library is used for connecting wifi
 ## functions
 
 ### `void setup()`
-in this function we set the outputs and inputs for the entire program like this `pinMode(VERT_PIN, INPUT);`, we also connect with necessary things like wifi using this `WiFi.begin(ssid, password);`, i2c bus and the oled screen `display.begin(SSD1306_SWITCHCAPVCC, 0x3C)`. 0x3 is the i2c address for the oled screen.
+in this function we set the outputs and inputs for the entire program like this `pinMode(VERT_PIN, INPUT);`, we also connect with necessary things like wifi using this:
+```cpp
+WiFiManager wifiManager;
+if (!wifiManager.autoConnect("ESP32-Setup")) {
+  Serial.println("Failed to connect, restarting...");
+  delay(3000);
+  ESP.restart();
+}
+```
+for the initialization of the display we use this:
+```cpp
+SPI.begin(TFT_CLK, -1, TFT_MOSI);
+display.begin();
+```
 
 ### void `snakeInit()`
 the snake init function is used to initialize everything needed for the snake and the first apple. first there are some variables that are set to false or 0
@@ -41,9 +54,9 @@ after this the function starts by setting the values in the struct called snake.
 the creategame function clears the screen, draws the apple at its position, draws each segment of the snake, and finally updates the display so you can see everything on the OLED screen. It uses a grid system, so it multiplies the apple’s and snake’s coordinates by the block size to place them at the right spots in pixels.
 
 ```cpp
-display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, WHITE);
+display.fillRect(applex, appley, BLOCKSIZE, BLOCKSIZE, ILI9341_RED);
 ```
-this code is used to create apples, in the code we use blocksize. the block size is the size of every object. this is done so that the snake and apple arent way too small. the block size is 4, the ssd1306 is 128 x 64. this means that the game is 32 by 16 blocks.
+this code is used to create apples, in the code we use blocksize. the block size is the size of every object. this is done so that the snake and apple arent way too small. the block size is 8, the ILI9341 is 320x240 pixels
 
 ```cpp
 for (int i = 0; i < snake.length; i++)

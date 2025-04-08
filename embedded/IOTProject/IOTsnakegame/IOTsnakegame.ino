@@ -133,7 +133,7 @@ void setup() {
   // }
 
   WiFiManager wifiManager;
-  // start wifi and i2c
+  // start wifi
   if (!wifiManager.autoConnect("ESP32-Setup")) {
     Serial.println("Failed to connect, restarting...");
     delay(3000);
