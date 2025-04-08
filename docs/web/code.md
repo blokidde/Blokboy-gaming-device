@@ -21,6 +21,23 @@ Receives statistics from the ESP32 and puts them into the database.
 ```
 this is what the expected json looks like, the function parses this, validates it and puts it into the score table with and INSERT INTO query
 
+### start_game.php
+Creates a new game entry in the database and returns a game_id and player_id to the ESP32. This will then later be used for the insert.php function
+
+the json that is sent first looks like this:
+```json
+{ "generate": 1 }
+```
+it then get a json back that looks like this if the first POST is succesful:
+
+```json
+{
+  "status": "success",
+  "player_id": 42,
+  "game_id": 101
+}
+```
+
 ## JavaScript
 JS handles the communication between the webpage and the server (PHP backend) as well as sending debug requests to the ESP32 device.
 
