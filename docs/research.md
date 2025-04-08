@@ -68,6 +68,16 @@ on the top you can see several different http messages, all of these were sent b
 
 ![http_top](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/http_messages.png)
 
+### HTTPS
+
+
+
+![https_top](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/top_HTTPS.png)
+
+1
+
+![https_message_encoded](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/message_HTTPS.png)
+
 ## Why is security important?
 
 ## Are there issues that arise from switching to https?
