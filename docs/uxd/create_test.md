@@ -20,6 +20,7 @@ test subject peter
 - unclear buttons, what do they do
 - takes a while for the device to start up and its unclear what the device is doing during that time
 - the battery started to run out and the screen was barely visible
+
 ## conclusion
 
 ## optimalization
