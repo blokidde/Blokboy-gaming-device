@@ -90,10 +90,15 @@ Security is important because the internet can be a dangerous place. Without goo
 A common attack is a man-in-the-middle attack (MITM). In a MITM attack, an attacker secretly sits between two people (or a device and a server) communicating over the internet. The attacker can read, copy, or even change the information being exchanged, all without either side noticing. To prevent MITM attacks, developers use encryption (like HTTPS) and certificates that ensure both sides are who they say they are.
 https://www.cloudflare.com/learning/security/threats/man-in-the-middle-attack/
 
+Another type of attack is called SQL injection. This happens when attackers use insecure input fields (like forms on websites) to send harmful instructions directly to a database. If these fields aren’t properly secured, attackers could access private data, delete or modify important information, or even take control of entire database. Preventing SQL injection involves carefully checking user input and using secure programming techniques to avoid letting attackers send illegal instructions.
+https://portswigger.net/web-security/sql-injection
+
 ## Are there issues that arise from switching to https?
 
 ### Sources
 https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
 https://www.ssl.com/faqs/what-is-https/
-chatgpt
+chatgpt for the step by step upgrade
 https://owasp.org/www-project-top-ten/
+https://www.cloudflare.com/learning/security/threats/man-in-the-middle-attack/
+https://portswigger.net/web-security/sql-injection
