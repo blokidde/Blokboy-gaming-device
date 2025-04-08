@@ -87,6 +87,8 @@ This shows the extra safety with HTTPS.
 ## Why is security important?
 Security is important because the internet can be a dangerous place. Without good security, people with bad intentions can easily access your personal information or interfere with your systems. They might steal data, such as passwords or bank information, change your data, or even completely disrupt how your system works. This can lead to serious issues like identity theft, loss of money, damage to your reputation, or a loss of trust from your users.
 
+A common attack is a man-in-the-middle attack (MITM). In a MITM attack, an attacker secretly sits between two people (or a device and a server) communicating over the internet. The attacker can read, copy, or even change the information being exchanged, all without either side noticing. To prevent MITM attacks, developers use encryption (like HTTPS) and certificates that ensure both sides are who they say they are.
+https://www.cloudflare.com/learning/security/threats/man-in-the-middle-attack/
 
 ## Are there issues that arise from switching to https?
 
