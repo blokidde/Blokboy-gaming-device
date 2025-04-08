@@ -85,6 +85,8 @@ Encrypted HTTPS message, showing no readable info:
 This shows the extra safety with HTTPS.
 
 ## Why is security important?
+Security is important because the internet can be a dangerous place. Without good security, people with bad intentions can easily access your personal information or interfere with your systems. They might steal data, such as passwords or bank information, change your data, or even completely disrupt how your system works. This can lead to serious issues like identity theft, loss of money, damage to your reputation, or a loss of trust from your users.
+
 
 ## Are there issues that arise from switching to https?
 
@@ -92,3 +94,4 @@ This shows the extra safety with HTTPS.
 https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
 https://www.ssl.com/faqs/what-is-https/
 chatgpt
+https://owasp.org/www-project-top-ten/
