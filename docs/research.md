@@ -55,8 +55,6 @@ to upgrade you need at least these things:
 - https capable server
 - updated URL's
 
-## step by step upgrade to HTTPS
-
 ## How do i test the upgraded safety?
 ### HTTP
 ![http_wireshark](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/http_wireshark.png)
@@ -78,7 +76,7 @@ This is a Wireshark capture using HTTPS. The content is encrypted, showing only 
 
 ![https_top](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/top_HTTPS.png)
 
-Encrypted HTTPS message, showing no readable info:
+Encrypted HTTPS message, showing no readable info(the higlighted part is the encrypted message):
 
 ![https_message_encoded](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/message_HTTPS.png)
 
@@ -94,11 +92,15 @@ Another type of attack is called SQL injection. This happens when attackers use 
 https://portswigger.net/web-security/sql-injection
 
 ## Are there issues that arise from switching to https?
+Switching from HTTP to HTTPS can give a few small problems like:
+- setup is more difficult
+- slower performance
+- certificate renewal
 
 ### Sources
-https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
-https://www.ssl.com/faqs/what-is-https/
-chatgpt for the step by step upgrade
-https://owasp.org/www-project-top-ten/
-https://www.cloudflare.com/learning/security/threats/man-in-the-middle-attack/
-https://portswigger.net/web-security/sql-injection
+- https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
+- https://www.ssl.com/faqs/what-is-https/
+- chatgpt for the step by step upgrade guide
+- https://owasp.org/www-project-top-ten/
+- https://www.cloudflare.com/learning/security/threats/man-in-the-middle-attack/
+- https://portswigger.net/web-security/sql-injection
