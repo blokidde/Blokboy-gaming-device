@@ -1,7 +1,7 @@
 # Database
 
 ## Database EERD
-
+![ERD](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/erd.png)
 ## Tables
 
 ### players
