@@ -7,13 +7,13 @@
 #include <Adafruit_ILI9341.h>
 ```
 
-these libraries are used for the 128x64 oled screen
+these libraries are used for the ILI9341 display
 ```cpp
 #include <HTTPClient.h>
 #include <WiFiClientSecure.h>
 #include <ArduinoJson.h>
 ```
-these libraries are used for the http requests, the arduinojson lib is used to create 
+these libraries are used for the https requests, the arduinojson lib is used to create 
 
 ```cpp
 #include <WiFi.h>
@@ -63,10 +63,10 @@ for (int i = 0; i < snake.length; i++)
 {
   int x = snake.segments[i].x * BLOCKSIZE;
   int y = snake.segments[i].y * BLOCKSIZE;
-  display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, SSD1306_WHITE);
+  display.fillRect(x, y, BLOCKSIZE, BLOCKSIZE, ILI9341_GREEN);
 }
 ```
-this code uses the same principle to create the starting segments of the snake. they are also made from blocks that are 4x4 pixels.
+this code uses the same principle to create the starting segments of the snake. they are also made from blocks that are 8x8 pixels.
 
 ### void drawSnake()
 The drawSnake function moves the snake’s head in its current direction and checks if it hits a wall or its own segments. If it eats an apple, the snake grows longer and the apple is moved to a new random location. Otherwise, it just moves forward. If the snake collides with anything, the game ends.
@@ -140,7 +140,7 @@ moveTime = millis();
 this function updates the moveTime to the current time with millis(). this is used so the game knows when it needs to move the snake.
 
 ### void httpreq()
-The httpreq function sends the snake’s movement statistics to a server using an HTTP POST request. It first creates WiFi and HTTP clients, then prepares a JSON object containing the number of times the snake moved up, down, left, and right. This JSON is converted into a string and sent to the server. The function also prints the JSON to the serial monitor for debugging.
+The httpreq function sends the snake’s movement statistics to a server using an HTTPS POST request. It first creates WiFi and HTTPS clients, then prepares a JSON object containing the number of times the snake moved up, down, left, and right. This JSON is converted into a string and sent over a secute HTTPS connection to the server. The function also prints the JSON to the serial monitor for debugging.
 
 ```cpp
 HTTPClient httpClient;
@@ -170,7 +170,7 @@ httpcode = httpClient.POST(jsonString);
 this last bit of code sends the jsonString to the webpage(url).
 
 ### void startGame()
-The startGame function initializes a new game by sending an HTTP POST request to a server which in turn gets a game ID from a database. It also retrieves the server's response. These values are stored in player_id and game_id for use in the game. for more information on the code, see above(httpreq)
+The startGame function initializes a new game by sending an HTTPS POST request to a server which in turn gets a game ID from a database. It also retrieves the server's response. These values are stored in player_id and game_id for use in the game. for more information on the code, see above(httpsreq)
 
 ### void webserver()
 The webserver function listens for incoming connections on port 80. When a client connects, it reads the request and checks if the client has requested a specific endpoint (like "GET /debug"). Based on the request, the server either handles the request or responds with the corresponding information.
@@ -202,7 +202,7 @@ The debug function is used for debugging purposes. It displays information on th
 
 ```cpp
 while(digitalRead(BUTTON_1_PIN)){
-  display.fillRect(0, 0, display.width(), display.height(), SSD1306_WHITE);
+  display.fillScreen(ILI9341_WHITE);
   display.display();
   delay(20);
 }
