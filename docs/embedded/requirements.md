@@ -95,8 +95,24 @@ example for buzzer:
 ```cpp
 tone(BUZZER_PIN, 1000, 100);
 ```
-EMBRQ#05
-[Insert text explaining how you fulfilled the requirement here]
 
-Code:
-[Insert code snippet proving the requirement is fulfilled here]
+## requirements EMBRQ#05
+
+The embedded device uses the WifiManager for configuration of SSID and password (PWD) for connecting to the network.
+
+## EMBRQ#05
+The esp32 connects to wifi using the wifimanager, it does this by first initializing the library:
+
+### code
+```cpp
+#include <WiFiManager.h>
+```
+then the wifimanager checks if it can connect with the wifi with this while loop:
+```cpp
+if (!wifiManager.autoConnect("ESP32-Setup")) {
+  Serial.println("Failed to connect, restarting...");
+  delay(3000);
+  ESP.restart();
+}
+```
+if it cannot connect, the wifimanager starts a web portal through which you can input the correct wifi.
