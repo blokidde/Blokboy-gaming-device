@@ -59,11 +59,11 @@ positive feedback:
 ## optimalization
 based on the user test results, several optimisations need to be made to improve the overall usability and physical interaction of the device. these will however not me made on time for the product market.
 
-- joystick movement improvement 
-  the joystick gets stuck and does not move smoothly. the hole should be increased by 0.4 mm and the hole should have smoother edges.  
+- joystick movement improvement: the joystick gets stuck and does not move smoothly. the hole should be increased by 0.4 mm and the hole should have smoother edges.  
 
-- button clarity  
-  users found the button functions unclear. symbols or labels should be on or next to the buttons in the next iteration.  
+- button clarity: users found the button functions unclear. symbols or labels should be on or next to the buttons in the next iteration.  
 
-- screen level adjustment
-  the screen is not level with the case because of the pins, to fix this an extra hole for the pins should be made
+- screen level adjustment: the screen is not level with the case because of the pins, to fix this an extra hole for the pins should be made.
+
+- low visibility: after playing the game for a while the battery starts to get empty, to fix this a charger for the battery is necessary.
+  
