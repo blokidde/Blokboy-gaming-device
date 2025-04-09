@@ -388,8 +388,8 @@ void reset() {
 }
 
 
-/// @brief Sends a JSON HTTP request with movement statistics.
-/// This function sends a HTTP POST request containing the total movement
+/// @brief Sends a JSON HTTPS request with movement statistics.
+/// This function sends a HTTPS POST request containing the total movement
 /// stats of the snake during a game
 /// @param game_id ID created by database, used as foreign keys for.
 /// @param totalup The number of times the snake moved up.
@@ -403,7 +403,7 @@ void httpreq(int game_id, int totalup, int totaldown, int totalleft, int totalri
   WiFiClientSecure client;
   HTTPClient httpClient;
 
-  // ignores unsafe(self generated) ssl certificates and allows them in
+  // ignores unsafe(self generated)
   client.setInsecure();
 
   // initialize http client with url
