@@ -114,8 +114,8 @@ my goal for today is to get my SPI display to work, right now it works but the f
 
 yesterday i fixed my SPI display, this took a very long time because my entire code needed upgrades and changes and i didnt know which changes i needed. after a long while i finally found what i had to change, instead of clearing the entire screen everytime i wanted to update something i need to only clear the pixels that werent necessary anymore. when i cleared the entire screen the display started flickering, this was because the SPI is slower than the I2C i used before this. now i have updated the code to make it work the way i said before.
 
-### 27/3/25
-today i want to learn how to use a multimeter, i also want to write 
 ## week 9
-
+this week i did a lot of documentation, so there is not a lot i can add to my learning journal
 ## week 10
+### 8/4/25
+today i learned how to install and use https, this is done to increase the safety of the messages between server and client by encoding the message. at first it was a little bit difficult, i followed an website's step by step instructions but this didnt work correctly. So after this i tried to use chatgpt, this helped me tremendously because it could immediatly pinpoint where i went wrong, like the fact that i needed the openssl software in my PATH. and the fact that i made some slight mistakes in my nginx.conf file, because of this i could pretty easily upgrade to https. after this i also used wireshark to test the encoded message, i had not done this for a pretty long time as well so i had to find out how all of this worked, this was however pretty easy.
