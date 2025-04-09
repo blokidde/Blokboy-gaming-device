@@ -36,7 +36,7 @@
 #define MAX_LENGTH 100
 
 // buzzer pin
-#define BUZZER_PIN 1
+#define BUZZER_PIN 12
 
 // size of the game, display is 320 by 240, game has blocks size of 8
 // so 240 and 320 divided by 8
