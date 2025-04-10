@@ -1,64 +1,100 @@
 @startuml
-title architecture diagram
+title System Architecture Diagram - IoT Snake Game
 
+' Algemene layout
 skinparam linetype ortho
-
-rectangle "User device" as Userdev
-
-rectangle "User" as User
-
-rectangle "frontend" as Browser {
-  component "index.html" as index
-  component "script.js" as script
-  component "style.css" as style
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
 }
 
-rectangle "docker" as docker {
-  component "tunnel" as tunnel
-  component "nginx" as nginx
-  component "php" as php
-  component "mariadb" as mdb 
-  component "phpMyAdmin" as myad
+' Externe netwerken / systemen
+cloud "Internet / Intranet" as Internet
+cloud "GitLab Repository\n(External System)" as Gitlab
+cloud "Docker Registry\n(External System)" as Registry
+
+' User Device: smartphone, laptop enz.
+rectangle "User Device\n(Mobile / Laptop)" as UserDevice {
+  rectangle "Browser" {
+    component "index.html"
+    component "style.css"
+    component "script.js"
+  }
 }
 
-rectangle "backend" as backend {
-  component "insert.php" as insert
-  component "start_game.php" as start
-  component "get.php" as get
-  component "delete.php" as delete
-  component "db_connect.php" as dbconn
-  database "MySQL Database" as DB
+' Host System met Docker
+rectangle "Host System\n(PC / Laptop)" as Host {
+  component "Host OS (Windows/Linux)"
+  
+  rectangle "Docker Host" {
+    component "Docker Network"
+    
+    rectangle "Docker Containers" {
+      component "NGINX Container"
+      component "PHP Container"
+      
+      ' Database subsystem in Container
+      rectangle "MariaDB Container" {
+        rectangle "Database System\n(subsystem)" {
+          database "MariaDB Database" as DB
+          component "Database Instance"
+        }
+      }
+      
+      component "phpMyAdmin Container"
+    }
+  }
 }
 
-rectangle "embedded" as embedded{
-    component "ssd1306" as oled 
-    component "joystick" as joystick
-    component "button" as bttn 
-    component "buzzer" as bzzr
-    component "ESP32" as ESP32
+' Web Server (NGINX)
+rectangle "Web Server (NGINX)\n(subsystem)" {
+  rectangle "Frontend (HTML/CSS/JS)" {
+    component "HTML files"
+    component "CSS files"
+    component "JavaScript files"
+    ' Frontend PHP-files: N/A (no frontend PHP in this project)
+  }
 }
 
+' Backend (PHP API)
+rectangle "Backend (PHP API)\n(subsystem)" {
+  component "API PHP files\n(insert.php, get.php, etc.)"
+  component "Backend Libraries\n(PHP, DB libs, etc.)"
+}
 
-Userdev --> index : internet
-User --> embedded
-dbconn --> DB : db_connect.php
-ESP32 --> start : http
-ESP32 --> get : http
-script --> ESP32 : http
-ESP32 --> insert : http
-delete --> dbconn 
-get --> dbconn
-insert --> dbconn
-start --> dbconn
-ESP32 --> oled : I2C
-joystick --> ESP32 : analog
-ESP32 --> bzzr : pwm
-bttn --> ESP32 : analog
-style --> index
-script --> index
-backend --> script : http
-DB --> mdb
+' Embedded System
+rectangle "Embedded System (ESP32)\n(subsystem)" {
+  component "ESP32 (C++)"
+  component "Arduino Libraries"
+  component "Game Logic"
+  component "HTTP Client"
+  
+  rectangle "input/ Output" {
+    component "Joystick (analog)"
+    component "Button (digital)"
+    component "Buzzer (PWM)"
+    component "TFT Display (SPI)"
+  }
+}
 
+'
+' COMMUNICATION LINES
+'
+UserDevice --> "index.html" : HTTPS (443)
+"index.html" --> "style.css"
+"index.html" --> "script.js"
+"script.js" --> "ESP32 (C++)" : HTTP (80)\nDebug Request
+
+"ESP32 (C++)" --> "HTTP Client"
+"HTTP Client" --> "API PHP files\n(insert.php, get.php, etc.)" : HTTP (80)
+"API PHP files\n(insert.php, get.php, etc.)" --> DB : MySQL (3306)
+
+"ESP32 (C++)" --> "TFT Display (SPI)" : SPI
+"Joystick (analog)" --> "ESP32 (C++)"
+"Button (digital)" --> "ESP32 (C++)"
+"ESP32 (C++)" --> "Buzzer (PWM)"
+
+Host --> Gitlab : Git (HTTPS, 443)
+Host --> Registry : Docker Pull (HTTPS, 443)
 
 @enduml
-
