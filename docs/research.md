@@ -8,6 +8,8 @@
 - [How do i test the upgraded safety?](#How-do-i-test-the-upgraded-safety)
 - [Why is security important?](#Why-is-security-important)
 - [Are there issues that arise from switching to https?](#Are-there-issues-that-arise-from-switching-to-https)
+- [Research method](#Research-method)
+- [Conclusion](#Conclusion)
 - [Sources](#Sources)
 
 ## Introduction

@@ -60,5 +60,3 @@ The following image shows the System Architecture Diagram for the IoT Snake Game
 - Analog / Digital: Joystick and button inputs  
 - PWM: Buzzer output from ESP32
 
-## Conclusion
-This System Architecture diagram meets all assignment requirements (SAD#01–SAD#16). Each subsystem is clearly separated, and the communication protocols are indicated with arrows. The architecture clarifies how the IoT Snake Game works, from the embedded device to the Docker-based environment and the database.
