@@ -36,6 +36,7 @@ This upgrade improves not only the security of the system, but also trustworthin
 | Browser Lock Icon   | No lock icon, or shows "Not secure"              | Shows a lock icon in the address bar                   |
 | Performance         | Slightly faster, but vulnerable                  | Slightly slower due to encryption, but safe            |
 | SEO & Trust         | Lower SEO ranking; users may be warned           | Better SEO ranking; users trust it more                |
+https://chatgpt.com/
 
 ## how does https improve the safety?
 HTTPS improves the safety of communication between a client and a server in three important ways: encryption, authentication, and data integrity. This protection is made possible by using TLS (Transport Layer Security), a protocol that ensures data is transferred securely over the internet.
@@ -96,11 +97,30 @@ Switching from HTTP to HTTPS can give a few small problems like:
 - setup is more difficult
 - slower performance
 - certificate renewal
+https://chatgpt.com/
+
+## Research method
+
+To answer the research question, I looked at how HTTP and HTTPS work using both online sources and my own testing. I first tested an HTTP connection between my ESP32 and a local server, then captured the traffic using Wireshark. I repeated the test after upgrading to HTTPS and compared the results. This showed exactly what part of the message is visible and how that changes when encryption is used.
+
+Next to testing, I also read multiple sources like Cloudflare, SSL.com, and OWASP to understand how encryption works, what kind of attacks HTTPS protects against, and how HTTPS is implemented in web applications and IoT projects.
+
+
+## Conclusion
+
+The main question was: How can I make the connection between client and server safer?
+
+After comparing HTTP and HTTPS, reading about encryption methods, and testing it with Wireshark, I can say that HTTPS is the best option to make the connection safer. It protects the data in three ways: encryption, authentication, and data integrity. These make it much harder for attackers to read or change the data during transport.
+
+I also found out what is needed to set up HTTPS: a TLS certificate, an HTTPS-capable server, and updated URLs in the client code. Testing with Wireshark clearly showed that with HTTP, the whole message is visible, but with HTTPS, the data is fully encrypted and unreadable for others on the network.
+
+Some small downsides exist, like more setup time and performance cost, but the safety it adds is much more important. Security is especially needed in IOT or web projects where data is sent over the internet.
+
 
 ### Sources
 - https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/
 - https://www.ssl.com/faqs/what-is-https/
-- chatgpt for the step by step upgrade guide
+- https://chatgpt.com/
 - https://owasp.org/www-project-top-ten/
 - https://www.cloudflare.com/learning/security/threats/man-in-the-middle-attack/
 - https://portswigger.net/web-security/sql-injection

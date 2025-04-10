@@ -38,8 +38,9 @@ what went wrong: when i tried to put the display in, it did not fit
 how i tried to solve it: i printed a new iteration with the display horizontally
 
 #### all iterations next to eachother
-this picture shows all the different iterations starting with the gray ones(right) and ending with the final product with the components installed and wired.
-![iterations](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/all_iterations.png)
+this picture shows all the different iterations starting with the gray ones(bottom) and ending with the final product with the components installed and wired. more can be found about the iterations in the concept design page.
+
+![iterations](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/all_iterations.jpg)
 
 ### final result
 
@@ -52,7 +53,18 @@ the final product works as intended. all parts fit together tightly. the game ca
 the product is clean and usable. it meets the defined requirements and can be easily printed and assembled by others. it only needs a few more changes/ iterations before the product would be very good.
 
 ### final product pictures
-![prod front](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_front.png)
-![prod open](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_open.png)
-![prod left](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_left.png)
-![prod right](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_right.png)
+the product from the front, you can see the display, joystick and buttons: 
+
+![prod front](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_front.jpg)
+
+the product when its open:
+
+![prod open](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_open.jpg)
+
+the product from the left, you can see the buzzer on the side:
+
+![prod left](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_left.jpg)
+
+the product from the right, you can see the on off button:
+
+![prod right](https://teemiixuujuu34-fa53a7.dev.hihva.nl/assets/prod_right.jpg)
