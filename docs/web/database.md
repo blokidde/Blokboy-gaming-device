@@ -82,7 +82,13 @@ INSERT INTO sensor_data (sensor_id, game_id, direction, total_moves, timestamp) 
 ```
 
 ## how to use database
-use this script to create the database with tables
+1. Open MySQL Workbench.
+2. Copy the full SQL code below.
+3. Paste it into a new SQL tab.
+4. Run the script to create the schema, tables, and relationships.
+
+link to sql file: 
+[Link](https://gitlab.fdmci.hva.nl/IoT/2024-2025-semester-2/individual-project/teemiixuujuu34/-/blob/main/database/mydatabase.sql?ref_type=heads)
 ```sql
 -- MySQL Workbench Forward Engineering
 

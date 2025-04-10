@@ -1,4 +1,10 @@
-// this function gets the scores and playerID's from 
+/**
+ * Function: fetchScores and debug
+ * Author: Jurriaan Egmond
+ * Date: 2025-04-10
+ * Description: Fetches score data from the API and updates the score table in the frontend. and sends
+ * a request to ESP to debug
+ */
 function fetchScores() {
   fetch('api/get.php')
     .then(response => response.json())

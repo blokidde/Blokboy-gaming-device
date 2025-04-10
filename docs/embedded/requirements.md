@@ -4,7 +4,7 @@
 The embedded device acts as a client and sends measured sensor data to the application backend over http or https.
 
 ## EMBRQ#01
-The ESP32 sends sensor data to a webserver using HTTPS. It acts like a client and sends the number of times the joystick was moved up, down, left, and right. This is done using WiFi and a POST request. The data is sent as a JSON string to the backend.
+The ESP32 sends sensor data to a webserver using HTTPS. It acts like a client and sends the number of times the joystick was moved up, down, left, and right. This is done using WiFi and a POST request. The data is sent as a JSON string to the backend. more aboout this can be read in the research page
 
 ### Code:
 ```cpp

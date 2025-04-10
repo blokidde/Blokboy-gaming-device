@@ -120,7 +120,7 @@ this loop checks the x and y positions of a newly generated apple with all segme
 ### void readSensors()
 this function is used to get sensor data from the joystick to give directions to the snake.
 ```cpp
-if (vert < 1000 && snake.direction_y != -1)
+if (vert < DOWNTHRES && snake.direction_y != -1)
   {
     snake.direction_x = 0;
     snake.direction_y = 1;

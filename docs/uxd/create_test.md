@@ -66,4 +66,6 @@ based on the user test results, several optimisations need to be made to improve
 - screen level adjustment: the screen is not level with the case because of the pins, to fix this an extra hole for the pins should be made.
 
 - low visibility: after playing the game for a while the battery starts to get empty, to fix this a charger for the battery is necessary.
-  
+
+## files
+all files are stored in the uxd map of gitlab, more about which files are used can be found in concept design.

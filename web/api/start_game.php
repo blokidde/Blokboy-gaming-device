@@ -1,4 +1,14 @@
 <?php
+/**
+ * File: start_game.php
+ * Author: Jurriaan Egmond
+ * Date: 2025-04-10
+ * Description:
+ *   This endpoint creates a new game session in the database for a player.
+ *   It is called by the ESP32 when a new game starts.
+ *   If no existing player is provided, a new player is generated.
+ *   Returns a JSON object containing player_id and game_id.
+ */
 // Include database connection
 require "db_connect.php";
 

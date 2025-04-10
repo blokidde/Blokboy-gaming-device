@@ -1,5 +1,14 @@
 # Web Code
 
+## Web development
+### Modern Web Standards
+This web application uses modern web development principles:
+- JavaScript fetch() for all API calls
+- Clean separation (HTML for structure, CSS for style, JS for logic)
+- Responsive styling with CSS
+- All data is dynamically loaded via JavaScript without reloading the page
+
+
 ## PHP
 ### db_connect.php
 a single file for connecting to the database using mysqli. this file is used in all the other php files.
@@ -60,3 +69,4 @@ fetch('https://145.109.225.167/debug', { method: 'GET' })
 ```
 
 makes a GET request to the esp32's ip address webserver
+

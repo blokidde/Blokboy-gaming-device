@@ -1,4 +1,14 @@
 <?php
+/**
+ * File: insert.php
+ * Author: Jurriaan Egmond
+ * Date: 2025-04-10
+ * Description:
+ *   This endpoint receives game data from the ESP32 after a session ends.
+ *   It expects a JSON payload with game_id, score, and joystick statistics.
+ *   The data is validated and inserted into the database.
+ *   Returns a JSON response with success or error status.
+ */
 // Include the file that connects to the database
 require "db_connect.php";
 

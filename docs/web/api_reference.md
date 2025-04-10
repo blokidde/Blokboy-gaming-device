@@ -14,8 +14,8 @@ The ESP32 collects joystick movement data and sends it to the API through an HTT
 The API receives joystick input from the ESP32 and stores it in a database.
 
 #### request
-- Method: `POST`
-- Content-Type: `application/json`
+- Method: POST
+- Content-Type: application/json
 - Body: JSON formatted data containing joystick movement counts.
 
 #### request format
@@ -28,6 +28,47 @@ The API receives joystick input from the ESP32 and stores it in a database.
     "totalright": 4,
     "score": 9
 }
+```
+
+### POST start_game.php
+The API receives a player ID and creates a new game session for that player in the database. It returns the newly created game ID.
+
+#### request
+- Method: POST
+- Content-Type: application/json
+- Body: JSON formatted data containing the player ID.
+
+#### request format
+```json
+{
+  "player_id": 3
+}
+```
+
+### GET get.php
+The API retrieves all recorded scores from the database along with the corresponding player IDs. This endpoint is used by the frontend to display the current scores of all players.
+
+#### request
+- Method: GET
+- No request body required.
+
+#### response format
+Returns a JSON array of score entries. Each entry contains:
+- player_id: the ID of the player
+- score_value: the score they achieved
+
+#### example response
+```json
+[
+  {
+    "player_id": 1,
+    "score_value": 45
+  },
+  {
+    "player_id": 2,
+    "score_value": 60
+  }
+]
 ```
 
 #### response codes
