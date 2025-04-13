@@ -34,7 +34,7 @@ function fetchScores() {
 }
 
 function sendRequestToESP32() {
-  fetch('https://145.109.225.167/debug', { method: 'GET' })
+  fetch('https://192.168.178.56/debug', { method: 'GET' })
     .then(response => response.text())
     .then(data => console.log('ESP32 Response:', data))
     .catch(error => console.error('Error sending request:', error));

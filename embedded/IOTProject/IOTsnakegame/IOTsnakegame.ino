@@ -129,12 +129,12 @@ int oldTailY = -1;
 WiFiServer server(80);
 
 // ip's school
-const char* url = "https://145.92.189.65/api/insert.php";
-const char* starturl = "https://145.92.189.65/api/start_game.php";
+// const char* url = "https://145.92.189.65/api/insert.php";
+// const char* starturl = "https://145.92.189.65/api/start_game.php";
 
 // // // ip's home
-// const char *url = "https://192.168.178.61/api/insert.php";
-// const char* starturl = "https://192.168.178.61/api/start_game.php";
+const char *url = "https://192.168.178.61/api/insert.php";
+const char* starturl = "https://192.168.178.61/api/start_game.php";
 
 // initialization of the display
 Adafruit_ILI9341 display = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
